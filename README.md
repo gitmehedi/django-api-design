@@ -74,10 +74,20 @@ Now that you are clear about REST API's meaning, let us know what REST API examp
 
 
 ### Conclusion
-
+This article taught us about what is REST, API, and RESTful API principles. We've looked at REST API, what REST API is used for, and how to use it. REST API interaction methods are a pretty comprehensive notion with no explicit specifications. Finally, we discovered that REST API is an architectural style employed for component interactions rather than a standard in and of itself. 
 
 ### Frequently Asked Questions (FAQ)
-
+1. **What is the use of REST API?**  
+A RESTful API is an architectural approach for an application program interface (API) that accesses and utilizes data via HTTP requests. It may use that data to GET, PUT, POST, and DELETE data, which correspond to reading, modifying, creating, and removing resource-related activities. 
+2. **What is the difference between REST API and API?**  
+REST (Representational State Transfer) is the API that uses a set of rules to communicate between applications and servers. 
+3. **What is the URL in REST API?**  
+An API URL Path is a URL that allows you to access an API's numerous functionalities. Using one is as easy as entering any URL into your web browser.
+4. **How to design a REST API?**  
+The most common methods to design are GET, POST, PUT, and DELETE. 
+5.  **What is the difference between SOAP and REST API?**  
+SOAP solely utilizes XML for sharing information in its message format, but REST is not limited to XML and allows the implementer to choose which Media-Type to use, such as XML, JSON, or plain text. Furthermore, whereas REST may utilize the SOAP protocol, SOAP cannot use REST. 
+SOAP solely utilizes XML for sharing information in its message format, but REST is not limited to XML and allows the implementer to choose which Media-Type to use, such as XML, JSON, or plain text. Furthermore, whereas REST may utilize the SOAP protocol, SOAP cannot use REST. 
 
 
 
