@@ -1,7 +1,7 @@
 # API Implementation with Django
 
 
-#API Design Types
+# API Design Types
 
 1. REST API
 2. SOAP
@@ -17,6 +17,7 @@
 
 To communicate, software applications use Application Programming Interfaces or APIs. APIs allow two programs to share data consistently. Your eCommerce site may connect with payment software, shipping software, and other essential integrations via their APIs. There are several techniques for developing an API, but if you want to integrate software into your product, you need to know what is REST API.
 
+![REST API Architecture](./images/rest_api_architecture.png)
 
 ### History of Rest API
 
