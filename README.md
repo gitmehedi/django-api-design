@@ -1,14 +1,18 @@
 # API Implementation with Django
 
 
-# API Design Types
+## API Design Types
 
-1. REST API
+1. REST
 2. SOAP
 3. GraphQL
 4. gRPC
-5. MQTT
+5. MQTT 
+6. WebSockets 
+7. Webhooks 
+8. AMQP
 
+![](./images/api_types.gif)
 
 
 ## REST API
