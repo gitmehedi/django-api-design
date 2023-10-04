@@ -2,6 +2,7 @@ from django.test import TestCase
 from api_db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+import faker
 
 USERNAME = 'admin'
 
@@ -28,7 +29,7 @@ class ModelTest(TestCase):
 
     def testProductCategory(self):
         user = User.objects.create(username=USERNAME)
-        name = 'Fruits'
+        name = faker.Factory("name")
         ins = self.createProductCategory(user, name)
 
         self.assertEquals(ins.name, name)
