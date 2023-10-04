@@ -3,11 +3,17 @@ from api_db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 import faker
+from faker import Factory
 
 USERNAME = 'admin'
 
 
 class ModelTest(TestCase):
+
+    def getFakeData(self, type='name'):
+        fake = Factory.create('it_IT')
+        return fake
+
     def testCreateUser(self):
         user = User.objects.create(username=USERNAME)
         self.assertEquals(user.username, USERNAME)
@@ -29,7 +35,7 @@ class ModelTest(TestCase):
 
     def testProductCategory(self):
         user = User.objects.create(username=USERNAME)
-        name = faker.Factory("name")
+        name = self.getFakeData().name()
         ins = self.createProductCategory(user, name)
 
         self.assertEquals(ins.name, name)
@@ -48,7 +54,7 @@ class ModelTest(TestCase):
 
     def testProductInventory(self):
         user = User.objects.create(username=USERNAME)
-        name = 'Gulshan Branch'
+        name = self.getFakeData().name()
 
         ins = self.createInventory(user, name)
 
@@ -59,7 +65,7 @@ class ModelTest(TestCase):
     def create_payment(self, amount, user):
         ins = models.PaymentDetails()
         ins.amount = amount
-        ins.provider = 'Pushti'
+        ins.provider = self.getFakeData().name()
         ins.status = True
         ins.create_user = user
         ins.write_user = user
@@ -98,7 +104,7 @@ class ModelTest(TestCase):
     def createDiscount(self, user, name):
         ins = models.Discount()
         ins.name = name
-        ins.description = 'no direct description'
+        ins.description = self.getFakeData().name()
         ins.discount_percent = 12
         ins.status = True
         ins.create_user = user
@@ -108,7 +114,7 @@ class ModelTest(TestCase):
 
     def testDiscount(self):
         user = User.objects.create(username=USERNAME)
-        name = 'Non-Regular'
+        name = self.getFakeData().name()
         ins = self.createDiscount(user, name)
 
         self.assertEquals(ins.name, name)
@@ -136,13 +142,13 @@ class ModelTest(TestCase):
 
         ins = models.UserAddresses()
         ins.user = user
-        ins.address_line1 = 'Gulshan 2'
-        ins.address_line2 = 'Dhaka, Bangladesh'
-        ins.city = 'Dhaka City'
+        ins.address_line1 = self.getFakeData().name()
+        ins.address_line2 = self.getFakeData().name()
+        ins.city = self.getFakeData().name()
         ins.postal_code = postal_code
-        ins.country = 'Bangladesh'
-        ins.mobile = '019123909090'
-        ins.telephone = '+90882342423'
+        ins.country = self.getFakeData().name()
+        ins.mobile = self.getFakeData().name()
+        ins.telephone = self.getFakeData().name()
         ins.create_user = user
         ins.write_user = user
         ins.save()
@@ -157,8 +163,8 @@ class ModelTest(TestCase):
 
         ins = models.UserPayment()
         ins.user = user
-        ins.payment_type = 'online'
-        ins.provider = 'bKash'
+        ins.payment_type = self.getFakeData().name()
+        ins.provider = self.getFakeData().name()
         ins.account_no = account_no
         ins.expires_at = timezone.now()
         ins.create_user = user
@@ -171,15 +177,15 @@ class ModelTest(TestCase):
 
     def testProducts(self):
         user = User.objects.create(username=USERNAME)
-        name = "Pineapple"
+        name = self.getFakeData().name()
 
         ins = models.Products()
         ins.name = name
-        ins.description = 'It has several nutrient'
+        ins.description = self.getFakeData().name()
         ins.sku = '1234567'
         ins.price = 200
-        ins.category = self.createProductCategory(user, 'Fruits')
-        ins.inventory = self.createInventory(user, 'Gulshan Branch')
+        ins.category = self.createProductCategory(user, self.getFakeData().name())
+        ins.inventory = self.createInventory(user, self.getFakeData().name())
         ins.discount = self.createDiscount(user, '20')
         ins.create_user = user
         ins.write_user = user
