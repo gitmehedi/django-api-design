@@ -71,7 +71,7 @@ class ModelTest(TestCase):
         ins = self.create_payment(amount, user)
 
         self.assertEquals(ins.amount, amount)
-        self.assertTrue(ins, models.PaymentDetails)
+        self.assertTrue(isinstance(ins, models.PaymentDetails))
         self.checkInstance(ins)
 
     def createOrder(self, user, total_price):
@@ -91,7 +91,7 @@ class ModelTest(TestCase):
         ins = self.createOrder(user, total_price)
 
         self.assertEquals(ins.total_price, total_price)
-        self.assertTrue(ins, models.OrderDetails)
+        self.assertTrue(isinstance(ins, models.OrderDetails))
         self.checkInstance(ins)
 
     def createDiscount(self, user, name):
@@ -126,7 +126,7 @@ class ModelTest(TestCase):
         ins.save()
 
         self.assertEquals(ins.total, total)
-        self.assertTrue(ins, models.ShoppingSession)
+        self.assertTrue(isinstance(ins, models.ShoppingSession))
         self.checkInstance(ins)
 
     def testUserAddresses(self):
@@ -147,7 +147,7 @@ class ModelTest(TestCase):
         ins.save()
 
         self.assertEquals(ins.postal_code, postal_code)
-        self.assertTrue(ins, models.UserAddresses)
+        self.assertTrue(isinstance(ins, models.UserAddresses))
         self.checkInstance(ins)
 
     def testUserPayment(self):
@@ -165,7 +165,7 @@ class ModelTest(TestCase):
         ins.save()
 
         self.assertEquals(ins.account_no, account_no)
-        self.assertTrue(ins, models.UserPayment)
+        self.assertTrue(isinstance(ins, models.UserPayment))
         self.checkInstance(ins)
 
     def testProducts(self):
@@ -185,7 +185,7 @@ class ModelTest(TestCase):
         ins.save()
 
         self.assertEquals(ins.name, name)
-        self.assertTrue(ins, models.Products)
+        self.assertTrue(isinstance(ins, models.Products))
         self.checkInstance(ins)
 
     def testOrderItems(self):
@@ -195,13 +195,12 @@ class ModelTest(TestCase):
         ins = models.OrderItems()
         ins.quantity = quantity
         ins.order_id = self.createOrder(user, '120')
-        # ins.product = False
         ins.create_user = user
         ins.write_user = user
         ins.save()
 
         self.assertEquals(ins.quantity, quantity)
-        self.assertTrue(ins, models.OrderItems)
+        self.assertTrue(isinstance(ins, models.OrderItems))
         self.checkInstance(ins)
 
     def testCartItem(self):
@@ -210,12 +209,10 @@ class ModelTest(TestCase):
 
         ins = models.CartItem()
         ins.quantity = quantity
-        # ins.product = False
-        # ins.session = False
         ins.create_user = user
         ins.write_user = user
         ins.save()
 
         self.assertEquals(ins.quantity, quantity)
-        self.assertTrue(ins, models.CartItem)
+        self.assertTrue(isinstance(ins, models.CartItem))
         self.checkInstance(ins)
