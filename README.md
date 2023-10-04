@@ -24,26 +24,26 @@ To communicate, software applications use Application Programming Interfaces or 
 There was no agreement on how to develop or use an API before 2000. Protocols like  Simple Object Access Protocol (SOAP), which were notoriously difficult to build, administer, and debug, were required for its integration.
 
 APIs were then developed to be adaptive rather than accessible. After realizing the true potential of Web APIs in 2000, things started to shift: Roy Fielding and a team of experts created Representational State Transfer or REST, irreversibly altering the API landscape. The objective was to create a standard that would allow two servers to communicate and exchange data from anywhere in the world.  As a result, they created REST, a resource-oriented architecture that includes the following concepts, attributes, and constraints:
-- Interface uniformity 
-- Client/server architecture 
-- No state or session retention 
-- Resource representation caching 
-- Usage of the HTTP protocol and its methods 
+- Interface uniformity
+- Client/server architecture
+- No state or session retention
+- Resource representation caching
+- Usage of the HTTP protocol and its methods
 
 ### Features of REST API
 
 We have understood what is Rest API, and how it works. Now, we will see the features of Rest API. 
-* Scalability: Development teams may quickly scale the solution due to the separation of client and server.  
-* Flexibility & Portability: Data from one of the queries must be accurate for REST-style APIs; thus, it is conceivable to transition from one server to another. It is also possible to alter the database at any moment.  
-* Independence: Through the isolation of the client and server, the protocol allows for autonomous development across a project. REST APIs are also adaptive to the working syntax and platform, enabling you to test many environments simultaneously while building.   
+* Scalability: Development teams may quickly scale the solution due to the separation of client and server.  
+* Flexibility & Portability: Data from one of the queries must be accurate for REST-style APIs; thus, it is conceivable to transition from one server to another. It is also possible to alter the database at any moment.  
+* Independence: Through the isolation of the client and server, the protocol allows for autonomous development across a project. REST APIs are also adaptive to the working syntax and platform, enabling you to test many environments simultaneously while building.   
 
 
 
 ### Principals of REST API
 
 - **Client-Server Decoupling**  
-In REST API design, client and server applications must be completely independent of each other. The only information the client application should know is the URI of the requested resource; it can't interact with the server application in any other ways. Similarly, a server application shouldn't modify the client application other than passing it to the requested data via HTTP.
-- **Uniform Interface**  
+    In REST API design, client and server applications must be completely independent of each other. The only information the client application should know is the URI of the requested resource; it can't interact with the server application in any other ways. Similarly, a server application shouldn't modify the client application other than passing it to the requested data via HTTP.
+- **Uniform Interface**    
 All API requests for the same resource should look the same, no matter where the request comes from. The REST API should ensure that the same piece of data, such as the name or email address of a user, belongs to only one uniform resource identifier (URI). Resources shouldn’t be too large but should contain every piece of information that the client might need.
 - **Statelessness**  
 REST APIs are stateless, meaning that each request needs to include all the information necessary for processing it. In other words, REST APIs do not require any server-side sessions. Server applications aren’t allowed to store any data related to a client request.
