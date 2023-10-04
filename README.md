@@ -12,7 +12,7 @@
 7. Webhooks 
 8. AMQP
 
-![](./images/api_types.gif)
+![API TYPES](./images/api_types.gif)
 
 
 ## REST API
