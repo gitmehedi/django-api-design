@@ -63,11 +63,11 @@ When possible, resources should be cacheable on the client or server side. Serve
 ### Methods of REST API
 
 Challenges of using Rest API
-1. REST endpoint consensus: It makes little difference how you style your URLs, but consistency across your API is essential. Unfortunately, as procedures get more complicated, the number of possible possibilities grows even more significant. As a result, consistency on huge codebases with multiple developers can be challenging.  
-2. REST API versioning: APIs are frequently versioned to avoid compatibility difficulties. However, old endpoints remain alive, increasing effort due to the maintenance of numerous APIs. 
-3. REST API authentication: API authentication will differ based on the circumstance. It treats the third-party programs as logged-in users with specified privileges and permissions. Registered users can also utilize third-party programs to access their data, such as searching for emails or documents. 
-4. REST API Security: Even though RESTful APIs make it easier to access and change your application, security vulnerabilities might arise. A client, for example, can submit hundreds of requests per second and destroy your server. 
-5. Multiple Requests and Unnecessary Data: A response may contain more information than you require or require additional queries to get all the data. 
+1. **REST endpoint consensus:** It makes little difference how you style your URLs, but consistency across your API is essential. Unfortunately, as procedures get more complicated, the number of possible possibilities grows even more significant. As a result, consistency on huge codebases with multiple developers can be challenging.  
+2. **REST API versioning:** APIs are frequently versioned to avoid compatibility difficulties. However, old endpoints remain alive, increasing effort due to the maintenance of numerous APIs. 
+3. **REST API authentication:** API authentication will differ based on the circumstance. It treats the third-party programs as logged-in users with specified privileges and permissions. Registered users can also utilize third-party programs to access their data, such as searching for emails or documents. 
+4. **REST API Security:** Even though RESTful APIs make it easier to access and change your application, security vulnerabilities might arise. A client, for example, can submit hundreds of requests per second and destroy your server. 
+5. **Multiple Requests and Unnecessary Data:** A response may contain more information than you require or require additional queries to get all the data. 
 
 
 ### Rest API Examples

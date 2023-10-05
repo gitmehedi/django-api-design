@@ -24,6 +24,9 @@ class ProductCategory(AbstractModel):
         db_table = 'product_category'
         ordering = ('-id',)
 
+    def __str__(self):
+        return self.name
+
 
 class ProductInventory(AbstractModel):
     name = models.CharField(max_length=100, blank=False)
@@ -34,6 +37,9 @@ class ProductInventory(AbstractModel):
         db_table = 'product_inventory'
         ordering = ('-id',)
 
+    def __str__(self):
+        return self.name
+
 
 class PaymentDetails(AbstractModel):
     amount = models.FloatField()
@@ -43,6 +49,9 @@ class PaymentDetails(AbstractModel):
     class Meta:
         db_table = 'payment_details'
         ordering = ('-id',)
+
+    def __str__(self):
+        return self.amount
 
 
 class OrderDetails(AbstractModel):
@@ -56,6 +65,9 @@ class OrderDetails(AbstractModel):
         db_table = 'order_details'
         ordering = ('-id',)
 
+    def __str__(self):
+        return self.user.name
+
 
 class Discount(AbstractModel):
     name = models.CharField(max_length=100, blank=False)
@@ -67,6 +79,9 @@ class Discount(AbstractModel):
         db_table = 'discount'
         ordering = ('-id',)
 
+    def __str__(self):
+        return self.name
+
 
 class ShoppingSession(AbstractModel):
     total = models.FloatField()
@@ -75,6 +90,9 @@ class ShoppingSession(AbstractModel):
     class Meta:
         db_table = 'shopping_session'
         ordering = ('-id',)
+
+    def __str__(self):
+        return self.user.name
 
 
 class UserAddresses(AbstractModel):
@@ -91,6 +109,9 @@ class UserAddresses(AbstractModel):
         db_table = 'user_addresses'
         ordering = ('-id',)
 
+    def __str__(self):
+        return self.user.name
+
 
 class UserPayment(AbstractModel):
     user = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL, related_name='%(class)s_payment')
@@ -102,6 +123,9 @@ class UserPayment(AbstractModel):
     class Meta:
         db_table = 'user_payment'
         ordering = ('-id',)
+
+    def __str__(self):
+        return self.account_no
 
 
 class Products(AbstractModel):
@@ -120,6 +144,9 @@ class Products(AbstractModel):
         db_table = 'products'
         ordering = ('-id',)
 
+    def __str__(self):
+        return self.name
+
 
 class OrderItems(AbstractModel):
     quantity = models.FloatField()
@@ -132,6 +159,9 @@ class OrderItems(AbstractModel):
         db_table = 'order_items'
         ordering = ('-id',)
 
+    def __str__(self):
+        return self.quantity
+
 
 class CartItem(AbstractModel):
     quantity = models.FloatField()
@@ -143,3 +173,6 @@ class CartItem(AbstractModel):
     class Meta:
         db_table = 'cart_item'
         ordering = ('-id',)
+
+    def __str__(self):
+        return self.quantity
