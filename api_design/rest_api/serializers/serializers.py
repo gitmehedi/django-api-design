@@ -329,7 +329,7 @@ class CartItemSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class CartItemSerializer(serializers.ModelSerializer):
+class CartItemPOSTSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.CartItem
         fields = ['quantity', 'product', 'session']
