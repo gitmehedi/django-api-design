@@ -14,17 +14,9 @@ class ProductInventoryList(APIView):
         return Response(serializer.data)
 
     def post(self, request, format=None):
-        user = User.objects.get(username='admin')
         serializer = ProductInventorySerializer(data=request.data)
         if serializer.is_valid():
-            ins = ProductInventory()
-            ins.name = serializer.validated_data['name']
-            ins.quantity = serializer.validated_data['quantity']
-            ins.status = serializer.validated_data['status']
-            ins.create_user = user
-            ins.write_user = user
-            ins.save()
-
+            serializer.create(serializer.validated_data)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -42,16 +34,10 @@ class ProductInventoryViews(APIView):
         return Response(serializer.data)
 
     def put(self, request, pk, format=None):
-        user = User.objects.get(username='admin')
         data = self.get_object(pk=pk)
         serializer = ProductInventorySerializer(data, data=request.data)
         if serializer.is_valid():
-            data.name = serializer.validated_data['name']
-            data.quantity = serializer.validated_data['quantity']
-            data.status = serializer.validated_data['status']
-            data.write_user = user
-            data.save()
-
+            serializer.update(data, serializer.data)
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

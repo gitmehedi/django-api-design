@@ -14,18 +14,9 @@ class ProductCategoryList(APIView):
         return Response(serializer.data)
 
     def post(self, request, format=None):
-        user = User.objects.get(username='admin')
         serializer = ProductCategorySerializer(data=request.data)
         if serializer.is_valid():
-            ins = models.ProductCategory()
-            ins.name = serializer.validated_data['name']
-            ins.code = serializer.validated_data['code']
-            ins.status = serializer.validated_data['status']
-            ins.description = serializer.validated_data['description']
-            ins.create_user = user
-            ins.write_user = user
-            ins.save()
-
+            serializer.create(serializer.validated_data)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -43,18 +34,10 @@ class ProductCategoryViews(APIView):
         return Response(serializer.data)
 
     def put(self, request, pk, format=None):
-        user = User.objects.get(username='admin')
         data = self.get_object(pk=pk)
         serializer = ProductCategorySerializer(data, data=request.data)
         if serializer.is_valid():
-            data.name = serializer.validated_data['name']
-            data.code = serializer.validated_data['code']
-            data.status = serializer.validated_data['status']
-            data.description = serializer.validated_data['description']
-            data.create_user = user
-            data.write_user = user
-            data.save()
-
+            serializer.update(data,serializer.validated_data)
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
