@@ -66,7 +66,7 @@ class OrderDetails(AbstractModel):
         ordering = ('-id',)
 
     def __str__(self):
-        return self.user.name
+        return self.total_price
 
 
 class Discount(AbstractModel):
@@ -92,7 +92,7 @@ class ShoppingSession(AbstractModel):
         ordering = ('-id',)
 
     def __str__(self):
-        return self.user.name
+        return self.total
 
 
 class UserAddresses(AbstractModel):
@@ -110,7 +110,7 @@ class UserAddresses(AbstractModel):
         ordering = ('-id',)
 
     def __str__(self):
-        return self.user.name
+        return self.city
 
 
 class UserPayment(AbstractModel):

@@ -19,7 +19,8 @@ class ModelTest(TestCase):
         self.assertEquals(user.username, USERNAME)
 
     def checkInstance(self, ins):
-        print(f"-------{ins} successfully completed-----")
+        print('-----------')
+        # print(f"-------{ins} successfully completed-----")
 
     def createProductCategory(self, user, name):
         ins = models.ProductCategory()
