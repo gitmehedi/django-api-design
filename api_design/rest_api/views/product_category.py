@@ -3,7 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from api_db import models
-from rest_api.serializers.model_serializers import ProductCategorySerializer
+from rest_api.serializers.serializers import ProductCategorySerializer, ProductCategoryListSerializer
 from django.contrib.auth.models import User
 
 
@@ -18,10 +18,10 @@ class ProductCategoryList(APIView):
         serializer = ProductCategorySerializer(data=request.data)
         if serializer.is_valid():
             ins = models.ProductCategory()
-            ins.name = serializer.data['name']
-            ins.code = serializer.data['code']
-            ins.status = serializer.data['status']
-            ins.description = serializer.data['description']
+            ins.name = serializer.validated_data['name']
+            ins.code = serializer.validated_data['code']
+            ins.status = serializer.validated_data['status']
+            ins.description = serializer.validated_data['description']
             ins.create_user = user
             ins.write_user = user
             ins.save()
@@ -38,21 +38,29 @@ class ProductCategoryViews(APIView):
             raise Http404
 
     def get(self, request, pk, format=None):
-        list = self.get_object(pk=pk)
-        serializer = ProductCategorySerializer(list)
+        data = self.get_object(pk=pk)
+        serializer = ProductCategoryListSerializer(data)
         return Response(serializer.data)
 
     def put(self, request, pk, format=None):
-        list = self.get_object(pk=pk)
-        serializer = ProductCategorySerializer(list, data=request.data)
+        user = User.objects.get(username='admin')
+        data = self.get_object(pk=pk)
+        serializer = ProductCategorySerializer(data, data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            data.name = serializer.validated_data['name']
+            data.code = serializer.validated_data['code']
+            data.status = serializer.validated_data['status']
+            data.description = serializer.validated_data['description']
+            data.create_user = user
+            data.write_user = user
+            data.save()
+
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk, format=None):
-        list = self.get_object(pk=pk)
-        if list:
-            list.delete()
+        data = self.get_object(pk=pk)
+        if data:
+            data.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(status=status.HTTP_400_BAD_REQUEST)
