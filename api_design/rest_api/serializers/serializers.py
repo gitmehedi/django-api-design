@@ -9,16 +9,22 @@ def getUser():
     return User.objects.get(username='admin')
 
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email', 'first_name', 'last_name']
+
+
 class ProductCategoryListSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.ProductCategory
-        fields = '__all__'
+        fields = ['id', 'username']
 
 
 class ProductCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = models.ProductCategory
-        fields = ['name', 'code', 'status', 'description']
+        fields = ['id', 'name', 'code', 'status', 'description']
 
     def create(self, data):
         ins = models.ProductCategory()
@@ -29,6 +35,7 @@ class ProductCategorySerializer(serializers.ModelSerializer):
         ins.create_user = getUser()
         ins.write_user = getUser()
         ins.save()
+        return ins
 
     def update(self, ins, data):
         ins.name = data['name']
@@ -38,6 +45,7 @@ class ProductCategorySerializer(serializers.ModelSerializer):
         ins.write_user = getUser()
         ins.modified_at = timezone.now()
         ins.save()
+        return ins
 
 
 class ProductInventoryListSerializer(serializers.ModelSerializer):
@@ -49,7 +57,7 @@ class ProductInventoryListSerializer(serializers.ModelSerializer):
 class ProductInventorySerializer(serializers.ModelSerializer):
     class Meta:
         model = models.ProductInventory
-        fields = ['name', 'quantity', 'status']
+        fields = ['id', 'name', 'quantity', 'status']
 
     def create(self, data):
         ins = models.ProductInventory()
@@ -59,6 +67,7 @@ class ProductInventorySerializer(serializers.ModelSerializer):
         ins.create_user = getUser()
         ins.write_user = getUser()
         ins.save()
+        return ins
 
     def update(self, ins, data):
         ins.name = data['name']
@@ -67,18 +76,19 @@ class ProductInventorySerializer(serializers.ModelSerializer):
         ins.write_user = getUser()
         ins.modified_at = timezone.now()
         ins.save()
+        return ins
 
 
 class PaymentDetailsSerializer(serializers.ModelSerializer):
     class Meta:
-        models = models.PaymentDetails
+        model = models.PaymentDetails
         fields = '__all__'
 
 
 class PaymentDetailsPOSTSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.PaymentDetails
-        fields = ['amount', 'provider', 'status']
+        fields = ['id', 'amount', 'provider', 'status']
 
     def create(self, data):
         ins = models.PaymentDetails()
@@ -88,6 +98,7 @@ class PaymentDetailsPOSTSerializer(serializers.ModelSerializer):
         ins.create_user = getUser()
         ins.write_user = getUser()
         ins.save()
+        return ins
 
     def update(self, ins, data):
         ins.amount = data['amount']
@@ -96,6 +107,7 @@ class PaymentDetailsPOSTSerializer(serializers.ModelSerializer):
         ins.write_user = getUser()
         ins.modified_at = timezone.now()
         ins.save()
+        return ins
 
 
 class OrderDetailsSerializer(serializers.ModelSerializer):
@@ -107,7 +119,7 @@ class OrderDetailsSerializer(serializers.ModelSerializer):
 class OrderDetailsPOSTSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.OrderDetails
-        fields = ['total_price', 'user', 'payment']
+        fields = ['id', 'total_price', 'user', 'payment']
 
     def create(self, data):
         ins = models.OrderDetails()
@@ -117,6 +129,7 @@ class OrderDetailsPOSTSerializer(serializers.ModelSerializer):
         ins.create_user = getUser()
         ins.write_user = getUser()
         ins.save()
+        return ins
 
     def update(self, ins, data):
         ins.total_price = data['total_price']
@@ -125,6 +138,7 @@ class OrderDetailsPOSTSerializer(serializers.ModelSerializer):
         ins.write_user = getUser()
         ins.modified_at = timezone.now()
         ins.save()
+        return ins
 
 
 class DiscountSerializer(serializers.ModelSerializer):
@@ -133,19 +147,10 @@ class DiscountSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = '__all__'
-
-
 class DiscountPOSTSerializer(serializers.ModelSerializer):
-    create_user = UserSerializer(required=False)
-    write_user = UserSerializer(required=False)
-
     class Meta:
         model = models.Discount
-        fields = '__all__'
+        fields = ['id', 'name', 'description', 'discount_percent', 'status']
 
     def create(self, data):
         ins = models.Discount()
@@ -156,6 +161,7 @@ class DiscountPOSTSerializer(serializers.ModelSerializer):
         ins.create_user = getUser()
         ins.write_user = getUser()
         ins.save()
+        return ins
 
     def update(self, ins, data):
         ins.name = data['name']
@@ -165,6 +171,7 @@ class DiscountPOSTSerializer(serializers.ModelSerializer):
         ins.write_user = getUser()
         ins.modified_at = timezone.now()
         ins.save()
+        return ins
 
 
 class ShoppingSessionSerializer(serializers.ModelSerializer):
@@ -176,13 +183,16 @@ class ShoppingSessionSerializer(serializers.ModelSerializer):
 class ShoppingSessionPOSTSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.ShoppingSession
-        fields = ['total', 'user']
+        fields = ['id', 'total', 'user']
 
     def create(self, data):
         ins = models.ShoppingSession()
         ins.total = data['total']
         ins.user = data['user']
+        ins.create_user = getUser()
+        ins.write_user = getUser()
         ins.save()
+        return ins
 
     def update(self, ins, data):
         ins.total = data['total']
@@ -190,6 +200,7 @@ class ShoppingSessionPOSTSerializer(serializers.ModelSerializer):
         ins.write_user = getUser()
         ins.modified_at = timezone.now()
         ins.save()
+        return ins
 
 
 class UserAddressesSerializer(serializers.ModelSerializer):
@@ -201,7 +212,8 @@ class UserAddressesSerializer(serializers.ModelSerializer):
 class UserAddressesPOSTSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.UserAddresses
-        fields = ['user', 'address_line1', 'address_line2', 'city', 'postal_code', 'country', 'mobile', 'telephone']
+        fields = ['id', 'user', 'address_line1', 'address_line2', 'city', 'postal_code', 'country', 'mobile',
+                  'telephone']
 
     def create(self, data):
         ins = models.UserAddresses()
@@ -217,6 +229,7 @@ class UserAddressesPOSTSerializer(serializers.ModelSerializer):
         ins.create_user = getUser()
         ins.write_user = getUser()
         ins.save()
+        return ins
 
     def update(self, ins, data):
         ins.user = data['user']
@@ -231,6 +244,7 @@ class UserAddressesPOSTSerializer(serializers.ModelSerializer):
         ins.write_user = getUser()
         ins.modified_at = timezone.now()
         ins.save()
+        return ins
 
 
 class UserPaymentSerializer(serializers.ModelSerializer):
@@ -242,7 +256,7 @@ class UserPaymentSerializer(serializers.ModelSerializer):
 class UserPaymentPOSTSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.UserPayment
-        fields = ['user', 'payment_type', 'provider', 'account_no', 'expires_at']
+        fields = ['id', 'user', 'payment_type', 'provider', 'account_no', 'expires_at']
 
     def create(self, data):
         ins = models.UserPayment()
@@ -254,6 +268,7 @@ class UserPaymentPOSTSerializer(serializers.ModelSerializer):
         ins.create_user = getUser()
         ins.write_user = getUser()
         ins.save()
+        return ins
 
     def update(self, ins, data):
         ins.user = data['user']
@@ -264,6 +279,7 @@ class UserPaymentPOSTSerializer(serializers.ModelSerializer):
         ins.write_user = getUser()
         ins.modified_at = timezone.now()
         ins.save()
+        return ins
 
 
 class ProductsSerializer(serializers.ModelSerializer):
@@ -275,12 +291,11 @@ class ProductsSerializer(serializers.ModelSerializer):
 class ProductsPOSTSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Products
-        fields = ['user', 'description', 'sku', 'price', 'category', 'inventory', 'discount']
+        fields = ['id', 'description', 'sku', 'price', 'category', 'inventory', 'discount']
 
     def create(self, data):
         ins = models.Products()
-        ins.user = data['user']
-        ins.payment_type = data['description']
+        ins.description = data['description']
         ins.sku = data['sku']
         ins.price = data['price']
         ins.category = data['category']
@@ -289,10 +304,9 @@ class ProductsPOSTSerializer(serializers.ModelSerializer):
         ins.create_user = getUser()
         ins.write_user = getUser()
         ins.save()
+        return ins
 
     def update(self, ins, data):
-        ins.user = data['user']
-        ins.payment_type = data['description']
         ins.sku = data['sku']
         ins.price = data['price']
         ins.category = data['category']
@@ -301,6 +315,7 @@ class ProductsPOSTSerializer(serializers.ModelSerializer):
         ins.write_user = getUser()
         ins.modified_at = timezone.now()
         ins.save()
+        return ins
 
 
 class OrderItemsSerializer(serializers.ModelSerializer):
@@ -312,7 +327,7 @@ class OrderItemsSerializer(serializers.ModelSerializer):
 class OrderItemsPOSTSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.OrderItems
-        fields = ['quantity', 'order_id', 'product']
+        fields = ['id', 'quantity', 'order_id', 'product']
 
     def create(self, data):
         ins = models.OrderItems()
@@ -322,6 +337,7 @@ class OrderItemsPOSTSerializer(serializers.ModelSerializer):
         ins.create_user = getUser()
         ins.write_user = getUser()
         ins.save()
+        return ins
 
     def update(self, ins, data):
         ins.quantity = data['quantity']
@@ -330,6 +346,7 @@ class OrderItemsPOSTSerializer(serializers.ModelSerializer):
         ins.write_user = getUser()
         ins.modified_at = timezone.now()
         ins.save()
+        return ins
 
 
 class CartItemSerializer(serializers.ModelSerializer):
@@ -341,7 +358,7 @@ class CartItemSerializer(serializers.ModelSerializer):
 class CartItemPOSTSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.CartItem
-        fields = ['quantity', 'product', 'session']
+        fields = ['id', 'quantity', 'product', 'session']
 
     def create(self, data):
         ins = models.CartItem()
@@ -351,11 +368,13 @@ class CartItemPOSTSerializer(serializers.ModelSerializer):
         ins.create_user = getUser()
         ins.write_user = getUser()
         ins.save()
+        return ins
 
     def update(self, ins, data):
         ins.quantity = data['quantity']
-        ins.order_id = data['order_id']
+        ins.session = data['session']
         ins.product = data['product']
         ins.write_user = getUser()
         ins.modified_at = timezone.now()
         ins.save()
+        return ins

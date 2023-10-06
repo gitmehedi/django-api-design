@@ -18,7 +18,8 @@ class ShoppingSessionList(APIView):
     def post(self, request, format=None):
         serializer = ShoppingSessionPOSTSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.create(serializer.validated_data)
+            ins = serializer.create(serializer.validated_data)
+            serializer.validated_data['id'] = ins.id
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -41,7 +42,7 @@ class ShoppingSessionViews(APIView):
         data = self.get_object(pk=pk)
         serializer = ShoppingSessionPOSTSerializer(data, data=request.data)
         if serializer.is_valid():
-            serializer.update(data, serializer.data)
+            serializer.update(data, serializer.validated_data)
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

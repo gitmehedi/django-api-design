@@ -18,7 +18,8 @@ class OrderDetailsList(APIView):
     def post(self, request, format=None):
         serializer = OrderDetailsPOSTSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.create(serializer.validated_data)
+            ins = serializer.create(serializer.validated_data)
+            serializer.validated_data['id'] = ins.id
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -41,7 +42,8 @@ class OrderDetailsViews(APIView):
         data = self.get_object(pk=pk)
         serializer = OrderDetailsPOSTSerializer(data, data=request.data)
         if serializer.is_valid():
-            serializer.update(data, serializer.data)
+            ins = serializer.create(serializer.validated_data)
+            serializer.validated_data['id'] = ins.id
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

@@ -1,14 +1,14 @@
 from django.urls import path
 from .views import product_category, product_inventory, cart_item, discount, order_details, order_items, \
-    payment_details, products, shopping_session, user_addresses, user_payment
+    payment_details, products, shopping_session, user_addresses, user_payment,users
 
 urlpatterns = [
     path('categories/', product_category.ProductCategoryList().as_view()),
     path('categories/<int:pk>/', product_category.ProductCategoryViews.as_view()),
     path('inventory/', product_inventory.ProductInventoryList.as_view()),
     path('inventory/<int:pk>/', product_inventory.ProductInventoryViews.as_view()),
-    path('user_payment/', user_payment.UserPaymentList.as_view()),
-    path('user_payment/<int:pk>/', user_payment.UserPaymentViews.as_view()),
+    path('user-payment/', user_payment.UserPaymentList.as_view()),
+    path('user-payment/<int:pk>/', user_payment.UserPaymentViews.as_view()),
     path('user-address/', user_addresses.UserAddressesList.as_view()),
     path('user-address/<int:pk>/', user_addresses.UserAddressesViews.as_view()),
     path('session/', shopping_session.ShoppingSessionList.as_view()),
@@ -25,4 +25,5 @@ urlpatterns = [
     path('discounts/<int:pk>/', discount.DiscountViews.as_view()),
     path('carts/', cart_item.CartItemList.as_view()),
     path('carts/<int:pk>/', cart_item.CartItemViews.as_view()),
+    path('getuser/', users.UsersViews.as_view()),
 ]
