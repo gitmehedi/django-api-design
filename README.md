@@ -14,6 +14,17 @@
 
 ![API TYPES](./images/api_types.gif)
 
+## API Design Types
+1. **REST**: Resource based for Web Servers
+2. **SOAP**: XML-based for Enterprise Applications
+3. **GraphQL**: Query Language reduce network load
+4. **gRPC**: High Performance for microservices
+5. **MQTT**: 
+6. **WebSockets**: Bidirectional for low-latency data exchange
+7. **Webhooks**: Asynchronous for event-driven application
+8. **AMQP**: 
+
+![API Types](./images/api_types_details.png)
 
 ## REST API
 
