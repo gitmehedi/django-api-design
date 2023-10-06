@@ -4,9 +4,12 @@ from rest_framework.response import Response
 from rest_framework import status
 from api_db.models import UserAddresses
 from rest_api.serializers.serializers import UserAddressesSerializer, UserAddressesPOSTSerializer
+from rest_framework.permissions import IsAuthenticated
 
 
 class UserAddressesList(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, format=None):
         lists = UserAddresses.objects.all()
         serializer = UserAddressesSerializer(lists, many=True)
@@ -21,6 +24,8 @@ class UserAddressesList(APIView):
 
 
 class UserAddressesViews(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get_object(self, pk):
         try:
             return UserAddresses.objects.get(pk=pk)

@@ -4,9 +4,12 @@ from rest_framework.response import Response
 from rest_framework import status
 from api_db.models import ProductInventory
 from rest_api.serializers.serializers import ProductInventorySerializer, ProductInventoryListSerializer
+from rest_framework.permissions import IsAuthenticated
 
 
 class ProductInventoryList(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, format=None):
         lists = ProductInventory.objects.all()
         serializer = ProductInventorySerializer(lists, many=True)
@@ -21,6 +24,8 @@ class ProductInventoryList(APIView):
 
 
 class ProductInventoryViews(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get_object(self, pk):
         try:
             return ProductInventory.objects.get(pk=pk)

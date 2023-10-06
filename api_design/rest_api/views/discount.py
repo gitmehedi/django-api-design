@@ -4,9 +4,12 @@ from rest_framework.response import Response
 from rest_framework import status
 from api_db.models import Discount
 from rest_api.serializers.serializers import DiscountSerializer, DiscountPOSTSerializer
+from rest_framework.permissions import IsAuthenticated
 
 
 class DiscountList(APIView):
+    permission_classes = (IsAuthenticated,)
+
     def get(self, request, format=None):
         lists = Discount.objects.all()
         serializer = DiscountSerializer(lists, many=True)
@@ -21,6 +24,8 @@ class DiscountList(APIView):
 
 
 class DiscountViews(APIView):
+    permission_classes = (IsAuthenticated,)
+
     def get_object(self, pk):
         try:
             return Discount.objects.get(pk=pk)

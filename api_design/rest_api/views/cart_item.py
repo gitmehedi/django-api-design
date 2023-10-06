@@ -4,9 +4,12 @@ from rest_framework.response import Response
 from rest_framework import status
 from api_db.models import CartItem
 from rest_api.serializers.serializers import CartItemSerializer, CartItemPOSTSerializer
+from rest_framework.permissions import IsAuthenticated
 
 
 class CartItemList(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, format=None):
         lists = CartItem.objects.all()
         serializer = CartItemSerializer(lists, many=True)

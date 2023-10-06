@@ -140,14 +140,12 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class DiscountPOSTSerializer(serializers.ModelSerializer):
-    # create_user = UserSerializer(required=False)
-    # write_user = UserSerializer(required=False)
+    create_user = UserSerializer(required=False)
+    write_user = UserSerializer(required=False)
 
     class Meta:
         model = models.Discount
         fields = '__all__'
-        # read_only_fields = ['created_at', 'updated_at', 'deleted_at', 'create_user', 'write_user']
-        exclude = ['created_at', 'updated_at', 'deleted_at', 'create_user', 'write_user']
 
     def create(self, data):
         ins = models.Discount()

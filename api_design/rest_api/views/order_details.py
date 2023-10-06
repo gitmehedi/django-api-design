@@ -4,9 +4,12 @@ from rest_framework.response import Response
 from rest_framework import status
 from api_db.models import OrderDetails
 from rest_api.serializers.serializers import OrderDetailsSerializer, OrderDetailsPOSTSerializer
+from rest_framework.permissions import IsAuthenticated
 
 
 class OrderDetailsList(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, format=None):
         lists = OrderDetails.objects.all()
         serializer = OrderDetailsSerializer(lists, many=True)
@@ -21,6 +24,8 @@ class OrderDetailsList(APIView):
 
 
 class OrderDetailsViews(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get_object(self, pk):
         try:
             return OrderDetails.objects.get(pk=pk)

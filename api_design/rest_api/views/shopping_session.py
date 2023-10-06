@@ -4,9 +4,12 @@ from rest_framework.response import Response
 from rest_framework import status
 from api_db.models import ShoppingSession
 from rest_api.serializers.serializers import ShoppingSessionSerializer, ShoppingSessionPOSTSerializer
+from rest_framework.permissions import IsAuthenticated
 
 
 class ShoppingSessionList(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, format=None):
         lists = ShoppingSession.objects.all()
         serializer = ShoppingSessionSerializer(lists, many=True)
@@ -21,6 +24,8 @@ class ShoppingSessionList(APIView):
 
 
 class ShoppingSessionViews(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get_object(self, pk):
         try:
             return ShoppingSession.objects.get(pk=pk)

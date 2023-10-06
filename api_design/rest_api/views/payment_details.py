@@ -4,9 +4,12 @@ from rest_framework.response import Response
 from rest_framework import status
 from api_db.models import PaymentDetails
 from rest_api.serializers.serializers import PaymentDetailsSerializer, PaymentDetailsPOSTSerializer
+from rest_framework.permissions import IsAuthenticated
 
 
 class PaymentDetailsList(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, format=None):
         lists = PaymentDetails.objects.all()
         serializer = PaymentDetailsSerializer(lists, many=True)
@@ -21,6 +24,8 @@ class PaymentDetailsList(APIView):
 
 
 class PaymentDetailsViews(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get_object(self, pk):
         try:
             return PaymentDetails.objects.get(pk=pk)

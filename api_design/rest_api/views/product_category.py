@@ -4,10 +4,12 @@ from rest_framework.response import Response
 from rest_framework import status
 from api_db import models
 from rest_api.serializers.serializers import ProductCategorySerializer, ProductCategoryListSerializer
-from django.contrib.auth.models import User
+from rest_framework.permissions import IsAuthenticated
 
 
 class ProductCategoryList(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, format=None):
         lists = models.ProductCategory.objects.all()
         serializer = ProductCategorySerializer(lists, many=True)
@@ -22,6 +24,8 @@ class ProductCategoryList(APIView):
 
 
 class ProductCategoryViews(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get_object(self, pk):
         try:
             return models.ProductCategory.objects.get(pk=pk)
@@ -37,7 +41,7 @@ class ProductCategoryViews(APIView):
         data = self.get_object(pk=pk)
         serializer = ProductCategorySerializer(data, data=request.data)
         if serializer.is_valid():
-            serializer.update(data,serializer.validated_data)
+            serializer.update(data, serializer.validated_data)
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
