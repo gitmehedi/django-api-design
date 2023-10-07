@@ -2,9 +2,9 @@
 
 ## API Design Types
 
-1. REST
-2. SOAP
-3. GraphQL
+1. [REST](#rest_api)
+2. [SOAP](#SOAP)
+3. [GraphQL](graphql_api)
 4. gRPC
 5. MQTT
 6. WebSockets
@@ -140,86 +140,25 @@ We have understood what is Rest API, and how it works. Now, we will see the feat
 
 Challenges of using Rest API
 
-1. **REST endpoint consensus:** It makes little difference how you style your URLs, but consistency across your API is
-   essential. Unfortunately, as procedures get more complicated, the number of possible possibilities grows even more
-   significant. As a result, consistency on huge codebases with multiple developers can be challenging.2. **REST API
-   versioning:**
-   APIs are
-   frequently
-   versioned to
-   avoid
-   compatibility
-   difficulties.
-   However, old
-   endpoints
-   remain alive,
-   increasing
-   effort due to
-   the
-   maintenance of
-   numerous
-   APIs.3. **REST
-   API
-   authentication:
-   ** API
-   authentication
-   will
-   differ
-   based
-   on the
-   circumstance.
-   It
-   treats
-   the
-   third-party
-   programs
-   as
-   logged-in
-   users
-   with
-   specified
-   privileges
-   and
-   permissions.
-   Registered
-   users
-   can
-   also
-   utilize
-   third-party
-   programs
-   to
-   access
-   their
-   data,
-   such
-   as
-   searching
-   for
-   emails
-   or
-   documents.4.
-   **REST API Security:** Even though RESTful APIs make it easier to access and change your application, security
-   vulnerabilities might arise. A client, for example, can submit hundreds of requests per second and destroy your
-   server.5. **Multiple Requests and Unnecessary Data:** A response may contain more information than you require or
-   require additional queries to get all the data.
+1. **REST endpoint consensus:** It makes little difference how you style your URLs, but consistency across your API is essential. Unfortunately, as procedures get more complicated, the number of possible possibilities grows even more significant. As a result, consistency on huge codebases with multiple developers can be challenging.
+2. **REST API Versioning:** APIs are frequently versioned to avoid compatibility difficulties. However, old endpoints remain alive, increasing effort due to the maintenance of numerous APIs.
+3. **REST API authentication:** API authentication will differ based on the circumstance. It treats the third-party programs as logged-in users with specified privileges and permissions. Registered users can also utilize third-party programs to access their data, such as searching for emails or documents.
+4. **REST API Security:** Even though RESTful APIs make it easier to access and change your application, security vulnerabilities might arise. A client, for example, can submit hundreds of requests per second and destroy your server.
+5. **Multiple Requests and Unnecessary Data:** A response may contain more information than you require or require additional queries to get all the data.
 
 ### Rest API Examples
 
 Now that you are clear about REST API's meaning, let us know what REST API examples are.
 
-- Twitter:Twitter API permits third-party applications to access and write data from Twitter. Write and post tweets,
+- **Twitter**: Twitter API permits third-party applications to access and write data from Twitter. Write and post tweets,
   share tweets, and read profiles using it. This API is handy for obtaining and analyzing massive quantities of tweets
   regarding certain subjects.
-- Instagram:The Instagram Basic Display API provides access to user profiles, images, and videos. You may use this API
+- **Instagram**: The Instagram Basic Display API provides access to user profiles, images, and videos. You may use this API
   and others to create applications that pull user data and integrate it into your product. Instagram also provides a
   Graph API for professional Instagram accounts to manage online activity.- Spotify:Spotify's web API lets customers
-  obtain information about artists, songs,
-  albums, and playlists on the Spotify
-  platform. You may also use it to create
-  playlists, stop and play music, shuffle
-  tracks, and do various other things.
-- HubSpot:All of HubSpot's APIs follow REST principles and are built for comprehensive integrations to help
+  obtain information about artists, songs, albums, and playlists on the Spotify
+  platform. You may also use it to create playlists, stop and play music, shuffle tracks, and do various other things.
+- **HubSpot**: All of HubSpot's APIs follow REST principles and are built for comprehensive integrations to help
   organizations get the most out of HubSpot's products. You can extend HubSpot's sophisticated marketing software with
   additional features and link your HubSpot account with other valuable applications.
 
@@ -258,4 +197,18 @@ rather than a standard in and of itself.
 - https://medium.com/bytebytego-system-design-alliance/best-practice-and-cheat-sheet-for-rest-api-design-6a6e12dfa89f
 - https://www.ibm.com/topics/rest-apis
 - https://www.youtube.com/watch?v=1Wl-rtew1_E
+- https://simpleisbetterthancomplex.com/tutorial/2018/12/19/how-to-use-jwt-authentication-with-django-rest-framework.html
 
+## GraphQL API
+
+### Introduction
+### History of GraphQL
+### Features of GraphQL
+### Principal of GraphQL
+### Methods of GraphQL
+### Rest API Examples
+### Conclusion
+### Frequently Asked Questions
+## References
+- https://www.codecademy.com/article/smyja/how-to-use-graphql-with-django
+- 
