@@ -39,10 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'api_db',
     'rest_framework',
-    'rest_api',
     'rest_framework.authtoken',
+    'graphene_django',
+    'api_db',
+    'rest_api',
+    'graphql_api',
 ]
 
 MIDDLEWARE = [
