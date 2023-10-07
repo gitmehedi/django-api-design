@@ -1,10 +1,35 @@
 # API Implementation with Django
 
+
+- [API Implementation with Django](#api-implementation-with-django)
+  - [API Design Types](#api-design-types)
+  - [REST API](#rest-api)
+    - [Introduction](#introduction)
+    - [History of Rest API](#history-of-rest-api)
+    - [Features of REST API](#features-of-rest-api)
+    - [Principals of REST API](#principals-of-rest-api)
+    - [Methods of REST API](#methods-of-rest-api)
+    - [Rest API Examples](#rest-api-examples)
+    - [Conclusion](#conclusion)
+    - [Frequently Asked Questions (FAQ)](#frequently-asked-questions-faq)
+    - [References:](#references)
+  - [GraphQL API](#graphql-api)
+    - [Introduction](#introduction-1)
+    - [History of GraphQL](#history-of-graphql)
+    - [Features of GraphQL](#features-of-graphql)
+    - [Principal of GraphQL](#principal-of-graphql)
+    - [Methods of GraphQL](#methods-of-graphql)
+    - [Rest API Examples](#rest-api-examples-1)
+    - [Conclusion](#conclusion-1)
+    - [Frequently Asked Questions](#frequently-asked-questions)
+    - [References](#references-1)
+  - [Resources](#resources)
+
 ## API Design Types
 
-1. [REST](#rest_api)
-2. [SOAP](#SOAP)
-3. [GraphQL](graphql_api)
+1. REST
+2. SOAP
+3. GraphQL
 4. gRPC
 5. MQTT
 6. WebSockets
@@ -13,7 +38,7 @@
 
 ![API TYPES](./images/api_types.gif)
 
-## API Design Types
+**API Design Types Details**
 
 1. **REST**:  
    Resource based for Web Servers  
@@ -191,7 +216,7 @@ rather than a standard in and of itself.
    implementer to choose which Media-Type to use, such as XML, JSON, or plain text. Furthermore, whereas REST may
    utilize the SOAP protocol, SOAP cannot use REST.
 
-## References:
+### References:
 
 - https://www.knowledgehut.com/blog/programming/rest-api
 - https://medium.com/bytebytego-system-design-alliance/best-practice-and-cheat-sheet-for-rest-api-design-6a6e12dfa89f
@@ -202,13 +227,29 @@ rather than a standard in and of itself.
 ## GraphQL API
 
 ### Introduction
+GraphQL is a query language for APIs and a runtime for fulfilling those queries with your existing data. GraphQL provides a complete and understandable description of the data in your API, gives clients the power to ask for exactly what they need and nothing more, makes it easier to evolve APIs over time, and enables powerful developer tools.    
 ### History of GraphQL
+GraphQL was developed by Facebook in 2012 and released as an open-source project in 2015. It was originally created to address limitation and shortcomings of REST.
+
+GraphQL allows clients to define the structure of the data they need, and servers to respond with exactly that data, without any unnecessary data. It’s often used as an alternative to RESTful APIs, particularly for scenarios where the client needs fine-grained control over the data that’s returned.
+
 ### Features of GraphQL
+The following terms are often used when interacting with GraphQL. Knowing them can be helpful, though we won’t be covering all of them in this tutorial.
+
+- **Schema**: Describes the functionality available to the client applications that connect to it.
+- **Query**: A schema type that represents the GET request and defines the operations that can be used for reading or fetching data.
+- **Nesting**: Queries can be nested inside of other queries.
+- **Mutation**: A schema type that defines the kind of operations that can be done to modify data.
+- **Subscription**: Notifies the client server in real time about updates to the data.
+- **Resolver**: Functions that return values for fields associated with existing schema types.
+
 ### Principal of GraphQL
 ### Methods of GraphQL
 ### Rest API Examples
 ### Conclusion
 ### Frequently Asked Questions
-## References
+### References
 - https://www.codecademy.com/article/smyja/how-to-use-graphql-with-django
-- 
+
+
+## Resources
