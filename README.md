@@ -239,7 +239,7 @@ The following terms are often used when interacting with GraphQL. Knowing them c
 - **Schema**: Describes the functionality available to the client applications that connect to it.
 - **Query**: A schema type that represents the GET request and defines the operations that can be used for reading or fetching data.
 - **Nesting**: Queries can be nested inside of other queries.
-- **Mutation**: A schema type that defines the kind of operations that can be done to modify data.
+- **Mutation**: A schema type that represent POST,PUT,DELETE requests and defines operations that can be used for modifying the data.
 - **Subscription**: Notifies the client server in real time about updates to the data.
 - **Resolver**: Functions that return values for fields associated with existing schema types.
 
