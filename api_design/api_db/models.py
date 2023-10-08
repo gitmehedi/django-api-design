@@ -50,9 +50,6 @@ class PaymentDetails(AbstractModel):
         db_table = 'payment_details'
         ordering = ('-id',)
 
-    def __str__(self):
-        return self.amount
-
 
 class OrderDetails(AbstractModel):
     total_price = models.FloatField()
@@ -64,9 +61,6 @@ class OrderDetails(AbstractModel):
     class Meta:
         db_table = 'order_details'
         ordering = ('-id',)
-
-    def __str__(self):
-        return self.total_price
 
 
 class Discount(AbstractModel):
@@ -90,9 +84,6 @@ class ShoppingSession(AbstractModel):
     class Meta:
         db_table = 'shopping_session'
         ordering = ('-id',)
-
-    def __str__(self):
-        return self.total
 
 
 class UserAddresses(AbstractModel):
@@ -159,9 +150,6 @@ class OrderItems(AbstractModel):
         db_table = 'order_items'
         ordering = ('-id',)
 
-    def __str__(self):
-        return self.quantity
-
 
 class CartItem(AbstractModel):
     quantity = models.FloatField()
@@ -173,6 +161,3 @@ class CartItem(AbstractModel):
     class Meta:
         db_table = 'cart_item'
         ordering = ('-id',)
-
-    def __str__(self):
-        return self.quantity
