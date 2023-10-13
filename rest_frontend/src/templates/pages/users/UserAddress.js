@@ -1,6 +1,7 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {fetchAllUserAddress} from "src/store";
+import Action from "src/components/actions";
 
 const UserAddress = () => {
     const dispatch = useDispatch();
@@ -28,8 +29,7 @@ const UserAddress = () => {
                 <td>{dt.mobile}</td>
                 <td>{dt.telephone}</td>
                 <td>
-                    <button className="btn btn-primary">Edit</button>
-                    <button className="btn btn-danger">Delete</button>
+                    <Action recId={dt.id}/>
                 </td>
             </tr>
         );

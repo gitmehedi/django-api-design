@@ -1,31 +1,30 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {fetchCategory} from "src/store";
+import {fetchAllOrders} from "src/store";
+import Action from "src/components/actions";
 
-const OrderItems = () => {
+const Orders = () => {
     const dispatch = useDispatch();
 
     const {data} = useSelector((state) => {
-        return state.categories;
+        return state.orders;
     })
 
 
     useEffect(() => {
-        dispatch(fetchCategory());
-    }, [fetchCategory]);
+        dispatch(fetchAllOrders());
+    }, [fetchAllOrders]);
 
 
     const renderData = data.map((dt) => {
         return (
             <tr key={dt.id}>
                 <td>{dt.id}</td>
-                <td>{dt.name}</td>
-                <td>{dt.code}</td>
-                <td>{dt.description}</td>
-                <td>{dt.status}</td>
+                <td>{dt.user}</td>
+                <td>{dt.total_price}</td>
+                <td>{dt.payment}</td>
                 <td>
-                    <button className="btn btn-primary">Edit</button>
-                    <button className="btn btn-danger">Delete</button>
+                    <Action recId={dt.id}/>
                 </td>
             </tr>
         );
@@ -38,10 +37,9 @@ const OrderItems = () => {
                 <thead>
                 <tr>
                     <th>No</th>
-                    <th>Name</th>
-                    <th>Code</th>
-                    <th>Description</th>
-                    <th>Status</th>
+                    <th>User</th>
+                    <th>Total Price</th>
+                    <th>Payment</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -53,4 +51,4 @@ const OrderItems = () => {
         </div>
     );
 };
-export default OrderItems;
+export default Orders;

@@ -1,29 +1,30 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {fetchAllCarts} from "src/store";
+import {fetchAllPayments} from "src/store";
+import Action from "src/components/actions";
 
-const Carts = () => {
+const PaymentDetails = () => {
     const dispatch = useDispatch();
 
     const {data} = useSelector((state) => {
-        return state.carts;
+        return state.payments;
     })
 
+
     useEffect(() => {
-        dispatch(fetchAllCarts());
-    }, [fetchAllCarts]);
+        dispatch(fetchAllPayments());
+    }, [fetchAllPayments]);
 
 
     const renderData = data.map((dt) => {
         return (
             <tr key={dt.id}>
                 <td>{dt.id}</td>
-                <td>{dt.quantity}</td>
-                <td>{dt.product}</td>
-                <td>{dt.session}</td>
+                <td>{dt.provider}</td>
+                <td>{dt.amount}</td>
+                <td>{dt.status}</td>
                 <td>
-                    <button className="btn btn-primary">Edit</button>
-                    <button className="btn btn-danger">Delete</button>
+                    <Action recId={dt.id}/>
                 </td>
             </tr>
         );
@@ -35,10 +36,10 @@ const Carts = () => {
             <table className='table table-striped'>
                 <thead>
                 <tr>
-                    <th>Serial</th>
-                    <th>Quantity</th>
-                    <th>Product</th>
-                    <th>Session</th>
+                    <th>No</th>
+                    <th>Provider Name</th>
+                    <th>Amount</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -50,4 +51,4 @@ const Carts = () => {
         </div>
     );
 };
-export default Carts;
+export default PaymentDetails;

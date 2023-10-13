@@ -1,6 +1,7 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {fetchAllDiscount} from "src/store";
+import Action from "src/components/actions";
 
 const Discounts = () => {
     const dispatch = useDispatch();
@@ -24,8 +25,7 @@ const Discounts = () => {
                 <td>{dt.description}</td>
                 <td>{dt.status}</td>
                 <td>
-                    <button className="btn btn-primary">Edit</button>
-                    <button className="btn btn-danger">Delete</button>
+                    <Action recId={dt.id}/>
                 </td>
             </tr>
         );

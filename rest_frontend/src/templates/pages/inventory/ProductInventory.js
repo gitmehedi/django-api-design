@@ -1,32 +1,30 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {fetchAllUserPayment} from "src/store";
+import {fetchAllInventory} from "src/store";
+import Action from "src/components/actions";
 
-const UserPayments = () => {
+const ProductInventory = () => {
     const dispatch = useDispatch();
 
     const {data} = useSelector((state) => {
-        return state.userPayments;
+        return state.inventory;
     })
 
 
     useEffect(() => {
-        dispatch(fetchAllUserPayment());
-    }, [fetchAllUserPayment]);
+        dispatch(fetchAllInventory());
+    }, [fetchAllInventory]);
 
 
     const renderData = data.map((dt) => {
         return (
             <tr key={dt.id}>
                 <td>{dt.id}</td>
-                <td>{dt.provider}</td>
-                <td>{dt.payment_type}</td>
-                <td>{dt.account_no}</td>
-                <td>{dt.expires_at}</td>
-                <td>{dt.user}</td>
+                <td>{dt.name}</td>
+                <td>{dt.quantity}</td>
+                <td>{dt.status}</td>
                 <td>
-                    <button className="btn btn-primary">Edit</button>
-                    <button className="btn btn-danger">Delete</button>
+                    <Action recId={dt.id}/>
                 </td>
             </tr>
         );
@@ -39,11 +37,9 @@ const UserPayments = () => {
                 <thead>
                 <tr>
                     <th>No</th>
-                    <th>Provider</th>
-                    <th>Payment Type</th>
-                    <th>Account No</th>
-                    <th>Expires At</th>
-                    <th>User</th>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -55,4 +51,4 @@ const UserPayments = () => {
         </div>
     );
 };
-export default UserPayments;
+export default ProductInventory;

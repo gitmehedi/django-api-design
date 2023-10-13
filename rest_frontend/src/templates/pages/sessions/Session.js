@@ -1,18 +1,19 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {fetchAllOrders} from "src/store";
+import {fetchAllSessions} from "src/store";
+import Action from "src/components/actions";
 
-const Orders = () => {
+const Sessions = () => {
     const dispatch = useDispatch();
 
     const {data} = useSelector((state) => {
-        return state.orders;
+        return state.sessions;
     })
 
 
     useEffect(() => {
-        dispatch(fetchAllOrders());
-    }, [fetchAllOrders]);
+        dispatch(fetchAllSessions());
+    }, [fetchAllSessions]);
 
 
     const renderData = data.map((dt) => {
@@ -20,11 +21,9 @@ const Orders = () => {
             <tr key={dt.id}>
                 <td>{dt.id}</td>
                 <td>{dt.user}</td>
-                <td>{dt.total_price}</td>
-                <td>{dt.payment}</td>
+                <td>{dt.total}</td>
                 <td>
-                    <button className="btn btn-primary">Edit</button>
-                    <button className="btn btn-danger">Delete</button>
+                    <Action recId={dt.id}/>
                 </td>
             </tr>
         );
@@ -38,8 +37,7 @@ const Orders = () => {
                 <tr>
                     <th>No</th>
                     <th>User</th>
-                    <th>Total Price</th>
-                    <th>Payment</th>
+                    <th>Total</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -51,4 +49,4 @@ const Orders = () => {
         </div>
     );
 };
-export default Orders;
+export default Sessions;
