@@ -1,28 +1,26 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {fetchCategory} from "src/store";
+import {fetchAllSessions} from "src/store";
 
 const ProductCategory = () => {
     const dispatch = useDispatch();
 
     const {data} = useSelector((state) => {
-        return state.categories;
+        return state.sessions;
     })
 
 
     useEffect(() => {
-        dispatch(fetchCategory());
-    }, [fetchCategory]);
+        dispatch(fetchAllSessions());
+    }, [fetchAllSessions]);
 
 
     const renderData = data.map((dt) => {
         return (
             <tr key={dt.id}>
                 <td>{dt.id}</td>
-                <td>{dt.name}</td>
-                <td>{dt.code}</td>
-                <td>{dt.description}</td>
-                <td>{dt.status}</td>
+                <td>{dt.user}</td>
+                <td>{dt.total}</td>
                 <td>
                     <button className="btn btn-primary">Edit</button>
                     <button className="btn btn-danger">Delete</button>
@@ -38,10 +36,8 @@ const ProductCategory = () => {
                 <thead>
                 <tr>
                     <th>No</th>
-                    <th>Name</th>
-                    <th>Code</th>
-                    <th>Description</th>
-                    <th>Status</th>
+                    <th>User</th>
+                    <th>Total</th>
                     <th>Action</th>
                 </tr>
                 </thead>

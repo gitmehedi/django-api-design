@@ -1,18 +1,18 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {fetchCategory} from "src/store";
+import {fetchAllProducts} from "src/store";
 
 const ProductCategory = () => {
     const dispatch = useDispatch();
 
     const {data} = useSelector((state) => {
-        return state.categories;
+        return state.products;
     })
 
 
     useEffect(() => {
-        dispatch(fetchCategory());
-    }, [fetchCategory]);
+        dispatch(fetchAllProducts());
+    }, [fetchAllProducts]);
 
 
     const renderData = data.map((dt) => {
@@ -20,7 +20,11 @@ const ProductCategory = () => {
             <tr key={dt.id}>
                 <td>{dt.id}</td>
                 <td>{dt.name}</td>
-                <td>{dt.code}</td>
+                <td>{dt.sku}</td>
+                <td>{dt.price}</td>
+                <td>{dt.category}</td>
+                <td>{dt.inventory}</td>
+                <td>{dt.discount}</td>
                 <td>{dt.description}</td>
                 <td>{dt.status}</td>
                 <td>
@@ -39,7 +43,11 @@ const ProductCategory = () => {
                 <tr>
                     <th>No</th>
                     <th>Name</th>
-                    <th>Code</th>
+                    <th>SKU</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th>Inventory</th>
+                    <th>Discount</th>
                     <th>Description</th>
                     <th>Status</th>
                     <th>Action</th>
@@ -49,7 +57,6 @@ const ProductCategory = () => {
                 {renderData}
                 </tbody>
             </table>
-
         </div>
     );
 };
