@@ -1,28 +1,29 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {fetchCategory} from "src/store";
+import {fetchAllUserPayment} from "src/store";
 
-const ProductCategory = () => {
+const UserPayments = () => {
     const dispatch = useDispatch();
 
     const {data} = useSelector((state) => {
-        return state.categories;
+        return state.userPayments;
     })
 
 
     useEffect(() => {
-        dispatch(fetchCategory());
-    }, [fetchCategory]);
+        dispatch(fetchAllUserPayment());
+    }, [fetchAllUserPayment]);
 
 
     const renderData = data.map((dt) => {
         return (
             <tr key={dt.id}>
                 <td>{dt.id}</td>
-                <td>{dt.name}</td>
-                <td>{dt.code}</td>
-                <td>{dt.description}</td>
-                <td>{dt.status}</td>
+                <td>{dt.provider}</td>
+                <td>{dt.payment_type}</td>
+                <td>{dt.account_no}</td>
+                <td>{dt.expires_at}</td>
+                <td>{dt.user}</td>
                 <td>
                     <button className="btn btn-primary">Edit</button>
                     <button className="btn btn-danger">Delete</button>
@@ -38,10 +39,11 @@ const ProductCategory = () => {
                 <thead>
                 <tr>
                     <th>No</th>
-                    <th>Name</th>
-                    <th>Code</th>
-                    <th>Description</th>
-                    <th>Status</th>
+                    <th>Provider</th>
+                    <th>Payment Type</th>
+                    <th>Account No</th>
+                    <th>Expires At</th>
+                    <th>User</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -53,4 +55,4 @@ const ProductCategory = () => {
         </div>
     );
 };
-export default ProductCategory;
+export default UserPayments;

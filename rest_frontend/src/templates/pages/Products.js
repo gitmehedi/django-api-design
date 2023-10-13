@@ -2,7 +2,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {fetchAllProducts} from "src/store";
 
-const ProductCategory = () => {
+const Products = () => {
     const dispatch = useDispatch();
 
     const {data} = useSelector((state) => {
@@ -60,4 +60,4 @@ const ProductCategory = () => {
         </div>
     );
 };
-export default ProductCategory;
+export default Products;

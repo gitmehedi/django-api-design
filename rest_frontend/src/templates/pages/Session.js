@@ -2,7 +2,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {fetchAllSessions} from "src/store";
 
-const ProductCategory = () => {
+const Sessions = () => {
     const dispatch = useDispatch();
 
     const {data} = useSelector((state) => {
@@ -49,4 +49,4 @@ const ProductCategory = () => {
         </div>
     );
 };
-export default ProductCategory;
+export default Sessions;

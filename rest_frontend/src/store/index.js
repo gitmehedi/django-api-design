@@ -5,6 +5,11 @@ import {InventoryReducer} from "src/store/slices/inventorySlice";
 import {DiscountReducer} from "src/store/slices/discountSlice";
 import {SessionReducer} from "src/store/slices/sessionSlice";
 import {ProductsReducer} from "src/store/slices/productsSlice";
+import {PaymentReducer} from "src/store/slices/paymentSlice";
+import {OrderDetailsReducer} from "./slices/orderDetailsSlice";
+import {UserPaymentReducer} from "./slices/userPaymentSlice";
+import {UserAddressReducer} from "./slices/userAddressSlice";
+
 
 const store = configureStore({
     reducer: {
@@ -14,6 +19,10 @@ const store = configureStore({
         discount: DiscountReducer,
         sessions: SessionReducer,
         products: ProductsReducer,
+        payments: PaymentReducer,
+        orders: OrderDetailsReducer,
+        userPayments: UserPaymentReducer,
+        userAddress: UserAddressReducer,
     }
 });
 
@@ -24,5 +33,9 @@ export * from 'src/store/thunks/inventoryThunks';
 export * from 'src/store/thunks/discountThunks';
 export * from 'src/store/thunks/sessionThunks';
 export * from 'src/store/thunks/productsThunks';
+export * from 'src/store/thunks/paymentThunks';
+export * from 'src/store/thunks/orderDetailsThunks';
+export * from 'src/store/thunks/userPaymentThunks';
+export * from 'src/store/thunks/userAddressThunks';
 
 
