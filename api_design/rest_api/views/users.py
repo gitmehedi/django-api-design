@@ -9,7 +9,7 @@ from rest_framework.authtoken.models import Token
 
 
 class UsersViews(APIView):
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
 
     def get_object(self, username):
         try:

@@ -252,5 +252,6 @@ The following terms are often used when interacting with GraphQL. Knowing them c
 - https://www.codecademy.com/article/smyja/how-to-use-graphql-with-django
 - https://birdeatsbug.com/blog/step-by-step-guide-to-use-graphql-with-django
 - https://www.apollographql.com/docs/kotlin/tutorial/09-write-your-first-mutation/
+- https://www.moesif.com/blog/technical/graphql/Getting-Started-with-GraphQL-Part2/
 
 ## Resources

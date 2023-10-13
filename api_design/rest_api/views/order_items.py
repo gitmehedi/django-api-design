@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 
 
 class OrderItemsList(APIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def get(self, request, format=None):
         lists = OrderItems.objects.all()

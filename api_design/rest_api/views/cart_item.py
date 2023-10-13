@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 
 
 class CartItemList(APIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def get(self, request, format=None):
         lists = CartItem.objects.all()

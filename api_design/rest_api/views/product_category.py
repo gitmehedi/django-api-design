@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 
 
 class ProductCategoryList(APIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def get(self, request, format=None):
         lists = models.ProductCategory.objects.all()
@@ -25,7 +25,7 @@ class ProductCategoryList(APIView):
 
 
 class ProductCategoryViews(APIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def get_object(self, pk):
         try:

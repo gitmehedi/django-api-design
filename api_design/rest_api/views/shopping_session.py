@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 
 
 class ShoppingSessionList(APIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def get(self, request, format=None):
         lists = ShoppingSession.objects.all()
