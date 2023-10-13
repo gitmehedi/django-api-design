@@ -1,18 +1,18 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {fetchCategory} from "src/store";
+import {fetchAllInventory} from "src/store";
 
-const ProductCategory = () => {
+const ProductInventory = () => {
     const dispatch = useDispatch();
 
     const {data} = useSelector((state) => {
-        return state.categories;
+        return state.inventory;
     })
 
 
     useEffect(() => {
-        dispatch(fetchCategory());
-    }, [fetchCategory]);
+        dispatch(fetchAllInventory());
+    }, [fetchAllInventory]);
 
 
     const renderData = data.map((dt) => {
@@ -20,8 +20,7 @@ const ProductCategory = () => {
             <tr key={dt.id}>
                 <td>{dt.id}</td>
                 <td>{dt.name}</td>
-                <td>{dt.code}</td>
-                <td>{dt.description}</td>
+                <td>{dt.quantity}</td>
                 <td>{dt.status}</td>
                 <td>
                     <button className="btn btn-primary">Edit</button>
@@ -39,8 +38,7 @@ const ProductCategory = () => {
                 <tr>
                     <th>No</th>
                     <th>Name</th>
-                    <th>Code</th>
-                    <th>Description</th>
+                    <th>Quantity</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
@@ -53,4 +51,4 @@ const ProductCategory = () => {
         </div>
     );
 };
-export default ProductCategory;
+export default ProductInventory;
