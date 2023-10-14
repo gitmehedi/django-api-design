@@ -1,7 +1,8 @@
 import {Routes, Route} from 'react-router-dom';
 import Index from 'src/templates/pages';
 import ProductCategory from 'src/templates/pages/category/ProductCategory';
-import CreateCategory from 'src/templates/pages/category/CreateCategory';
+import UpdateCategory from 'src/templates/pages/category/updateCategory';
+import CreateCategory from 'src/templates/pages/category/createCategory';
 import ProductInventory from 'src/templates/pages/inventory/ProductInventory';
 import Carts from 'src/templates/pages/carts/Carts';
 import Discounts from 'src/templates/pages/discounts/Discounts';
@@ -19,12 +20,12 @@ const RoutePath = () => {
         <div className="row">
             <Routes>
                 <Route path='/'>
-                    <Route index element={<Index/>}/>
+                    <Route index Component={Index}/>
                     <Route path='category/'>
-                        <Route path='create/' element={<CreateCategory/>}/>
-                        <Route path='update/:catid/' element={<ProductCategory/>}/>
-                        <Route path='delete/:catid/' element={<ProductCategory/>}/>
-                        <Route index element={<ProductCategory/>}/>
+                        <Route path='create/' Component={CreateCategory}/>
+                        <Route path='update/:catid/' Component={UpdateCategory}/>
+                        <Route path='delete/:catid/' Component={ProductCategory}/>
+                        <Route index Component={ProductCategory}/>
                     </Route>
                     <Route path='inventory/'>
                         <Route index element={<ProductInventory/>}/>

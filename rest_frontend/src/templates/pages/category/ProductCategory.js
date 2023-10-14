@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {fetchCategory} from "src/store";
+import {fetchAllCategory} from "src/store";
 import {Link, Outlet} from "react-router-dom";
 import Action from 'src/components/actions';
 
@@ -13,8 +13,8 @@ const ProductCategory = () => {
 
 
     useEffect(() => {
-        dispatch(fetchCategory());
-    }, [fetchCategory]);
+        dispatch(fetchAllCategory());
+    }, [fetchAllCategory]);
 
     const renderData = data.map((dt) => {
         return (

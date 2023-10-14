@@ -29,6 +29,7 @@ SECRET_KEY = '129x=f5&-4v_)d1)zo**2e8$i2ojg_!u7j%ri(uvt67ipl9z3o'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["localhost"]
 
 # Application definition
 
@@ -138,10 +139,19 @@ REST_FRAMEWORK = {
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+CSRF_COOKIE_SAMESITE = 'Strict'
+SESSION_COOKIE_SAMESITE = 'Strict'
+CSRF_COOKIE_HTTPONLY = False  # False since we will grab it via universal-cookies
+SESSION_COOKIE_HTTPONLY = True
+
+
+CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'http://127.0.0.1:3000'
 ]
+
 CORS_EXPOSE_HEADERS = [
     "Authorization",
     "Content-Type",

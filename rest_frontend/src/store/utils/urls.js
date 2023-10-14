@@ -6,6 +6,13 @@ const getApiURL = (resource) => {
     return url;
 }
 
+const getRecId = () => {
+    let urlParts = window.location.pathname.split('/');
+    if (urlParts.length > 0) {
+        let id = urlParts[urlParts.length - 1];
+        return parseInt(id);
+    }
+    return '';
+}
 
-
-export {REST_URL, BASE_URL, getApiURL};
+export {REST_URL, BASE_URL, getApiURL, getRecId};
