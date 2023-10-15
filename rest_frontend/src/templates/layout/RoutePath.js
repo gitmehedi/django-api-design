@@ -1,6 +1,6 @@
 import {Routes, Route} from 'react-router-dom';
 import Index from 'src/templates/pages';
-import ProductCategory from 'src/templates/pages/category/ProductCategory';
+import ListCategory from 'src/templates/pages/category/listCategory';
 import UpdateCategory from 'src/templates/pages/category/updateCategory';
 import CreateCategory from 'src/templates/pages/category/createCategory';
 import ProductInventory from 'src/templates/pages/inventory/ProductInventory';
@@ -24,8 +24,8 @@ const RoutePath = () => {
                     <Route path='category/'>
                         <Route path='create/' Component={CreateCategory}/>
                         <Route path='update/:catid/' Component={UpdateCategory}/>
-                        <Route path='delete/:catid/' Component={ProductCategory}/>
-                        <Route index Component={ProductCategory}/>
+                        <Route path='delete/:catid/' Component={ListCategory}/>
+                        <Route index Component={ListCategory}/>
                     </Route>
                     <Route path='inventory/'>
                         <Route index element={<ProductInventory/>}/>

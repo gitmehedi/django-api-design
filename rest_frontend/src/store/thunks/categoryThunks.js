@@ -38,15 +38,28 @@ const postCategory = createAsyncThunk('category/post', async (data, thunkAPI) =>
 });
 
 const putCategory = createAsyncThunk('category/put', async (data, thunkAPI) => {
+    let recId = data['recId'];
+    let record = data['data'];
     const response = await axios({
-        url: getApiURL('categories'),
+        url: getApiURL('categories/' + recId),
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
-        data: data
+        data: record
     });
     return response.data;
 });
 
-export {fetchAllCategory, fetchCategory, postCategory, putCategory};
+const delCategory = createAsyncThunk('category/delete', async (recId, thunkAPI) => {
+    const response = await axios({
+        url: getApiURL('categories/' + recId),
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
+    return response.data;
+});
+
+export {fetchAllCategory, fetchCategory, postCategory, putCategory, delCategory};

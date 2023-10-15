@@ -1,20 +1,26 @@
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {useEffect} from "react";
-import {fetchAllCategory} from "src/store";
-import {Link, Outlet} from "react-router-dom";
+import {fetchAllCategory, delCategory} from "src/store";
+import {Link} from "react-router-dom";
 import Action from 'src/components/actions';
+import {useThunk} from "src/hooks/useThunk";
 
-const ProductCategory = () => {
-    const dispatch = useDispatch();
+const ListCategory = () => {
+    const [doFetchAllCategory, isLoading, isError] = useThunk(fetchAllCategory);
+    const [doDelCategory, isDelLoading, isDelError] = useThunk(delCategory);
 
     const {data} = useSelector((state) => {
         return state.categories;
     })
 
-
     useEffect(() => {
-        dispatch(fetchAllCategory());
-    }, [fetchAllCategory]);
+        doFetchAllCategory();
+    }, [doFetchAllCategory]);
+
+    const handleDelete = (id) => {
+        doDelCategory(id);
+        doFetchAllCategory();
+    }
 
     const renderData = data.map((dt) => {
         return (
@@ -25,7 +31,7 @@ const ProductCategory = () => {
                 <td>{dt.description}</td>
                 <td>{dt.status}</td>
                 <td>
-                    <Action recId={dt.id}/>
+                    <Action recId={dt.id} delCallback={handleDelete}/>
                 </td>
             </tr>
         );
@@ -56,8 +62,7 @@ const ProductCategory = () => {
                 {renderData}
                 </tbody>
             </table>
-            <Outlet/>
         </div>
     );
 };
-export default ProductCategory;
+export default ListCategory;
