@@ -102,7 +102,7 @@ const Update = ({record}) => {
                 </div>
 
                 <div className="col-12">
-                    <button type="submit" className="btn btn-primary">Sign in</button>
+                    <button type="submit" className="btn btn-primary">Update</button>
                     <button className="btn btn-danger">Cancel</button>
                 </div>
 

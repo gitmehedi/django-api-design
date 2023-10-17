@@ -20,12 +20,11 @@ const RoutePath = () => {
         <div className="row">
             <Routes>
                 <Route path='/'>
-                    <Route index Component={Index}/>
+                    <Route index element={<Index/>}/>
                     <Route path='category/'>
-                        <Route path='create/' Component={CreateCategory}/>
-                        <Route path='update/:catid/' Component={UpdateCategory}/>
-                        <Route path='delete/:catid/' Component={ListCategory}/>
-                        <Route index Component={ListCategory}/>
+                        <Route path='create/' element={<CreateCategory/>}/>
+                        <Route path='update/:catid/' element={<UpdateCategory/>}/>
+                        <Route index element={<ListCategory/>}/>
                     </Route>
                     <Route path='inventory/'>
                         <Route index element={<ProductInventory/>}/>

@@ -15,7 +15,7 @@ const Navigation = () => {
                         <Link to='/dashboard' className="nav-link">Dashboard</Link>
                     </li>
                     <li className="nav-item">
-                        <Link to='/category/' className="nav-link">Category</Link>
+                        <Link to='/category/' className="nav-link" replace>Category</Link>
                     </li>
                     <li className="nav-item">
                         <Link to='/inventory/' className="nav-link">Inventory</Link>

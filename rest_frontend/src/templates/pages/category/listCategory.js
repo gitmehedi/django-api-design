@@ -1,52 +1,51 @@
 import {useSelector} from "react-redux";
 import {useEffect} from "react";
-import {fetchAllCategory, delCategory} from "src/store";
-import {Link} from "react-router-dom";
+import {fetchAllCategory, delCategory, fetchAllInventory} from "src/store";
+import {Link, Outlet} from "react-router-dom";
 import Action from 'src/components/actions';
 import {useThunk} from "src/hooks/useThunk";
+import CatTable from "./lists";
+import {useDispatch} from 'react-redux';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faCoffee, faBars} from '@fortawesome/free-solid-svg-icons';
+
 
 const ListCategory = () => {
-    const [doFetchAllCategory, isLoading, isError] = useThunk(fetchAllCategory);
-    const [doDelCategory, isDelLoading, isDelError] = useThunk(delCategory);
+    const dispatch = useDispatch();
 
-    const {data} = useSelector((state) => {
-        return state.categories;
-    })
+    const data = useSelector(state => state.categories.data);
+    const isLoading = useSelector(state => state.categories.isLoading);
 
     useEffect(() => {
-        doFetchAllCategory();
-    }, [doFetchAllCategory]);
+        dispatch(fetchAllCategory());
+    }, [fetchAllCategory]);
 
-    const handleDelete = (id) => {
-        doDelCategory(id);
-        doFetchAllCategory();
-    }
 
-    const renderData = data.map((dt) => {
-        return (
-            <tr key={dt.id}>
-                <td>{dt.id}</td>
-                <td>{dt.name}</td>
-                <td>{dt.code}</td>
-                <td>{dt.description}</td>
-                <td>{dt.status}</td>
-                <td>
-                    <Action recId={dt.id} delCallback={handleDelete}/>
-                </td>
-            </tr>
-        );
-    });
-
-    const handleCreate = (event) => {
-        console.log(event);
-        return (
-            <div>Bangladesh</div>
-        );
-    }
+    let content;
+    if (isLoading)
+        content = <div>Data is loading....</div>;
+    else
+        content = data.map((dt, i) => {
+            return (
+                <CatTable key={i} rec={dt}/>
+            );
+        });
 
     return (
         <div>
-            <Link to='/category/create' className="btn btn-success">Create</Link>
+            <div className="mb-4 mt-4 px-0">
+                <div className="float-left">
+                    <Link to='/category/create' className="btn btn-success">Add + </Link>
+                </div>
+                {/*<div className="btn-group btn-group-sm " role="group">*/}
+                {/*    <button type="button" className="btn btn-info">*/}
+                {/*        <FontAwesomeIcon icon={faCoffee}/>*/}
+                {/*    </button>*/}
+                {/*    <button type="button" className="btn btn-warning">*/}
+                {/*        <FontAwesomeIcon icon={faBars}/>*/}
+                {/*    </button>*/}
+                {/*</div>*/}
+            </div>
             <table className='table table-striped'>
                 <thead>
                 <tr>
@@ -59,9 +58,10 @@ const ListCategory = () => {
                 </tr>
                 </thead>
                 <tbody>
-                {renderData}
+                {content}
                 </tbody>
             </table>
+            <Outlet/>
         </div>
     );
 };

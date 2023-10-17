@@ -4,6 +4,7 @@ import {getApiURL} from "src/store/utils/urls";
 
 
 const fetchAllCategory = createAsyncThunk('category/fetchall', async (dispatch, thunkAPI) => {
+    console.log('Fetch All catgories');
     const response = await axios({
         url: getApiURL('categories'),
         method: 'GET',
@@ -52,14 +53,21 @@ const putCategory = createAsyncThunk('category/put', async (data, thunkAPI) => {
 });
 
 const delCategory = createAsyncThunk('category/delete', async (recId, thunkAPI) => {
-    const response = await axios({
-        url: getApiURL('categories/' + recId),
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    });
-    return response.data;
+
+    try {
+        const response = await axios({
+            url: getApiURL('categories/' + recId),
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        if (response.status)
+            return recId;
+    } catch (error) {
+        return error.message;
+    }
+
 });
 
 export {fetchAllCategory, fetchCategory, postCategory, putCategory, delCategory};

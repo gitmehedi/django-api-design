@@ -97,8 +97,8 @@ const CreateCategory = () => {
                     </div>
                 </div>
 
-                <div className="col-12">
-                    <button type="submit" className="btn btn-primary">Sign in</button>
+                <div className="d-grid gap-4 d-md-block">
+                    <button className="btn btn-primary">Create</button>
                     <button className="btn btn-danger">Cancel</button>
                 </div>
 
