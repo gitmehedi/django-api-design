@@ -1,9 +1,9 @@
 import {Routes, Route} from 'react-router-dom';
-import Index from 'src/templates/pages';
+import Index from 'src/templates/pages/dashboard/index';
 import ListCategory from 'src/templates/pages/category/listCategory';
 import UpdateCategory from 'src/templates/pages/category/updateCategory';
 import CreateCategory from 'src/templates/pages/category/createCategory';
-import ProductInventory from 'src/templates/pages/inventory/ProductInventory';
+import IndexInventory from 'src/templates/pages/inventory/indexInventory';
 import Carts from 'src/templates/pages/carts/Carts';
 import Discounts from 'src/templates/pages/discounts/Discounts';
 import OrderDetails from 'src/templates/pages/orders/OrderDetails';
@@ -27,7 +27,8 @@ const RoutePath = () => {
                         <Route index element={<ListCategory/>}/>
                     </Route>
                     <Route path='inventory/'>
-                        <Route index element={<ProductInventory/>}/>
+                        <Route index element={<IndexInventory/>}/>
+                        <Route index element={<IndexInventory/>}/>
                     </Route>
                     <Route path='user/'>
                         <Route path='user-payment/' element={<UserPayments/>}/>

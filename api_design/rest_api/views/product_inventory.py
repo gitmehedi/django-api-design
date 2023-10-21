@@ -5,15 +5,20 @@ from rest_framework import status
 from api_db.models import ProductInventory
 from rest_api.serializers.serializers import ProductInventorySerializer, ProductInventoryListSerializer
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.pagination import PageNumberPagination
+
 
 
 class ProductInventoryList(APIView):
     # permission_classes = [IsAuthenticated]
+    pagination_class = PageNumberPagination
 
     def get(self, request, format=None):
-        lists = ProductInventory.objects.all()
+        queryset = ProductInventory.objects.all()
+        paginator = self.pagination_class()
+        lists = paginator.paginate_queryset(queryset, request)
         serializer = ProductInventorySerializer(lists, many=True)
-        return Response(serializer.data)
+        return paginator.get_paginated_response(serializer.data)
 
     def post(self, request, format=None):
         serializer = ProductInventorySerializer(data=request.data)

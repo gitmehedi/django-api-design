@@ -135,7 +135,9 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ]
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 100,
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -144,7 +146,6 @@ CSRF_COOKIE_SAMESITE = 'Strict'
 SESSION_COOKIE_SAMESITE = 'Strict'
 CSRF_COOKIE_HTTPONLY = False  # False since we will grab it via universal-cookies
 SESSION_COOKIE_HTTPONLY = True
-
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOWED_ORIGINS = [
@@ -156,3 +157,18 @@ CORS_EXPOSE_HEADERS = [
     "Authorization",
     "Content-Type",
 ]
+
+CACHES = {
+    "default": {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': 'redis://localhost:6379',
+        # "OPTIONS": {
+        #     "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        # },
+        "KEY_PREFIX": "example"
+    }
+
+}
+
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"

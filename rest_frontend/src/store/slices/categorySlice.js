@@ -6,6 +6,9 @@ const CategorySlice = createSlice({
     initialState: {
         isLoading: false,
         data: [],
+        count: 0,
+        next: '',
+        previous: '',
         record: {},
         error: null,
     },
@@ -15,7 +18,10 @@ const CategorySlice = createSlice({
             state.isLoading = true;
         })
         builder.addCase(fetchAllCategory.fulfilled, (state, action) => {
-            state.data = action.payload;
+            state.data = action.payload.results;
+            state.count = action.payload.count;
+            state.next = action.payload.next;
+            state.previous = action.payload.previous;
             state.isLoading = false;
             console.log(action.payload);
         })

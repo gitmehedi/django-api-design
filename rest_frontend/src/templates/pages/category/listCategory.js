@@ -15,6 +15,9 @@ const ListCategory = () => {
 
     const data = useSelector(state => state.categories.data);
     const isLoading = useSelector(state => state.categories.isLoading);
+    const count = useSelector(state => state.categories.count);
+    const next = useSelector(state => state.categories.next);
+    const previous = useSelector(state => state.categories.previous);
 
     useEffect(() => {
         dispatch(fetchAllCategory());
@@ -37,6 +40,7 @@ const ListCategory = () => {
                 <div className="float-left">
                     <Link to='/category/create' className="btn btn-success">Add + </Link>
                 </div>
+
                 {/*<div className="btn-group btn-group-sm " role="group">*/}
                 {/*    <button type="button" className="btn btn-info">*/}
                 {/*        <FontAwesomeIcon icon={faCoffee}/>*/}
@@ -45,6 +49,9 @@ const ListCategory = () => {
                 {/*        <FontAwesomeIcon icon={faBars}/>*/}
                 {/*    </button>*/}
                 {/*</div>*/}
+            </div>
+            <div>
+                {count}
             </div>
             <table className='table table-striped'>
                 <thead>
@@ -61,7 +68,11 @@ const ListCategory = () => {
                 {content}
                 </tbody>
             </table>
-            <Outlet/>
+            <h2>{previous}</h2>
+            <Link to={previous}>Previous</Link>
+            <h3>Default</h3>
+            <Link to={next}>Next</Link>
+
         </div>
     );
 };
