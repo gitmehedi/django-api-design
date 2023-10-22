@@ -41,6 +41,7 @@ const postCategory = createAsyncThunk('category/post', async (data, thunkAPI) =>
 const putCategory = createAsyncThunk('category/put', async (data, thunkAPI) => {
     let recId = data['recId'];
     let record = data['data'];
+    console.log(data);
     const response = await axios({
         url: getApiURL('categories/' + recId),
         method: 'PUT',

@@ -2,6 +2,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {fetchAllProducts} from "src/store";
 import Action from "src/components/actions";
+import Pagination from "src/templates/snippets/Pagination"
+import PageHeader from "src/templates/snippets/PageHeader"
 
 const Products = () => {
     const dispatch = useDispatch();
@@ -37,27 +39,31 @@ const Products = () => {
 
 
     return (
-        <div>
-            <table className='table table-striped'>
-                <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Name</th>
-                    <th>SKU</th>
-                    <th>Price</th>
-                    <th>Category</th>
-                    <th>Inventory</th>
-                    <th>Discount</th>
-                    <th>Description</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                {renderData}
-                </tbody>
-            </table>
-        </div>
+        <>
+            <PageHeader title={'Products'} count={200} clink={'products'}/>
+            <div className='table-responsive small'>
+                <table className='table table-striped table-sm'>
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>SKU</th>
+                        <th>Price</th>
+                        <th>Category</th>
+                        <th>Inventory</th>
+                        <th>Discount</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {renderData}
+                    </tbody>
+                </table>
+            </div>
+            <Pagination/>
+        </>
     );
 };
 export default Products;

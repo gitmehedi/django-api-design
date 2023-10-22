@@ -8,8 +8,7 @@ const Update = ({record}) => {
     const navigate = useNavigate();
     const [errors, setErrors] = useState({});
     const [submitting, setSubmitting] = useState(false);
-    const id = getRecId();
-    const [doPutCategory, isLoading, loadingErrors] = useThunk(putCategory);
+
 
     useEffect(() => {
         if (Object.keys(errors).length === 0 && submitting) {
@@ -24,11 +23,7 @@ const Update = ({record}) => {
         status: record.status,
     });
 
-    const finishSubmit = () => {
-        let data = {'recId': id, 'data': fields}
-        doPutCategory(data);
-        navigate('/category');
-    }
+
 
     const validateFields = (values) => {
         let errors = {};
@@ -56,10 +51,6 @@ const Update = ({record}) => {
 
     return (
         <>
-            <div
-                className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-4 border-bottom">
-                <h1 className="h2">Modify Category</h1>
-            </div>
             <div>
                 <form className="row g-3" onSubmit={handleSubmit}>
                     <div className='col-md-6'>

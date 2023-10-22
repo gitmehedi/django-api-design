@@ -45,11 +45,11 @@ const Navigation = () => {
                     </h6>
                     <ul className="nav flex-column mb-auto">
                         <li className="nav-item">
-                            <Link to='/user-payments/'
+                            <Link to='/user/payments/'
                                   className="nav-link d-flex align-items-center gap-2">User Payments</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to='/user-address/'
+                            <Link to='/user/address/'
                                   className="nav-link d-flex align-items-center gap-2">User Address</Link>
                         </li>
                     </ul>

@@ -9,10 +9,13 @@ import CatTable from "./lists";
 import {useDispatch} from 'react-redux';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faCoffee, faBars} from '@fortawesome/free-solid-svg-icons';
-import styles from "../pages.style.css";
+
+import PageHeader from "src/templates/snippets/PageHeader";
+import Pagination from "src/templates/snippets/Pagination";
+import Loader from "src/components/Loader";
 
 
-const IndexCategory = () => {
+const Index = () => {
     const dispatch = useDispatch();
 
     const data = useSelector(state => state.categories.data);
@@ -28,7 +31,7 @@ const IndexCategory = () => {
 
     let content;
     if (isLoading)
-        content = <ReactLoading type="spin" color="ash" delay="200"/>;
+        content = <Loader/>;
     else
         content = data.map((dt, i) => {
             return (
@@ -38,18 +41,7 @@ const IndexCategory = () => {
 
     return (
         <>
-            <div
-                className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 className="h2">Product Category</h1>
-
-                <div className="btn-toolbar mb-2 mb-md-0">
-                    <div style={{marginRight: '10px', paddingTop: '5px'}}>Total Records: <strong>{count}</strong></div>
-
-                    <div className="btn-group me-2 ml-1">
-                        <Link to='/category/create' className="btn btn-sm btn-success">Add + </Link>
-                    </div>
-                </div>
-            </div>
+            <PageHeader title={'Product Category'} count={count} clink={'category'}/>
             <div className='table-responsive small'>
                 <table className='table table-striped table-sm'>
                     <thead>
@@ -67,22 +59,8 @@ const IndexCategory = () => {
                     </tbody>
                 </table>
             </div>
-            <div className={styles.pagination}>
-                <nav aria-label="Page navigation example">
-                    <ul className="pagination justify-content-center">
-                        <li className="page-item disabled">
-                            <a className="page-link" href="#" tabIndex="-1">Previous</a>
-                        </li>
-                        <li className="page-item"><a className="page-link" href="#">1</a></li>
-                        <li className="page-item"><a className="page-link" href="#">2</a></li>
-                        <li className="page-item"><a className="page-link" href="#">3</a></li>
-                        <li className="page-item">
-                            <a className="page-link" href="#">Next</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+            <Pagination/>
         </>
     );
 };
-export default IndexCategory;
+export default Index;

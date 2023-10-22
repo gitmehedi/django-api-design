@@ -2,6 +2,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {fetchAllOrders} from "src/store";
 import Action from "src/components/actions";
+import Pagination from "src/templates/snippets/Pagination"
+import PageHeader from "src/templates/snippets/PageHeader"
 
 const Orders = () => {
     const dispatch = useDispatch();
@@ -32,23 +34,26 @@ const Orders = () => {
 
 
     return (
-        <div>
-            <table className='table table-striped'>
-                <thead>
-                <tr>
-                    <th>No</th>
-                    <th>User</th>
-                    <th>Total Price</th>
-                    <th>Payment</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                {renderData}
-                </tbody>
-            </table>
-
-        </div>
+        <>
+            <PageHeader title={'Orders'} count={200} clink={'orders'}/>
+            <div className='table-responsive small'>
+                <table className='table table-striped table-sm'>
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>User</th>
+                        <th>Total Price</th>
+                        <th>Payment</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {renderData}
+                    </tbody>
+                </table>
+            </div>
+            <Pagination/>
+        </>
     );
 };
 export default Orders;

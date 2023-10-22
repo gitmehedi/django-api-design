@@ -2,6 +2,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {fetchAllUserAddress} from "src/store";
 import Action from "src/components/actions";
+import Pagination from "src/templates/snippets/Pagination"
+import PageHeader from "src/templates/snippets/PageHeader"
 
 const UserAddress = () => {
     const dispatch = useDispatch();
@@ -37,28 +39,31 @@ const UserAddress = () => {
 
 
     return (
-        <div>
-            <table className='table table-striped'>
-                <thead>
-                <tr>
-                    <th>No</th>
-                    <th>User Name</th>
-                    <th>Address 1</th>
-                    <th>Address 2</th>
-                    <th>City</th>
-                    <th>Postal Code</th>
-                    <th>Country</th>
-                    <th>Mobile</th>
-                    <th>Telephone</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                {renderData}
-                </tbody>
-            </table>
-
-        </div>
+        <>
+            <PageHeader title={'User Address'} count={200} clink={'user-address'}/>
+            <div className='table-responsive small'>
+                <table className='table table-striped table-sm'>
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>User Name</th>
+                        <th>Address 1</th>
+                        <th>Address 2</th>
+                        <th>City</th>
+                        <th>Postal Code</th>
+                        <th>Country</th>
+                        <th>Mobile</th>
+                        <th>Telephone</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {renderData}
+                    </tbody>
+                </table>
+            </div>
+            <Pagination/>
+        </>
     );
 };
 export default UserAddress;

@@ -2,6 +2,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {fetchAllUserPayment} from "src/store";
 import Action from "src/components/actions";
+import Pagination from "src/templates/snippets/Pagination"
+import PageHeader from "src/templates/snippets/PageHeader"
 
 const UserPayments = () => {
     const dispatch = useDispatch();
@@ -35,23 +37,26 @@ const UserPayments = () => {
 
     return (
         <div>
-            <table className='table table-striped'>
-                <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Provider</th>
-                    <th>Payment Type</th>
-                    <th>Account No</th>
-                    <th>Expires At</th>
-                    <th>User</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                {renderData}
-                </tbody>
-            </table>
-
+            <PageHeader title={'User Payments'} count={200} clink={'user-payments'}/>
+            <div className='table-responsive small'>
+                <table className='table table-striped table-sm'>
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Provider</th>
+                        <th>Payment Type</th>
+                        <th>Account No</th>
+                        <th>Expires At</th>
+                        <th>User</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {renderData}
+                    </tbody>
+                </table>
+            </div>
+            <Pagination/>
         </div>
     );
 };

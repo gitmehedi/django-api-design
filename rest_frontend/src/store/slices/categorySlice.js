@@ -16,8 +16,7 @@ const CategorySlice = createSlice({
     extraReducers(builder) {
         builder.addCase(fetchAllCategory.pending, (state, action) => {
             state.isLoading = true;
-        })
-        builder.addCase(fetchAllCategory.fulfilled, (state, action) => {
+        }).addCase(fetchAllCategory.fulfilled, (state, action) => {
             state.data = action.payload.results;
             state.count = action.payload.count;
             state.next = action.payload.next;
@@ -26,27 +25,30 @@ const CategorySlice = createSlice({
             console.log(action.payload);
         })
 
-        builder.addCase(postCategory.fulfilled, (state, action) => {
+        builder.addCase(postCategory.pending, (state, action) => {
+            state.isLoading = true;
+        }).addCase(postCategory.fulfilled, (state, action) => {
             state.data.push(action.payload);
             state.isLoading = false;
-            console.log(action.payload);
         })
 
         builder.addCase(fetchCategory.pending, (state, action) => {
             state.record = {};
             state.isLoading = true;
-        })
-        builder.addCase(fetchCategory.fulfilled, (state, action) => {
+        }).addCase(fetchCategory.fulfilled, (state, action) => {
             state.record = action.payload;
             state.isLoading = false;
         })
-        builder.addCase(delCategory.fulfilled, (state, action) => {
+
+        builder.addCase(delCategory.pending, (state, action) => {
+            state.isLoading = true;
+        }).addCase(delCategory.fulfilled, (state, action) => {
             if (!action.payload) {
                 return
             }
             const recId = action.payload;
-            const records = state.data.filter(dt => dt.id !== recId);
-            state.data = records;
+            state.data = state.data.filter(dt => dt.id !== recId);
+            state.isLoading = false;
         })
     }
 });
