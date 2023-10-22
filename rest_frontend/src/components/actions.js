@@ -13,8 +13,8 @@ const Action = ({recId, delCallback}) => {
     const confirmDelete = useConfirm('Sure?',recId, delCallback);
     return (
         <>
-            <Link to={`update/${recId}`} className="btn btn-primary">Edit</Link>
-            <button onClick={confirmDelete} className="btn btn-danger">Delete</button>
+            <Link to={`update/${recId}`} className="btn btn-sm btn-primary">Edit</Link>
+            <button onClick={confirmDelete} className="btn btn-sm btn-danger">Delete</button>
         </>
     )
 }

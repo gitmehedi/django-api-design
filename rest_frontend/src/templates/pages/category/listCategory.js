@@ -2,6 +2,7 @@ import {useSelector} from "react-redux";
 import {useEffect} from "react";
 import {fetchAllCategory, delCategory, fetchAllInventory} from "src/store";
 import {Link, Outlet} from "react-router-dom";
+import ReactLoading from "src/components/Loader";
 import Action from 'src/components/actions';
 import {useThunk} from "src/hooks/useThunk";
 import CatTable from "./lists";
@@ -26,7 +27,7 @@ const ListCategory = () => {
 
     let content;
     if (isLoading)
-        content = <div>Data is loading....</div>;
+        content = <ReactLoading type="spin" color="ash" delay="200"/>;
     else
         content = data.map((dt, i) => {
             return (
