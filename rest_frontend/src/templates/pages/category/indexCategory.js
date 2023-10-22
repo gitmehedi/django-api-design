@@ -1,39 +1,51 @@
-import {useEffect} from "react";
 import {useSelector} from "react-redux";
-import {fetchAllInventory} from "src/store";
-
-import {useThunk} from "src/hooks/useThunk";
-import ListTable from "./lists";
+import {useEffect} from "react";
+import {fetchAllCategory, delCategory, fetchAllInventory} from "src/store";
+import {Link, Outlet} from "react-router-dom";
 import ReactLoading from "src/components/Loader";
-import styles from '../pages.style.css';
-import {Link} from "react-router-dom";
+import Action from 'src/components/actions';
+import {useThunk} from "src/hooks/useThunk";
+import CatTable from "./lists";
+import {useDispatch} from 'react-redux';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faCoffee, faBars} from '@fortawesome/free-solid-svg-icons';
+import styles from "../pages.style.css";
 
-const IndexInventory = () => {
-    const [doAllInventory, isLoading, isErrors] = useThunk(fetchAllInventory);
-    const data = useSelector(state => state.inventory.data);
+
+const IndexCategory = () => {
+    const dispatch = useDispatch();
+
+    const data = useSelector(state => state.categories.data);
+    const isLoading = useSelector(state => state.categories.isLoading);
+    const count = useSelector(state => state.categories.count);
+    const next = useSelector(state => state.categories.next);
+    const previous = useSelector(state => state.categories.previous);
 
     useEffect(() => {
-        doAllInventory();
-    }, [doAllInventory]);
+        dispatch(fetchAllCategory());
+    }, [fetchAllCategory]);
 
 
     let content;
     if (isLoading)
         content = <ReactLoading type="spin" color="ash" delay="200"/>;
-    else if (isErrors)
-        content = <div>Errors in Page</div>
     else
-        content = data.map((dt) => {
-            return <ListTable key={dt.id} rec={dt}/>
+        content = data.map((dt, i) => {
+            return (
+                <CatTable key={i} rec={dt}/>
+            );
         });
 
     return (
         <>
             <div
                 className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 className="h2">Product Inventory</h1>
+                <h1 className="h2">Product Category</h1>
+
                 <div className="btn-toolbar mb-2 mb-md-0">
-                    <div className="btn-group me-2">
+                    <div style={{marginRight: '10px', paddingTop: '5px'}}>Total Records: <strong>{count}</strong></div>
+
+                    <div className="btn-group me-2 ml-1">
                         <Link to='/category/create' className="btn btn-sm btn-success">Add + </Link>
                     </div>
                 </div>
@@ -44,7 +56,8 @@ const IndexInventory = () => {
                     <tr>
                         <th>No</th>
                         <th>Name</th>
-                        <th>Quantity</th>
+                        <th>Code</th>
+                        <th>Description</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -72,4 +85,4 @@ const IndexInventory = () => {
         </>
     );
 };
-export default IndexInventory;
+export default IndexCategory;

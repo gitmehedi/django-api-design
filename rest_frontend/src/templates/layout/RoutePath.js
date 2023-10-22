@@ -1,6 +1,6 @@
 import {Routes, Route} from 'react-router-dom';
 import Index from 'src/templates/pages/dashboard/index';
-import ListCategory from 'src/templates/pages/category/listCategory';
+import IndexCategory from 'src/templates/pages/category/indexCategory';
 import UpdateCategory from 'src/templates/pages/category/updateCategory';
 import CreateCategory from 'src/templates/pages/category/createCategory';
 import IndexInventory from 'src/templates/pages/inventory/indexInventory';
@@ -24,7 +24,7 @@ const RoutePath = () => {
                     <Route path='category/'>
                         <Route path='create/' element={<CreateCategory/>}/>
                         <Route path='update/:catid/' element={<UpdateCategory/>}/>
-                        <Route index element={<ListCategory/>}/>
+                        <Route index element={<IndexCategory/>}/>
                     </Route>
                     <Route path='inventory/'>
                         <Route index element={<IndexInventory/>}/>
