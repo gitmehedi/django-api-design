@@ -121,9 +121,9 @@ class UserPayment(AbstractModel):
 
 class Products(AbstractModel):
     name = models.CharField(max_length=100)
-    description = models.TextField(max_length=500)
     sku = models.CharField(max_length=100)
     price = models.FloatField()
+    description = models.TextField(max_length=500)
     category = models.ForeignKey(ProductCategory, blank=True, null=True, on_delete=models.SET_NULL,
                                  related_name='%(class)s_category')
     inventory = models.ForeignKey(ProductInventory, blank=True, null=True, on_delete=models.SET_NULL,

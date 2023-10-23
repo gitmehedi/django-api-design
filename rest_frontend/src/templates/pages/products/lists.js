@@ -16,7 +16,11 @@ const TableData = ({rec}) => {
         <tr>
             <td>{rec.id}</td>
             <td>{rec.name}</td>
-            <td>{rec.code}</td>
+            <td>{rec.sku}</td>
+            <td>{rec.price}</td>
+            <td>{rec.category}</td>
+            <td>{rec.inventory}</td>
+            <td>{rec.discount}</td>
             <td>{rec.description}</td>
             <td>{rec.status}</td>
             <td>

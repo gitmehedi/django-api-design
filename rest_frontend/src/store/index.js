@@ -16,7 +16,7 @@ const store = configureStore({
         categories: CategoryReducer,
         carts: CartsReducer,
         inventory: InventoryReducer,
-        discount: DiscountReducer,
+        discounts: DiscountReducer,
         sessions: SessionReducer,
         products: ProductsReducer,
         payments: PaymentReducer,

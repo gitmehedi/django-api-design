@@ -9,14 +9,14 @@ const TableData = ({rec}) => {
     const [doDelDiscount] = useThunk(delDiscount);
     const handleDelete = (id) => {
         doDelDiscount(id);
-        navigate("/cart");
+        navigate("/discount");
     }
 
     return (
         <tr>
             <td>{rec.id}</td>
             <td>{rec.name}</td>
-            <td>{rec.code}</td>
+            <td>{rec.discount_percent}</td>
             <td>{rec.description}</td>
             <td>{rec.status}</td>
             <td>

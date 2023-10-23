@@ -15,9 +15,8 @@ const TableData = ({rec}) => {
     return (
         <tr>
             <td>{rec.id}</td>
-            <td>{rec.name}</td>
-            <td>{rec.code}</td>
-            <td>{rec.description}</td>
+            <td>{rec.provider}</td>
+            <td>{rec.amount}</td>
             <td>{rec.status}</td>
             <td>
                 <Action recId={rec.id} delCallback={handleDelete}/>
