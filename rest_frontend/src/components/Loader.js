@@ -5,4 +5,10 @@ const Loader = () => (
     <ReactLoading type={"spin"} color={"ash"} height={500} width={500} delay={20}/>
 );
 
-export default Loader;
+
+const NotFoundError = () => {
+    return (
+        <h2>Data Not Found, Something wrong happens.</h2>
+    );
+}
+export {Loader, NotFoundError};

@@ -3,9 +3,9 @@ import {useSelector} from "react-redux";
 import {fetchAllInventory} from "src/store";
 import {useThunk} from "src/hooks/useThunk";
 import ListTable from "./lists";
-import ReactLoading from "src/components/Loader";
-import Pagination from "src/templates/snippets/Pagination"
-import PageHeader from "src/templates/snippets/PageHeader"
+import Pagination from "src/templates/snippets/Pagination";
+import PageHeader from "src/templates/snippets/PageHeader";
+import {Loader, NotFoundError} from "src/components/Loader";
 
 const IndexInventory = () => {
     const [doAllInventory, isLoading, isErrors] = useThunk(fetchAllInventory);
@@ -18,9 +18,9 @@ const IndexInventory = () => {
 
     let content;
     if (isLoading)
-        content = <ReactLoading type="spin" color="ash" delay="200"/>;
+        content = <Loader/>;
     else if (isErrors)
-        content = <div>Errors in Page</div>
+        content = <NotFoundError/>;
     else
         content = data.map((dt) => {
             return <ListTable key={dt.id} rec={dt}/>
@@ -49,4 +49,7 @@ const IndexInventory = () => {
         </>
     );
 };
+
+export * from './create';
+export * from './update';
 export default IndexInventory;

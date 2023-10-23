@@ -1,9 +1,9 @@
 import {Routes, Route} from 'react-router-dom';
 import Index from 'src/templates/pages/dashboard/index';
 import IndexCategory from 'src/templates/pages/category/index';
-import UpdateCategory from 'src/templates/pages/category/updateCategory';
+import UpdateCategory from 'src/templates/pages/category/update';
 import CreateCategory from 'src/templates/pages/category/create';
-import IndexInventory from 'src/templates/pages/inventory/indexInventory';
+import IndexInventory from 'src/templates/pages/inventory/index';
 import Carts from 'src/templates/pages/carts/Carts';
 import Discounts from 'src/templates/pages/discounts/Discounts';
 import OrderDetails from 'src/templates/pages/orders/OrderDetails';

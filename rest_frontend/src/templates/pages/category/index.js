@@ -1,37 +1,31 @@
 import {useSelector} from "react-redux";
 import {useEffect} from "react";
-import {fetchAllCategory, delCategory, fetchAllInventory} from "src/store";
-import {Link, Outlet} from "react-router-dom";
-import ReactLoading from "src/components/Loader";
-import Action from 'src/components/actions';
 import {useThunk} from "src/hooks/useThunk";
+import PageHeader from "src/templates/snippets/PageHeader";
+import Pagination from "src/templates/snippets/Pagination";
+import {Loader, NotFoundError} from "src/components/Loader";
+import {fetchAllCategory} from "src/store";
 import CatTable from "./lists";
-import {useDispatch} from 'react-redux';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faCoffee, faBars} from '@fortawesome/free-solid-svg-icons';
 
-import PageHeader from "src/templates/snippets/PageHeader";
-import Pagination from "src/templates/snippets/Pagination";
-import Loader from "src/components/Loader";
-
 
 const Index = () => {
-    const dispatch = useDispatch();
+    const [doFetchAllCategory, isLoading, isErrors] = useThunk(fetchAllCategory);
 
     const data = useSelector(state => state.categories.data);
-    const isLoading = useSelector(state => state.categories.isLoading);
     const count = useSelector(state => state.categories.count);
-    const next = useSelector(state => state.categories.next);
-    const previous = useSelector(state => state.categories.previous);
 
     useEffect(() => {
-        dispatch(fetchAllCategory());
-    }, [fetchAllCategory]);
+        doFetchAllCategory();
+    }, [doFetchAllCategory]);
 
 
     let content;
     if (isLoading)
         content = <Loader/>;
+    else if (isErrors)
+        content = <NotFoundError/>;
     else
         content = data.map((dt, i) => {
             return (
