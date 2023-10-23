@@ -18,10 +18,10 @@ const Navigation = () => {
                                   className="nav-link d-flex align-items-center gap-2 active">Dashboard</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to='/category/' className="nav-link d-flex align-items-center gap-2">Category</Link>
+                            <Link to='/orders/' className="nav-link d-flex align-items-center gap-2">Orders</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to='/inventory/' className="nav-link d-flex align-items-center gap-2">Inventory</Link>
+                            <Link to='/carts/' className="nav-link d-flex align-items-center gap-2">Carts</Link>
                         </li>
                         <li className="nav-item">
                             <Link to='/session/' className="nav-link d-flex align-items-center gap-2">Sessions</Link>
@@ -29,14 +29,6 @@ const Navigation = () => {
                         <li className="nav-item">
                             <Link to='/products/' className="nav-link d-flex align-items-center gap-2">Products</Link>
                         </li>
-                        <li className="nav-item">
-                            <Link to='/orders/' className="nav-link d-flex align-items-center gap-2">Orders</Link>
-                        </li>
-
-                        <li className="nav-item">
-                            <Link to='/carts/' className="nav-link d-flex align-items-center gap-2">Carts</Link>
-                        </li>
-
                     </ul>
 
                     <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
@@ -44,6 +36,12 @@ const Navigation = () => {
                         <a className="link-secondary" href="#" aria-label="Add a new report"></a>
                     </h6>
                     <ul className="nav flex-column mb-auto">
+                        <li className="nav-item">
+                            <Link to='/category/' className="nav-link d-flex align-items-center gap-2">Category</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to='/inventory/' className="nav-link d-flex align-items-center gap-2">Inventory</Link>
+                        </li>
                         <li className="nav-item">
                             <Link to='/user/payments/'
                                   className="nav-link d-flex align-items-center gap-2">User Payments</Link>
