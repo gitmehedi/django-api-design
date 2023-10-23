@@ -42,11 +42,8 @@ const InventorySlice = createSlice({
         builder.addCase(putInventory.pending, (state, action) => {
             state.isLoading = true;
         }).addCase(putInventory.fulfilled, (state, action) => {
-            const item = action.payload;
-            const items = state.data.map(dt => (dt.id === item.id) ? item : dt);
-
-            state.data = items;
-            state.record = item;
+            let item = action.payload;
+            state.data = state.data.map(dt => (dt.id === item.id) ? item : dt);
             state.isLoading = false;
         })
 
