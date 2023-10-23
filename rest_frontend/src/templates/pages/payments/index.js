@@ -38,7 +38,7 @@ const IndexPayment = () => {
                 <table className='table table-striped table-sm'>
                     <thead>
                     <tr>
-                        <th>No</th>
+                        <th>#</th>
                         <th>Provider Name</th>
                         <th>Amount</th>
                         <th>Status</th>

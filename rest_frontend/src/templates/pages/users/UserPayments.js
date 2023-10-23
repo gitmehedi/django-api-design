@@ -42,7 +42,7 @@ const UserPayments = () => {
                 <table className='table table-striped table-sm'>
                     <thead>
                     <tr>
-                        <th>No</th>
+                        <th>#</th>
                         <th>Provider</th>
                         <th>Payment Type</th>
                         <th>Account No</th>

@@ -35,7 +35,7 @@ const IndexOrder = () => {
                 <table className='table table-striped table-sm'>
                     <thead>
                     <tr>
-                        <th>No</th>
+                        <th>#</th>
                         <th>User</th>
                         <th>Total Price</th>
                         <th>Payment</th>

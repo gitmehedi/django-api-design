@@ -38,7 +38,7 @@ const IndexCategory = () => {
                 <table className='table table-striped table-sm'>
                     <thead>
                     <tr>
-                        <th>No</th>
+                        <th>#</th>
                         <th>Name</th>
                         <th>Code</th>
                         <th>Description</th>

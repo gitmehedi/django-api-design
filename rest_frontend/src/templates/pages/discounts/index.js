@@ -38,7 +38,7 @@ const IndexDiscount = () => {
                 <table className='table table-striped table-sm'>
                     <thead>
                     <tr>
-                        <th>No</th>
+                        <th>#</th>
                         <th>Name</th>
                         <th>Discount Percent</th>
                         <th>Description</th>

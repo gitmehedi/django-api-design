@@ -38,7 +38,7 @@ const IndexSession = () => {
                 <table className='table table-striped table-sm'>
                     <thead>
                     <tr>
-                        <th>No</th>
+                        <th>#</th>
                         <th>User</th>
                         <th>Total</th>
                         <th>Action</th>

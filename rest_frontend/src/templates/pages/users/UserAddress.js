@@ -45,7 +45,7 @@ const UserAddress = () => {
                 <table className='table table-striped table-sm'>
                     <thead>
                     <tr>
-                        <th>No</th>
+                        <th>#</th>
                         <th>User Name</th>
                         <th>Address 1</th>
                         <th>Address 2</th>
