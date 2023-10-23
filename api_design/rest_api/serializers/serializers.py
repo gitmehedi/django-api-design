@@ -2,8 +2,6 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from django.utils import timezone
 
-
-
 from api_db import models
 
 
@@ -113,6 +111,9 @@ class PaymentDetailsPOSTSerializer(serializers.ModelSerializer):
 
 
 class OrderDetailsSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(source='user.username')
+    provider = serializers.CharField(source='payment.provider')
+
     class Meta:
         model = models.OrderDetails
         fields = '__all__'

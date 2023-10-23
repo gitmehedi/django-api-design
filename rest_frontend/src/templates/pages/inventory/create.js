@@ -7,7 +7,7 @@ import Forms from './forms';
 
 const CreateInventory = () => {
     const navigate = useNavigate();
-    const [doPostInventory, isLoading, loadingErrors] = useThunk(postInventory);
+    const [doPostInventory, isLoading, isError] = useThunk(postInventory);
 
     const finishSubmit = (data) => {
         doPostInventory(data);
@@ -17,7 +17,7 @@ const CreateInventory = () => {
     let content;
     if (isLoading) {
         content = <Loader/>;
-    } else if (loadingErrors) {
+    } else if (isError) {
         content = <NotFoundError/>;
     } else {
         content = <Forms formSubmit={finishSubmit}/>;

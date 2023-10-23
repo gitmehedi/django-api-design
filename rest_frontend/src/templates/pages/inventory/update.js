@@ -34,7 +34,7 @@ const UpdateInventory = () => {
     } else if (loadingErrors) {
         content = <NotFoundError/>;
     } else {
-        content = <Forms formSubmit={finishSubmit} record={record}/>;
+        content = <Forms record={record} formSubmit={finishSubmit}/>;
     }
 
     return (
@@ -49,4 +49,4 @@ const UpdateInventory = () => {
         </>
     );
 };
-export  {UpdateInventory};
+export {UpdateInventory};

@@ -5,9 +5,9 @@ const Forms = ({formSubmit, record}) => {
     const [submitting, setSubmitting] = useState(false);
     const [errors, setErrors] = useState({});
     const [fields, setFields] = useState({
-        name: record ? record.name : '',
-        quantity: record ? record.quantity : '',
-        status: record ? record.status : true,
+        user: record ? record.user : '',
+        total_price: record ? record.total_price : '',
+        payment: record ? record.payment : '',
     });
 
     useEffect(() => {
@@ -18,11 +18,14 @@ const Forms = ({formSubmit, record}) => {
 
     const validateFields = (values) => {
         let errors = {};
-        if (values.name === '') {
-            errors.name = "Name should not be Empty";
+        if (values.user === '') {
+            errors.user = "User should not be Empty";
         }
-        if (values.quantity === '') {
-            errors.quantity = "Code Should be Empty";
+        if (values.total_price === '') {
+            errors.total_price = "Total Price should not be Empty";
+        }
+        if (values.payment === '') {
+            errors.payment = "Payment Provider should not be Empty";
         }
         return errors;
     }
@@ -43,41 +46,40 @@ const Forms = ({formSubmit, record}) => {
             <form className="row g-3" onSubmit={handleSubmit}>
                 <div className='col-md-6'>
                     <div className="col-md-12">
-                        <label htmlFor="title" className="form-label">Title</label>
+                        <label htmlFor="user" className="form-label">User</label>
                         <input type="text"
-                               name="name"
-                               value={fields.name}
+                               name="user"
+                               value={fields.user}
                                onChange={handleChange}
-                               className={`form-control ${errors.name ? 'is-invalid' : ''}`}
+                               className={`form-control ${errors.user ? 'is-invalid' : ''}`}
                                id="title"/>
                     </div>
 
                     <div className="col-md-12">
-                        <label htmlFor="code" className="form-label">Quantity</label>
+                        <label htmlFor="total_price" className="form-label">Total Price</label>
                         <input type="text"
-                               name="quantity"
+                               name="total_price"
                                onChange={handleChange}
-                               value={fields.quantity}
-                               className={`form-control ${errors.quantity ? 'is-invalid' : ''}`}
+                               value={fields.total_price}
+                               className={`form-control ${errors.total_price ? 'is-invalid' : ''}`}
                                id="code"/>
                     </div>
 
-                    <div className="col-12">
-                        <div className="form-check">
-                            <input className="form-check-input"
-                                   type="checkbox"
-                                   id="status"
-                                   name="status"
-                                   value={fields.status}
-                                   onClick={handleChange}
-                            />
-                            <label className="form-check-label" htmlFor="status">Status</label>
-                        </div>
+                    <div className="col-md-12">
+                        <label htmlFor="payment" className="form-label">Payment Provider</label>
+                        <input type="text"
+                               name="payment"
+                               onChange={handleChange}
+                               value={fields.payment}
+                               className={`form-control ${errors.payment ? 'is-invalid' : ''}`}
+                               id="code"/>
                     </div>
+
+
                 </div>
                 <div className="d-grid gap-4 d-md-block">
                     <button className="btn btn-sm btn-success">Save</button>
-                    <Link to='/category/' style={{marginLeft: '5px'}} className="btn btn-sm btn-danger">Cancel</Link>
+                    <Link to='/orders/' style={{marginLeft: '5px'}} className="btn btn-sm btn-danger">Cancel</Link>
                 </div>
             </form>
 
