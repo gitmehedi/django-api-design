@@ -10,6 +10,7 @@ import TableData from "./lists";
 const IndexOrder = () => {
     const [doFetchAllOrders, isLoading, isError] = useThunk(fetchAllOrders);
     const data = useSelector(state => state.orders.data);
+    const count = useSelector(state => state.orders.count);
 
     useEffect(() => {
         doFetchAllOrders();
@@ -29,7 +30,7 @@ const IndexOrder = () => {
 
     return (
         <>
-            <PageHeader title={'Orders'} count={200} clink={'orders'}/>
+            <PageHeader title={'Orders'} count={count} clink={'orders'}/>
             <div className='table-responsive small'>
                 <table className='table table-striped table-sm'>
                     <thead>

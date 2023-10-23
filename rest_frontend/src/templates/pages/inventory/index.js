@@ -8,8 +8,9 @@ import PageHeader from "src/templates/snippets/PageHeader";
 import {Loader, NotFoundError} from "src/components/Loader";
 
 const IndexInventory = () => {
-    const [doAllInventory, isLoading, isErrors] = useThunk(fetchAllInventory);
+    const [doAllInventory, isLoading, isError] = useThunk(fetchAllInventory);
     const data = useSelector(state => state.inventory.data);
+    const count = useSelector(state => state.inventory.count);
 
     useEffect(() => {
         doAllInventory();
@@ -19,7 +20,7 @@ const IndexInventory = () => {
     let content;
     if (isLoading)
         content = <Loader/>;
-    else if (isErrors)
+    else if (isError)
         content = <NotFoundError/>;
     else
         content = data.map((dt) => {
@@ -28,7 +29,7 @@ const IndexInventory = () => {
 
     return (
         <>
-            <PageHeader title={'Product Inventory'} count={200} clink={'inventory'}/>
+            <PageHeader title={'Product Inventory'} count={count} clink={'inventory'}/>
             <div className='table-responsive small'>
                 <table className='table table-striped table-sm'>
                     <thead>

@@ -33,7 +33,7 @@ const IndexSession = () => {
 
     return (
         <>
-            <PageHeader title={'Sessions'} count={200} clink={'session'}/>
+            <PageHeader title={'Sessions'} count={count} clink={'session'}/>
             <div className='table-responsive small'>
                 <table className='table table-striped table-sm'>
                     <thead>
