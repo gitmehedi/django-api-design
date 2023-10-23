@@ -33,7 +33,7 @@ const IndexPayment = () => {
 
     return (
         <>
-            <PageHeader title={'Payment Details'} count={count} clink={'payment'}/>
+            <PageHeader title={'Payment Details'} count={count} clink={'payments'}/>
             <div className='table-responsive small'>
                 <table className='table table-striped table-sm'>
                     <thead>

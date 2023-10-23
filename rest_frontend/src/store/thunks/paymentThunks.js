@@ -7,7 +7,7 @@ const url = getApiURL('payments');
 const urlID = getApiURL('payments', getRecId());
 
 
-const fetchAllPayment = createAsyncThunk('carts/fetchAllPayment', async (dispatch, thunkAPI) => {
+const fetchAllPayment = createAsyncThunk('payments/fetchAllPayment', async (dispatch, thunkAPI) => {
 
     const response = await axios.get(url);
     try {
@@ -17,7 +17,7 @@ const fetchAllPayment = createAsyncThunk('carts/fetchAllPayment', async (dispatc
     }
 });
 
-const postPayment = createAsyncThunk('carts/postPayment', async (data, thunkAPI) => {
+const postPayment = createAsyncThunk('payments/postPayment', async (data, thunkAPI) => {
     let {record} = data;
 
     const response = await axios.post(url, record);
@@ -28,7 +28,7 @@ const postPayment = createAsyncThunk('carts/postPayment', async (data, thunkAPI)
     }
 });
 
-const fetchPayment = createAsyncThunk('carts/fetchPayment', async (id, thunkAPI) => {
+const fetchPayment = createAsyncThunk('payments/fetchPayment', async (id, thunkAPI) => {
     const response = await axios.get(urlID);
     try {
         return response.data;
@@ -37,7 +37,7 @@ const fetchPayment = createAsyncThunk('carts/fetchPayment', async (id, thunkAPI)
     }
 });
 
-const putPayment = createAsyncThunk('carts/putPayment', async (data, thunkAPI) => {
+const putPayment = createAsyncThunk('payments/putPayment', async (data, thunkAPI) => {
     let {record} = data;
     const response = await axios.put(urlID, record);
     try {
@@ -47,8 +47,8 @@ const putPayment = createAsyncThunk('carts/putPayment', async (data, thunkAPI) =
     }
 });
 
-const delPayment = createAsyncThunk('carts/delPayment', async (id, thunkAPI) => {
-    const response = await axios.delete(url);
+const delPayment = createAsyncThunk('payments/delPayment', async (id, thunkAPI) => {
+    const response = await axios.delete(urlID);
     try {
         return id;
     } catch (e) {
