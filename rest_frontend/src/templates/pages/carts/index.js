@@ -4,19 +4,19 @@ import {useThunk} from "src/hooks/useThunk";
 import PageHeader from "src/templates/snippets/PageHeader";
 import Pagination from "src/templates/snippets/Pagination";
 import {Loader, NotFoundError} from "src/components/Loader";
-import {fetchAllCategory} from "src/store";
+import {fetchAllCart} from "src/store";
 import TableData from "./lists";
 
 
-const IndexCategory = () => {
-    const [doFetchAllCategory, isLoading, isErrors] = useThunk(fetchAllCategory);
+const IndexCart = () => {
+    const [doFetchAllCart, isLoading, isErrors] = useThunk(fetchAllCart);
 
     const data = useSelector(state => state.categories.data);
     const count = useSelector(state => state.categories.count);
 
     useEffect(() => {
-        doFetchAllCategory();
-    }, [doFetchAllCategory]);
+        doFetchAllCart();
+    }, [doFetchAllCart]);
 
 
     let content;
@@ -38,7 +38,7 @@ const IndexCategory = () => {
                 <table className='table table-striped table-sm'>
                     <thead>
                     <tr>
-                        <th>No</th>
+                        <th>#</th>
                         <th>Name</th>
                         <th>Code</th>
                         <th>Description</th>
@@ -57,6 +57,6 @@ const IndexCategory = () => {
 };
 
 
-export {IndexCategory};
+export {IndexCart};
 export * from './create';
 export * from './update';

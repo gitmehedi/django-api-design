@@ -3,11 +3,11 @@ import Index from 'src/templates/pages/dashboard/index';
 import {IndexCategory, UpdateCategory, CreateCategory} from 'src/templates/pages/category';
 import {IndexInventory, CreateInventory, UpdateInventory} from 'src/templates/pages/inventory';
 import {IndexOrder, CreateOrder, UpdateOrder} from 'src/templates/pages/orders';
-import Carts from 'src/templates/pages/carts/Carts';
-import Discounts from 'src/templates/pages/discounts/Discounts';
-import PaymentDetails from 'src/templates/pages/payments/PaymentDetails';
-import Products from 'src/templates/pages/products/Products';
-import Session from 'src/templates/pages/sessions/Session';
+import {IndexCart, CreateCart, UpdateCart} from 'src/templates/pages/carts';
+import {IndexDiscount, CreateDiscount, UpdateDiscount} from 'src/templates/pages/discounts';
+import {IndexProduct, CreateProduct, UpdateProduct} from 'src/templates/pages/products';
+import {IndexSession, CreateSession, UpdateSession} from 'src/templates/pages/sessions';
+import {IndexPayment, CreatePayment, UpdatePayment} from 'src/templates/pages/payments';
 import UserAddress from 'src/templates/pages/users/UserAddress';
 import UserPayments from 'src/templates/pages/users/UserPayments';
 
@@ -34,25 +34,33 @@ const RoutePath = () => {
                         <Route index element={<IndexOrder/>}/>
                     </Route>
                     <Route path='products/'>
-                        <Route index element={<Products/>}/>
+                        <Route path='create/' element={<CreateProduct/>}/>
+                        <Route path='update/:did/' element={<UpdateProduct/>}/>
+                        <Route index element={<IndexProduct/>}/>
+                    </Route>
+                    <Route path='session/'>
+                        <Route path='create/' element={<CreateSession/>}/>
+                        <Route path='update/:did/' element={<UpdateSession/>}/>
+                        <Route index element={<IndexSession/>}/>
+                    </Route>
+                    <Route path='payments/'>
+                        <Route path='create/' element={<CreatePayment/>}/>
+                        <Route path='update/:did/' element={<UpdatePayment/>}/>
+                        <Route index element={<IndexPayment/>}/>
+                    </Route>
+                    <Route path='discounts/'>
+                        <Route path='create/' element={<CreateDiscount/>}/>
+                        <Route path='update/:did/' element={<UpdateDiscount/>}/>
+                        <Route index element={<IndexDiscount/>}/>
+                    </Route>
+                    <Route path='carts/'>
+                        <Route path='create/' element={<CreateCart/>}/>
+                        <Route path='update/:did/' element={<UpdateCart/>}/>
+                        <Route index element={<IndexCart/>}/>
                     </Route>
                     <Route path='user/'>
                         <Route path='payments/' element={<UserPayments/>}/>
                         <Route path='address/' element={<UserAddress/>}/>
-                    </Route>
-                    <Route path='session/'>
-                        <Route index element={<Session/>}/>
-                    </Route>
-
-                    <Route path='payments/'>
-                        <Route index element={<PaymentDetails/>}/>
-                    </Route>
-
-                    <Route path='discounts/'>
-                        <Route index element={<Discounts/>}/>
-                    </Route>
-                    <Route path='carts/'>
-                        <Route index element={<Carts/>}/>
                     </Route>
                 </Route>
             </Routes>

@@ -4,19 +4,19 @@ import {useThunk} from "src/hooks/useThunk";
 import PageHeader from "src/templates/snippets/PageHeader";
 import Pagination from "src/templates/snippets/Pagination";
 import {Loader, NotFoundError} from "src/components/Loader";
-import {fetchAllCategory} from "src/store";
+import {fetchAllProduct} from "src/store";
 import TableData from "./lists";
 
 
-const IndexCategory = () => {
-    const [doFetchAllCategory, isLoading, isErrors] = useThunk(fetchAllCategory);
+const IndexProduct = () => {
+    const [doFetchAllProduct, isLoading, isErrors] = useThunk(fetchAllProduct);
 
-    const data = useSelector(state => state.categories.data);
-    const count = useSelector(state => state.categories.count);
+    const data = useSelector(state => state.products.data);
+    const count = useSelector(state => state.products.count);
 
     useEffect(() => {
-        doFetchAllCategory();
-    }, [doFetchAllCategory]);
+        doFetchAllProduct();
+    }, [doFetchAllProduct]);
 
 
     let content;
@@ -33,14 +33,18 @@ const IndexCategory = () => {
 
     return (
         <>
-            <PageHeader title={'Product Category'} count={count} clink={'category'}/>
+            <PageHeader title={'Products Category'} count={count} clink={'products'}/>
             <div className='table-responsive small'>
                 <table className='table table-striped table-sm'>
                     <thead>
                     <tr>
                         <th>No</th>
                         <th>Name</th>
-                        <th>Code</th>
+                        <th>SKU</th>
+                        <th>Price</th>
+                        <th>Category</th>
+                        <th>Inventory</th>
+                        <th>Discount</th>
                         <th>Description</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -57,6 +61,6 @@ const IndexCategory = () => {
 };
 
 
-export {IndexCategory};
+export {IndexProduct};
 export * from './create';
 export * from './update';

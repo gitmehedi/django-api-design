@@ -4,19 +4,19 @@ import {useThunk} from "src/hooks/useThunk";
 import PageHeader from "src/templates/snippets/PageHeader";
 import Pagination from "src/templates/snippets/Pagination";
 import {Loader, NotFoundError} from "src/components/Loader";
-import {fetchAllCategory} from "src/store";
+import {fetchAllSession} from "src/store";
 import TableData from "./lists";
 
 
-const IndexCategory = () => {
-    const [doFetchAllCategory, isLoading, isErrors] = useThunk(fetchAllCategory);
+const IndexSession = () => {
+    const [doFetchAllSession, isLoading, isErrors] = useThunk(fetchAllSession);
 
-    const data = useSelector(state => state.categories.data);
-    const count = useSelector(state => state.categories.count);
+    const data = useSelector(state => state.sessions.data);
+    const count = useSelector(state => state.sessions.count);
 
     useEffect(() => {
-        doFetchAllCategory();
-    }, [doFetchAllCategory]);
+        doFetchAllSession();
+    }, [doFetchAllSession]);
 
 
     let content;
@@ -33,16 +33,14 @@ const IndexCategory = () => {
 
     return (
         <>
-            <PageHeader title={'Product Category'} count={count} clink={'category'}/>
+            <PageHeader title={'Sessions'} count={200} clink={'session'}/>
             <div className='table-responsive small'>
                 <table className='table table-striped table-sm'>
                     <thead>
                     <tr>
                         <th>No</th>
-                        <th>Name</th>
-                        <th>Code</th>
-                        <th>Description</th>
-                        <th>Status</th>
+                        <th>User</th>
+                        <th>Total</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -57,6 +55,6 @@ const IndexCategory = () => {
 };
 
 
-export {IndexCategory};
+export {IndexSession};
 export * from './create';
 export * from './update';

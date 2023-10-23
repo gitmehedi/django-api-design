@@ -1,8 +1,10 @@
 const BASE_URL = 'http://localhost:8000/';
 const REST_URL = 'http://localhost:8000/rest/';
 
-const getApiURL = (resource) => {
-    const url = REST_URL + resource + '/';
+const getApiURL = (resource, id = null) => {
+    let url = REST_URL + resource + '/'
+    if (id)
+        url = url + id + '/';
     return url;
 }
 

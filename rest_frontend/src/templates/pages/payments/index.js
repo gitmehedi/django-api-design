@@ -4,19 +4,19 @@ import {useThunk} from "src/hooks/useThunk";
 import PageHeader from "src/templates/snippets/PageHeader";
 import Pagination from "src/templates/snippets/Pagination";
 import {Loader, NotFoundError} from "src/components/Loader";
-import {fetchAllCategory} from "src/store";
+import {fetchAllPayment} from "src/store";
 import TableData from "./lists";
 
 
-const IndexCategory = () => {
-    const [doFetchAllCategory, isLoading, isErrors] = useThunk(fetchAllCategory);
+const IndexPayment = () => {
+    const [doFetchAllPayment, isLoading, isErrors] = useThunk(fetchAllPayment);
 
-    const data = useSelector(state => state.categories.data);
-    const count = useSelector(state => state.categories.count);
+    const data = useSelector(state => state.payments.data);
+    const count = useSelector(state => state.payments.count);
 
     useEffect(() => {
-        doFetchAllCategory();
-    }, [doFetchAllCategory]);
+        doFetchAllPayment();
+    }, [doFetchAllPayment]);
 
 
     let content;
@@ -33,15 +33,14 @@ const IndexCategory = () => {
 
     return (
         <>
-            <PageHeader title={'Product Category'} count={count} clink={'category'}/>
+            <PageHeader title={'Payment Details'} count={count} clink={'payment'}/>
             <div className='table-responsive small'>
                 <table className='table table-striped table-sm'>
                     <thead>
                     <tr>
                         <th>No</th>
-                        <th>Name</th>
-                        <th>Code</th>
-                        <th>Description</th>
+                        <th>Provider Name</th>
+                        <th>Amount</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -57,6 +56,6 @@ const IndexCategory = () => {
 };
 
 
-export {IndexCategory};
+export {IndexPayment};
 export * from './create';
 export * from './update';
