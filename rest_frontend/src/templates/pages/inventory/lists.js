@@ -1,8 +1,17 @@
 import Action from "src/components/actions";
-import {deleteInventory} from "src/store/thunks/inventoryThunks";
+import {useNavigate} from "react-router-dom";
+import {deleteInventory} from "src/store";
+import {useThunk} from "src/hooks/useThunk";
 
 
-const ListTable = ({rec}) => {
+const TableData = ({rec}) => {
+    const navigate = useNavigate();
+    const [doDelInventory] = useThunk(deleteInventory);
+
+    const handleDelete = (id) => {
+        doDelInventory(id);
+        navigate('/inventory');
+    }
 
     return (
         <tr key={rec.id}>
@@ -11,10 +20,10 @@ const ListTable = ({rec}) => {
             <td>{rec.quantity}</td>
             <td>{rec.status}</td>
             <td>
-                <Action recId={rec.id} delCallback={deleteInventory}/>
+                <Action recId={rec.id} delCallback={handleDelete}/>
             </td>
         </tr>
     );
 };
 
-export default ListTable;
+export default TableData;

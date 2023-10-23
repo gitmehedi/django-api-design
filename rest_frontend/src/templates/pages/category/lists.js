@@ -4,9 +4,9 @@ import {useThunk} from "src/hooks/useThunk";
 import {useNavigate} from "react-router-dom";
 
 
-const CatTable = ({rec}) => {
+const TableData = ({rec}) => {
     const navigate = useNavigate();
-    const [doDelCategory, isDelLoading, isDelError] = useThunk(delCategory);
+    const [doDelCategory] = useThunk(delCategory);
     const handleDelete = (id) => {
         doDelCategory(id);
         navigate("/category");
@@ -25,4 +25,4 @@ const CatTable = ({rec}) => {
         </tr>
     );
 };
-export default CatTable;
+export default TableData;

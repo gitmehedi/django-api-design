@@ -8,7 +8,8 @@ const CreateCategory = () => {
     const navigate = useNavigate();
     const [doPostCategory, isLoading, loadingErrors] = useThunk(postCategory);
 
-    const finishSubmit = (data) => {
+    const finishSubmit = (fields) => {
+        let data = {'record': fields}
         doPostCategory(data);
         navigate('/category');
     }
@@ -34,4 +35,4 @@ const CreateCategory = () => {
         </>
     );
 };
-export default CreateCategory;
+export {CreateCategory};

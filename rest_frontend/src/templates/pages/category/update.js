@@ -14,7 +14,7 @@ const UpdateCategory = () => {
     const [doPutCategory] = useThunk(putCategory);
 
     const finishSubmit = (fields) => {
-        let data = {'recId': id, 'data': fields}
+        let data = {'id': id, 'record': fields}
         doPutCategory(data);
         navigate('/category');
     }
@@ -48,4 +48,4 @@ const UpdateCategory = () => {
         </>
     );
 };
-export default UpdateCategory;
+export {UpdateCategory};

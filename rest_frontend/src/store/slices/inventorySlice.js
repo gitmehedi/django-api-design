@@ -13,7 +13,7 @@ const InventorySlice = createSlice({
         isLoading: false,
         errors: null,
         data: [],
-        count:0,
+        count: 0,
         record: {}
     },
     reducers: {},
@@ -35,7 +35,7 @@ const InventorySlice = createSlice({
         builder.addCase(postInventory.pending, (state, action) => {
             state.isLoading = true;
         }).addCase(postInventory.fulfilled, (state, action) => {
-            state.data.push(action.payload);
+            state.data = [...action.payload, ...state.data];
             state.isLoading = false;
         })
 
@@ -53,12 +53,11 @@ const InventorySlice = createSlice({
         builder.addCase(deleteInventory.pending, (state, action) => {
             state.isLoading = true;
         }).addCase(deleteInventory.fulfilled, (state, action) => {
-            const id = action.payload;
-            const items = state.data.filter(dt => dt.id !== id);
-
-            state.data = items;
+            if (!action.payload) {
+                return
+            }
+            state.data = state.data.filter(dt => dt.id !== action.payload);
             state.isLoading = false;
-            console.log(items);
         })
     }
 });

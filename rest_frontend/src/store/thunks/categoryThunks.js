@@ -4,44 +4,43 @@ import {getApiURL} from "src/store/utils/urls";
 
 
 const fetchAllCategory = createAsyncThunk('category/fetchall', async (dispatch, thunkAPI) => {
-    console.log('Fetch All catgories');
-    const response = await axios({
-        url: getApiURL('categories'),
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    });
-    return response.data;
+    const url = getApiURL('categories');
+
+    const response = await axios.get(url);
+    try {
+        return response.data;
+    } catch (e) {
+        return e.message;
+    }
 });
 
-const fetchCategory = createAsyncThunk('category/fetch', async (recId, thunkAPI) => {
-    const response = await axios({
-        url: getApiURL('categories/' + recId),
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    });
-    return response.data;
+const fetchCategory = createAsyncThunk('category/fetch', async (id, thunkAPI) => {
+    const url = getApiURL('categories' + id);
+
+    const response = await axios.get(url);
+    try {
+        return response.data;
+    } catch (e) {
+        return e.message;
+    }
 });
 
 const postCategory = createAsyncThunk('category/post', async (data, thunkAPI) => {
-    const response = await axios({
-        url: getApiURL('categories'),
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        data: data
-    });
-    return response.data;
+    const {record} = data;
+    const url = getApiURL('categories');
+
+    const response = await axios.post(url, record);
+    try {
+        return response.data;
+    } catch (e) {
+        return e.message;
+    }
 });
 
 const putCategory = createAsyncThunk('category/put', async (data, thunkAPI) => {
     let recId = data['recId'];
     let record = data['data'];
-    console.log(data);
+
     const response = await axios({
         url: getApiURL('categories/' + recId),
         method: 'PUT',

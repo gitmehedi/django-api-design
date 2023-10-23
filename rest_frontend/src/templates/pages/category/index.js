@@ -5,12 +5,12 @@ import PageHeader from "src/templates/snippets/PageHeader";
 import Pagination from "src/templates/snippets/Pagination";
 import {Loader, NotFoundError} from "src/components/Loader";
 import {fetchAllCategory} from "src/store";
-import CatTable from "./lists";
+import TableData from "./lists";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faCoffee, faBars} from '@fortawesome/free-solid-svg-icons';
 
 
-const Index = () => {
+const IndexCategory = () => {
     const [doFetchAllCategory, isLoading, isErrors] = useThunk(fetchAllCategory);
 
     const data = useSelector(state => state.categories.data);
@@ -29,7 +29,7 @@ const Index = () => {
     else
         content = data.map((dt, i) => {
             return (
-                <CatTable key={i} rec={dt}/>
+                <TableData key={i} rec={dt}/>
             );
         });
 
@@ -57,4 +57,8 @@ const Index = () => {
         </>
     );
 };
-export default Index;
+
+
+export {IndexCategory};
+export * from './create';
+export * from './update';

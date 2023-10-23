@@ -2,7 +2,7 @@ import {useEffect} from "react";
 import {useSelector} from "react-redux";
 import {fetchAllInventory} from "src/store";
 import {useThunk} from "src/hooks/useThunk";
-import ListTable from "./lists";
+import TableData from "./lists";
 import Pagination from "src/templates/snippets/Pagination";
 import PageHeader from "src/templates/snippets/PageHeader";
 import {Loader, NotFoundError} from "src/components/Loader";
@@ -23,7 +23,7 @@ const IndexInventory = () => {
         content = <NotFoundError/>;
     else
         content = data.map((dt) => {
-            return <ListTable key={dt.id} rec={dt}/>
+            return <TableData key={dt.id} rec={dt}/>
         });
 
     return (
@@ -50,6 +50,6 @@ const IndexInventory = () => {
     );
 };
 
+export {IndexInventory};
 export * from './create';
 export * from './update';
-export default IndexInventory;

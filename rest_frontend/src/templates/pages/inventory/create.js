@@ -1,5 +1,5 @@
 import {useNavigate, Link} from 'react-router-dom';
-import {postCategory} from "src/store";
+import {postInventory} from "src/store";
 import {useThunk} from 'src/hooks/useThunk';
 import {Loader, NotFoundError} from "src/components/Loader";
 import Forms from './forms';
@@ -7,10 +7,10 @@ import Forms from './forms';
 
 const CreateInventory = () => {
     const navigate = useNavigate();
-    const [doPostCategory, isLoading, loadingErrors] = useThunk(postCategory);
+    const [doPostInventory, isLoading, loadingErrors] = useThunk(postInventory);
 
     const finishSubmit = (data) => {
-        doPostCategory(data);
+        doPostInventory(data);
         navigate('/inventory');
     }
 
@@ -35,4 +35,5 @@ const CreateInventory = () => {
         </>
     );
 };
-export default CreateInventory;
+
+export {CreateInventory};

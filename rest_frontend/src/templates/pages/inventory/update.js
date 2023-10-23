@@ -1,7 +1,7 @@
 import {useSelector} from "react-redux";
 import {useEffect} from "react";
 import {useNavigate} from 'react-router-dom';
-import {fetchCategory, putCategory} from "src/store";
+import {fetchInventory, putInventory} from "src/store";
 import {getRecId} from 'src/store/utils/urls';
 import {useThunk} from 'src/hooks/useThunk';
 import {Loader, NotFoundError} from "src/components/Loader";
@@ -11,22 +11,22 @@ import Forms from "./forms";
 const UpdateInventory = () => {
     const id = getRecId();
     const navigate = useNavigate();
-    const [doFetchCategory, isLoading, loadingErrors] = useThunk(fetchCategory);
-    const [doPutCategory] = useThunk(putCategory);
+    const [doFetchInventory, isLoading, loadingErrors] = useThunk(fetchInventory);
+    const [doPutInventory] = useThunk(putInventory);
 
     const finishSubmit = (fields) => {
-        let data = {'recId': id, 'data': fields}
-        doPutCategory(data);
+        let data = {'recId': id, 'record': fields}
+        doPutInventory(data);
         navigate('/inventory');
     }
 
     useEffect(() => {
         if (id) {
-            doFetchCategory(id);
+            doFetchInventory(id);
         }
-    }, [doFetchCategory]);
+    }, [doFetchInventory]);
 
-    const record = useSelector((state) => state.categories.record);
+    const record = useSelector((state) => state.inventory.record);
 
     let content;
     if (isLoading) {
@@ -49,4 +49,4 @@ const UpdateInventory = () => {
         </>
     );
 };
-export default UpdateInventory;
+export  {UpdateInventory};

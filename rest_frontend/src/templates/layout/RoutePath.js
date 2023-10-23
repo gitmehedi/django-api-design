@@ -1,9 +1,7 @@
 import {Routes, Route} from 'react-router-dom';
 import Index from 'src/templates/pages/dashboard/index';
-import IndexCategory from 'src/templates/pages/category/index';
-import UpdateCategory from 'src/templates/pages/category/update';
-import CreateCategory from 'src/templates/pages/category/create';
-import IndexInventory from 'src/templates/pages/inventory/index';
+import {IndexCategory, UpdateCategory, CreateCategory} from 'src/templates/pages/category';
+import {IndexInventory, CreateInventory, UpdateInventory} from 'src/templates/pages/inventory';
 import Carts from 'src/templates/pages/carts/Carts';
 import Discounts from 'src/templates/pages/discounts/Discounts';
 import OrderDetails from 'src/templates/pages/orders/OrderDetails';
@@ -23,11 +21,12 @@ const RoutePath = () => {
                     <Route index element={<Index/>}/>
                     <Route path='category/'>
                         <Route path='create/' element={<CreateCategory/>}/>
-                        <Route path='update/:catid/' element={<UpdateCategory/>}/>
+                        <Route path='update/:did/' element={<UpdateCategory/>}/>
                         <Route index element={<IndexCategory/>}/>
                     </Route>
                     <Route path='inventory/'>
-                        <Route index element={<IndexInventory/>}/>
+                        <Route path='create/' element={<CreateInventory/>}/>
+                        <Route path='update/:did' element={<UpdateInventory/>}/>
                         <Route index element={<IndexInventory/>}/>
                     </Route>
                     <Route path='user/'>

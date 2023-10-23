@@ -22,13 +22,12 @@ const CategorySlice = createSlice({
             state.next = action.payload.next;
             state.previous = action.payload.previous;
             state.isLoading = false;
-            console.log(action.payload);
         })
 
         builder.addCase(postCategory.pending, (state, action) => {
             state.isLoading = true;
         }).addCase(postCategory.fulfilled, (state, action) => {
-            state.data.push(action.payload);
+            state.data = [...action.payload, ...state.data];
             state.isLoading = false;
         })
 
@@ -46,8 +45,7 @@ const CategorySlice = createSlice({
             if (!action.payload) {
                 return
             }
-            const recId = action.payload;
-            state.data = state.data.filter(dt => dt.id !== recId);
+            state.data = state.data.filter(dt => dt.id !== action.payload);
             state.isLoading = false;
         })
     }

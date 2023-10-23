@@ -3,18 +3,20 @@ import axios from "axios";
 import {getApiURL} from "../utils/urls";
 
 const fetchAllInventory = createAsyncThunk('inventory/fetchAllInventory', async (dispatch, thunkAPI) => {
-    const response = await axios({
-        url: getApiURL('inventory'),
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
-    return response.data;
+    const url = getApiURL('inventory');
+
+    const response = await axios(url);
+    try {
+        return response.data;
+    } catch (e) {
+        return e.message;
+    }
 });
 
 const fetchInventory = createAsyncThunk('inventory/fetchInventory', async (id, thunkAPI) => {
-    const response = await axios.get(getApiURL('inventory/') + id);
+    let url = getApiURL("inventory/" + id);
+
+    const response = await axios.get(url);
     try {
         return response.data;
     } catch (e) {
@@ -24,7 +26,9 @@ const fetchInventory = createAsyncThunk('inventory/fetchInventory', async (id, t
 
 
 const postInventory = createAsyncThunk('inventory/postInventory', async (data, thunkAPI) => {
-    const response = await axios.post(getApiURL('inventory'), data);
+    let url = getApiURL("inventory");
+
+    const response = await axios.post(url, data);
     try {
         return response.data;
     } catch (e) {
@@ -34,9 +38,10 @@ const postInventory = createAsyncThunk('inventory/postInventory', async (data, t
 
 
 const putInventory = createAsyncThunk('inventory/putInventory', async (data, thunkAPI) => {
-    const id = data['id'];
-    const item = data
-    const response = await axios.post(getApiURL('inventory/' + id), item);
+    let {recId, record} = data;
+    let url = getApiURL("inventory/" + recId);
+
+    const response = await axios.put(url, record);
     try {
         return response.data;
     } catch (e) {
@@ -45,8 +50,9 @@ const putInventory = createAsyncThunk('inventory/putInventory', async (data, thu
 });
 
 const deleteInventory = createAsyncThunk('inventory/deleteInventory', async (id, thunkAPI) => {
+    let url = getApiURL("inventory/" + id);
 
-    const response = await axios.delete(getApiURL('inventory/' + id));
+    const response = await axios.delete(url);
     try {
         return id;
     } catch (e) {
