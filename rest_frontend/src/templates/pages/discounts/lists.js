@@ -9,7 +9,7 @@ const TableData = ({rec}) => {
     const [doDelDiscount] = useThunk(delDiscount);
     const handleDelete = (id) => {
         doDelDiscount(id);
-        navigate("/discount");
+        navigate('/discount');
     }
 
     return (

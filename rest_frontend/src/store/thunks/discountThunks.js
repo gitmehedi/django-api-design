@@ -2,8 +2,8 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 import {getApiURL, getRecId} from 'src/store/utils/urls';
 
-const RESOURCE='';
-const url = getApiURL('discounts');
+const RESOURCE = 'discounts';
+const url = getApiURL(RESOURCE);
 
 
 const fetchAllDiscount = createAsyncThunk('discounts/fetchAllDiscount', async (dispatch, thunkAPI) => {
@@ -28,6 +28,8 @@ const postDiscount = createAsyncThunk('discounts/postDiscount', async (data, thu
 });
 
 const fetchDiscount = createAsyncThunk('discounts/fetchDiscount', async (id, thunkAPI) => {
+    const url = getApiURL(RESOURCE, id);
+
     const response = await axios.get(url);
     try {
         return response.data;
@@ -37,7 +39,9 @@ const fetchDiscount = createAsyncThunk('discounts/fetchDiscount', async (id, thu
 });
 
 const putDiscount = createAsyncThunk('discounts/putDiscount', async (data, thunkAPI) => {
-    let {record} = data;
+    let {id, record} = data;
+    const url = getApiURL(RESOURCE, id);
+
     const response = await axios.put(url, record);
     try {
         return response.data;
@@ -47,6 +51,8 @@ const putDiscount = createAsyncThunk('discounts/putDiscount', async (data, thunk
 });
 
 const delDiscount = createAsyncThunk('discounts/delDiscount', async (id, thunkAPI) => {
+    const url = getApiURL(RESOURCE, id);
+
     const response = await axios.delete(url);
     try {
         return id;
