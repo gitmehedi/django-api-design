@@ -353,6 +353,9 @@ class OrderItemsPOSTSerializer(serializers.ModelSerializer):
 
 
 class CartItemSerializer(serializers.ModelSerializer):
+    product_name = serializers.CharField(source='product.name')
+    session_total = serializers.CharField(source='session.total')
+
     class Meta:
         model = models.CartItem
         fields = '__all__'

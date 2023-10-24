@@ -7,7 +7,7 @@ const url = getApiURL('products');
 const urlID = getApiURL('products', getRecId());
 
 
-const fetchAllProduct = createAsyncThunk('carts/fetchAllProduct', async (dispatch, thunkAPI) => {
+const fetchAllProduct = createAsyncThunk('products/fetchAllProduct', async (dispatch, thunkAPI) => {
 
     const response = await axios.get(url);
     try {
@@ -17,7 +17,7 @@ const fetchAllProduct = createAsyncThunk('carts/fetchAllProduct', async (dispatc
     }
 });
 
-const postProduct = createAsyncThunk('carts/postProduct', async (data, thunkAPI) => {
+const postProduct = createAsyncThunk('products/postProduct', async (data, thunkAPI) => {
     let {record} = data;
 
     const response = await axios.post(url, record);
@@ -28,7 +28,7 @@ const postProduct = createAsyncThunk('carts/postProduct', async (data, thunkAPI)
     }
 });
 
-const fetchProduct = createAsyncThunk('carts/fetchProduct', async (id, thunkAPI) => {
+const fetchProduct = createAsyncThunk('products/fetchProduct', async (id, thunkAPI) => {
     const response = await axios.get(urlID);
     try {
         return response.data;
@@ -37,7 +37,7 @@ const fetchProduct = createAsyncThunk('carts/fetchProduct', async (id, thunkAPI)
     }
 });
 
-const putProduct = createAsyncThunk('carts/putProduct', async (data, thunkAPI) => {
+const putProduct = createAsyncThunk('products/putProduct', async (data, thunkAPI) => {
     let {record} = data;
     const response = await axios.put(urlID, record);
     try {
@@ -47,7 +47,7 @@ const putProduct = createAsyncThunk('carts/putProduct', async (data, thunkAPI) =
     }
 });
 
-const delProduct = createAsyncThunk('carts/delProduct', async (id, thunkAPI) => {
+const delProduct = createAsyncThunk('products/delProduct', async (id, thunkAPI) => {
     const response = await axios.delete(url);
     try {
         return id;

@@ -7,7 +7,7 @@ const url = getApiURL('discounts');
 const urlID = getApiURL('discounts', getRecId());
 
 
-const fetchAllDiscount = createAsyncThunk('carts/fetchAllDiscount', async (dispatch, thunkAPI) => {
+const fetchAllDiscount = createAsyncThunk('discounts/fetchAllDiscount', async (dispatch, thunkAPI) => {
 
     const response = await axios.get(url);
     try {
@@ -17,7 +17,7 @@ const fetchAllDiscount = createAsyncThunk('carts/fetchAllDiscount', async (dispa
     }
 });
 
-const postDiscount = createAsyncThunk('carts/postDiscount', async (data, thunkAPI) => {
+const postDiscount = createAsyncThunk('discounts/postDiscount', async (data, thunkAPI) => {
     let {record} = data;
 
     const response = await axios.post(url, record);
@@ -28,7 +28,7 @@ const postDiscount = createAsyncThunk('carts/postDiscount', async (data, thunkAP
     }
 });
 
-const fetchDiscount = createAsyncThunk('carts/fetchDiscount', async (id, thunkAPI) => {
+const fetchDiscount = createAsyncThunk('discounts/fetchDiscount', async (id, thunkAPI) => {
     const response = await axios.get(urlID);
     try {
         return response.data;
@@ -37,7 +37,7 @@ const fetchDiscount = createAsyncThunk('carts/fetchDiscount', async (id, thunkAP
     }
 });
 
-const putDiscount = createAsyncThunk('carts/putDiscount', async (data, thunkAPI) => {
+const putDiscount = createAsyncThunk('discounts/putDiscount', async (data, thunkAPI) => {
     let {record} = data;
     const response = await axios.put(urlID, record);
     try {
@@ -47,7 +47,7 @@ const putDiscount = createAsyncThunk('carts/putDiscount', async (data, thunkAPI)
     }
 });
 
-const delDiscount = createAsyncThunk('carts/delDiscount', async (id, thunkAPI) => {
+const delDiscount = createAsyncThunk('discounts/delDiscount', async (id, thunkAPI) => {
     const response = await axios.delete(url);
     try {
         return id;

@@ -17,6 +17,7 @@ const CartsSlice = createSlice({
         }).addCase(fetchAllCart.fulfilled, (state, action) => {
             state.data = action.payload;
             state.isLoading = false;
+            console.log(state.data);
         })
 
         builder.addCase(fetchCart.pending, (state, action) => {
@@ -24,6 +25,7 @@ const CartsSlice = createSlice({
         }).addCase(fetchCart.fulfilled, (state, action) => {
             state.record = action.payload;
             state.isLoading = false;
+            console.log(state.data);
         })
 
         builder.addCase(postCart.pending, (state, action) => {
@@ -31,6 +33,7 @@ const CartsSlice = createSlice({
         }).addCase(postCart.fulfilled, (state, action) => {
             state.data = [...action.payload, ...state.data];
             state.isLoading = false;
+            console.log(state.data);
         })
 
         builder.addCase(putCart.pending, (state, action) => {
@@ -39,13 +42,15 @@ const CartsSlice = createSlice({
             let item = action.payload;
             state.data = state.data.map(dt => (dt.id === item.id) ? item : dt);
             state.isLoading = false;
+            console.log(state.data);
         })
 
         builder.addCase(delCart.pending, (state, action) => {
             state.isLoading = true;
         }).addCase(delCart.fulfilled, (state, action) => {
-            state.data = state.data.filter(dt => dt !== action.payload);
+            state.data = state.data.filter(dt => dt.id !== action.payload);
             state.isLoading = false;
+            console.log(state.data);
         })
 
     }

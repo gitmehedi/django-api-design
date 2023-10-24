@@ -3,8 +3,8 @@ import axios from "axios";
 import {getApiURL, getRecId} from 'src/store/utils/urls';
 
 
-const url = getApiURL('carts');
-const urlID = getApiURL('carts', getRecId());
+const RESOURCE = 'carts';
+const url = getApiURL(RESOURCE);
 
 
 const fetchAllCart = createAsyncThunk('carts/fetchAllCart', async (dispatch, thunkAPI) => {
@@ -29,7 +29,9 @@ const postCart = createAsyncThunk('carts/postCart', async (data, thunkAPI) => {
 });
 
 const fetchCart = createAsyncThunk('carts/fetchCart', async (id, thunkAPI) => {
-    const response = await axios.get(urlID);
+    let url = getApiURL(RESOURCE, id)
+
+    const response = await axios.get(url);
     try {
         return response.data;
     } catch (e) {
@@ -38,8 +40,10 @@ const fetchCart = createAsyncThunk('carts/fetchCart', async (id, thunkAPI) => {
 });
 
 const putCart = createAsyncThunk('carts/putCart', async (data, thunkAPI) => {
-    let {record} = data;
-    const response = await axios.put(urlID, record);
+    let {id, record} = data;
+    let url = getApiURL(RESOURCE, id);
+
+    const response = await axios.put(url, record);
     try {
         return response.data;
     } catch (e) {
@@ -48,6 +52,8 @@ const putCart = createAsyncThunk('carts/putCart', async (data, thunkAPI) => {
 });
 
 const delCart = createAsyncThunk('carts/delCart', async (id, thunkAPI) => {
+    let url = getApiURL(RESOURCE, id)
+
     const response = await axios.delete(url);
     try {
         return id;

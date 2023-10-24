@@ -6,18 +6,18 @@ import {delCart} from "src/store";
 
 const TableData = ({rec}) => {
     const navigate = useNavigate();
-    const [doDelCategory] = useThunk(delCart);
+    const [doDelCart] = useThunk(delCart);
     const handleDelete = (id) => {
-        doDelCategory(id);
-        navigate("/cart");
+        doDelCart(id);
+        navigate("/carts/");
     }
 
     return (
         <tr>
             <td>{rec.id}</td>
-            <td>{rec.name}</td>
-            <td>{rec.code}</td>
-            <td>{rec.description}</td>
+            <td>{rec.product_name}</td>
+            <td>{rec.session_total}</td>
+            <td>{rec.quantity}</td>
             <td>{rec.status}</td>
             <td>
                 <Action recId={rec.id} delCallback={handleDelete}/>

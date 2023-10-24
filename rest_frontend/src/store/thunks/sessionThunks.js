@@ -7,7 +7,7 @@ const url = getApiURL('session');
 const urlID = getApiURL('session', getRecId());
 
 
-const fetchAllSession = createAsyncThunk('carts/fetchAllSession', async (dispatch, thunkAPI) => {
+const fetchAllSession = createAsyncThunk('sessions/fetchAllSession', async (dispatch, thunkAPI) => {
 
     const response = await axios.get(url);
     try {
@@ -17,7 +17,7 @@ const fetchAllSession = createAsyncThunk('carts/fetchAllSession', async (dispatc
     }
 });
 
-const postSession = createAsyncThunk('carts/postSession', async (data, thunkAPI) => {
+const postSession = createAsyncThunk('sessions/postSession', async (data, thunkAPI) => {
     let {record} = data;
 
     const response = await axios.post(url, record);
@@ -28,7 +28,7 @@ const postSession = createAsyncThunk('carts/postSession', async (data, thunkAPI)
     }
 });
 
-const fetchSession = createAsyncThunk('carts/fetchSession', async (id, thunkAPI) => {
+const fetchSession = createAsyncThunk('sessions/fetchSession', async (id, thunkAPI) => {
     const response = await axios.get(urlID);
     try {
         return response.data;
@@ -37,7 +37,7 @@ const fetchSession = createAsyncThunk('carts/fetchSession', async (id, thunkAPI)
     }
 });
 
-const putSession = createAsyncThunk('carts/putSession', async (data, thunkAPI) => {
+const putSession = createAsyncThunk('sessions/putSession', async (data, thunkAPI) => {
     let {record} = data;
     const response = await axios.put(urlID, record);
     try {
@@ -47,7 +47,7 @@ const putSession = createAsyncThunk('carts/putSession', async (data, thunkAPI) =
     }
 });
 
-const delSession = createAsyncThunk('carts/delSession', async (id, thunkAPI) => {
+const delSession = createAsyncThunk('sessions/delSession', async (id, thunkAPI) => {
     const response = await axios.delete(url);
     try {
         return id;
