@@ -1,5 +1,6 @@
 import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
+import {TextField, NumberField,DropdownField} from "src/components/FormField";
 
 
 const Forms = ({formSubmit, record}) => {
@@ -44,23 +45,23 @@ const Forms = ({formSubmit, record}) => {
             <form className="row g-3" onSubmit={handleSubmit}>
                 <div className='col-md-6'>
                     <div className="col-md-12">
-                        <label htmlFor="provider" className="form-label">Provider</label>
-                        <input type="text"
-                               name="provider"
-                               value={fields.provider}
-                               onChange={handleChange}
-                               className={`form-control ${errors.provider ? 'is-invalid' : ''}`}
-                               id="title"/>
+                        <TextField name="provider"
+                                   event={handleChange}
+                                   value={fields.provider}
+                                   error={errors.provider}/>
                     </div>
 
                     <div className="col-md-12">
-                        <label htmlFor="amount" className="form-label">Amount</label>
-                        <input type="text"
-                               name="amount"
-                               onChange={handleChange}
-                               value={fields.amount}
-                               className={`form-control ${errors.amount ? 'is-invalid' : ''}`}
-                               id="code"/>
+                        <NumberField name="amount"
+                                     event={handleChange}
+                                     value={fields.amount}
+                                     error={errors.amount}/>
+                    </div>
+                    <div className="col-md-12">
+                        <DropdownField name="user"
+                                     event={handleChange}
+                                     value={fields.user}
+                                     error={errors.user}/>
                     </div>
 
                     <div className="col-12">
