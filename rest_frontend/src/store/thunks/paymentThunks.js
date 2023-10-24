@@ -4,7 +4,6 @@ import {getApiURL, getRecId} from 'src/store/utils/urls';
 
 
 const url = getApiURL('payments');
-const url = getApiURL('payments', getRecId());
 
 
 const fetchAllPayment = createAsyncThunk('payments/fetchAllPayment', async (dispatch, thunkAPI) => {
