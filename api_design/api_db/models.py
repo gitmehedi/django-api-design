@@ -142,9 +142,9 @@ class Products(AbstractModel):
 class OrderItems(AbstractModel):
     quantity = models.FloatField()
     order_id = models.ForeignKey(OrderDetails, blank=True, null=True, on_delete=models.SET_NULL,
-                                 related_name='%(class)s_payment')
+                                 related_name='%(class)s_order')
     product = models.ForeignKey(Products, blank=True, null=True, on_delete=models.SET_NULL,
-                                related_name='%(class)s_order')
+                                related_name='%(class)s_product')
 
     class Meta:
         db_table = 'order_items'
@@ -154,9 +154,9 @@ class OrderItems(AbstractModel):
 class CartItem(AbstractModel):
     quantity = models.FloatField()
     product = models.ForeignKey(Products, blank=True, null=True, on_delete=models.SET_NULL,
-                                related_name='%(class)s_cart')
+                                related_name='%(class)s_product')
     session = models.ForeignKey(ShoppingSession, blank=True, null=True, on_delete=models.SET_NULL,
-                                related_name='%(class)s_cart')
+                                related_name='%(class)s_session')
 
     class Meta:
         db_table = 'cart_item'
