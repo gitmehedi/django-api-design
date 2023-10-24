@@ -25,7 +25,7 @@ class OrderItemsList(APIView):
 
 
 class OrderItemsViews(APIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def get_object(self, pk):
         try:

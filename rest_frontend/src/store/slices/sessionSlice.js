@@ -44,7 +44,7 @@ const SessionSlice = createSlice({
         builder.addCase(delSession.pending, (state, action) => {
             state.isLoading = true;
         }).addCase(delSession.fulfilled, (state, action) => {
-            state.data = state.data.filter(dt => dt !== action.payload);
+            state.data = state.data.filter(dt => dt.id !== action.payload);
             state.isLoading = false;
         })
     }

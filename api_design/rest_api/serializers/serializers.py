@@ -178,6 +178,8 @@ class DiscountPOSTSerializer(serializers.ModelSerializer):
 
 
 class ShoppingSessionSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(source='user.username')
+
     class Meta:
         model = models.ShoppingSession
         fields = '__all__'

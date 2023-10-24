@@ -9,7 +9,8 @@ const CreateInventory = () => {
     const navigate = useNavigate();
     const [doPostInventory, isLoading, isError] = useThunk(postInventory);
 
-    const finishSubmit = (data) => {
+    const finishSubmit = (fields) => {
+        let data = {record: fields};
         doPostInventory(data);
         navigate('/inventory');
     }

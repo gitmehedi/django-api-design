@@ -15,7 +15,7 @@ const UpdateInventory = () => {
     const [doPutInventory] = useThunk(putInventory);
 
     const finishSubmit = (fields) => {
-        let data = {'recId': id, 'record': fields}
+        let data = {'id': id, 'record': fields}
         doPutInventory(data);
         navigate('/inventory');
     }

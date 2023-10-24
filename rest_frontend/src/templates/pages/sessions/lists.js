@@ -15,7 +15,7 @@ const TableData = ({rec}) => {
     return (
         <tr>
             <td>{rec.id}</td>
-            <td>{rec.user}</td>
+            <td>{rec.username}</td>
             <td>{rec.total}</td>
             <td>{rec.status}</td>
             <td>

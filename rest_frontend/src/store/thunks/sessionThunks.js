@@ -2,9 +2,8 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 import {getApiURL, getRecId} from 'src/store/utils/urls';
 
-
-const url = getApiURL('session');
-const urlID = getApiURL('session', getRecId());
+const RESOURCE = 'session'
+const url = getApiURL(RESOURCE);
 
 
 const fetchAllSession = createAsyncThunk('sessions/fetchAllSession', async (dispatch, thunkAPI) => {
@@ -19,6 +18,7 @@ const fetchAllSession = createAsyncThunk('sessions/fetchAllSession', async (disp
 
 const postSession = createAsyncThunk('sessions/postSession', async (data, thunkAPI) => {
     let {record} = data;
+    console.log(data);
 
     const response = await axios.post(url, record);
     try {
@@ -29,7 +29,9 @@ const postSession = createAsyncThunk('sessions/postSession', async (data, thunkA
 });
 
 const fetchSession = createAsyncThunk('sessions/fetchSession', async (id, thunkAPI) => {
-    const response = await axios.get(urlID);
+    let url = getApiURL(RESOURCE, id)
+
+    const response = await axios.get(url);
     try {
         return response.data;
     } catch (e) {
@@ -38,8 +40,11 @@ const fetchSession = createAsyncThunk('sessions/fetchSession', async (id, thunkA
 });
 
 const putSession = createAsyncThunk('sessions/putSession', async (data, thunkAPI) => {
-    let {record} = data;
-    const response = await axios.put(urlID, record);
+    let {id, record} = data;
+    let url = getApiURL(RESOURCE, id)
+
+
+    const response = await axios.put(url, record);
     try {
         return response.data;
     } catch (e) {
@@ -48,6 +53,8 @@ const putSession = createAsyncThunk('sessions/putSession', async (data, thunkAPI
 });
 
 const delSession = createAsyncThunk('sessions/delSession', async (id, thunkAPI) => {
+    let url = getApiURL(RESOURCE, id)
+
     const response = await axios.delete(url);
     try {
         return id;
