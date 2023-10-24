@@ -4,7 +4,7 @@ import {getApiURL, getRecId} from 'src/store/utils/urls';
 
 
 const url = getApiURL('payments');
-const urlID = getApiURL('payments', getRecId());
+const url = getApiURL('payments', getRecId());
 
 
 const fetchAllPayment = createAsyncThunk('payments/fetchAllPayment', async (dispatch, thunkAPI) => {
@@ -29,7 +29,7 @@ const postPayment = createAsyncThunk('payments/postPayment', async (data, thunkA
 });
 
 const fetchPayment = createAsyncThunk('payments/fetchPayment', async (id, thunkAPI) => {
-    const response = await axios.get(urlID);
+    const response = await axios.get(url);
     try {
         return response.data;
     } catch (e) {
@@ -39,7 +39,7 @@ const fetchPayment = createAsyncThunk('payments/fetchPayment', async (id, thunkA
 
 const putPayment = createAsyncThunk('payments/putPayment', async (data, thunkAPI) => {
     let {record} = data;
-    const response = await axios.put(urlID, record);
+    const response = await axios.put(url, record);
     try {
         return response.data;
     } catch (e) {
@@ -48,7 +48,7 @@ const putPayment = createAsyncThunk('payments/putPayment', async (data, thunkAPI
 });
 
 const delPayment = createAsyncThunk('payments/delPayment', async (id, thunkAPI) => {
-    const response = await axios.delete(urlID);
+    const response = await axios.delete(url);
     try {
         return id;
     } catch (e) {

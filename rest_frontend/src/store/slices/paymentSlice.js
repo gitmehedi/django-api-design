@@ -45,7 +45,7 @@ const PaymentSlice = createSlice({
         builder.addCase(delPayment.pending, (state, action) => {
             state.isLoading = true;
         }).addCase(delPayment.fulfilled, (state, action) => {
-            state.data = state.data.filter(dt => dt !== action.payload);
+            state.data = state.data.filter(dt => dt.id !== action.payload);
             state.isLoading = false;
         })
     }

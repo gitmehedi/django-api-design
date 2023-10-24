@@ -44,7 +44,7 @@ const DiscountSlice = createSlice({
         builder.addCase(delDiscount.pending, (state, action) => {
             state.isLoading = true;
         }).addCase(delDiscount.fulfilled, (state, action) => {
-            state.data = state.data.filter(dt => dt !== action.payload);
+            state.data = state.data.filter(dt => dt.id !== action.payload);
             state.isLoading = false;
         })
     }

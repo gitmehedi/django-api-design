@@ -45,7 +45,7 @@ const ProductsSlice = createSlice({
         builder.addCase(delProduct.pending, (state, action) => {
             state.isLoading = true;
         }).addCase(delProduct.fulfilled, (state, action) => {
-            state.data = state.data.filter(dt => dt !== action.payload);
+            state.data = state.data.filter(dt => dt.id !== action.payload);
             state.isLoading = false;
         })
     }

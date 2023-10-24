@@ -2,9 +2,8 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 import {getApiURL, getRecId} from 'src/store/utils/urls';
 
-
+const RESOURCE='';
 const url = getApiURL('discounts');
-const urlID = getApiURL('discounts', getRecId());
 
 
 const fetchAllDiscount = createAsyncThunk('discounts/fetchAllDiscount', async (dispatch, thunkAPI) => {
@@ -29,7 +28,7 @@ const postDiscount = createAsyncThunk('discounts/postDiscount', async (data, thu
 });
 
 const fetchDiscount = createAsyncThunk('discounts/fetchDiscount', async (id, thunkAPI) => {
-    const response = await axios.get(urlID);
+    const response = await axios.get(url);
     try {
         return response.data;
     } catch (e) {
@@ -39,7 +38,7 @@ const fetchDiscount = createAsyncThunk('discounts/fetchDiscount', async (id, thu
 
 const putDiscount = createAsyncThunk('discounts/putDiscount', async (data, thunkAPI) => {
     let {record} = data;
-    const response = await axios.put(urlID, record);
+    const response = await axios.put(url, record);
     try {
         return response.data;
     } catch (e) {
