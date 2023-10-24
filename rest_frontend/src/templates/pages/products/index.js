@@ -33,7 +33,7 @@ const IndexProduct = () => {
 
     return (
         <>
-            <PageHeader title={'Products Category'} count={count} clink={'products'}/>
+            <PageHeader title={'Products'} count={count} clink={'products'}/>
             <div className='table-responsive small'>
                 <table className='table table-striped table-sm'>
                     <thead>

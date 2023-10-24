@@ -16,7 +16,7 @@ const TableData = ({rec}) => {
         <tr>
             <td>{rec.id}</td>
             <td>{rec.product_name}</td>
-            <td>{rec.session_total}</td>
+            <td>{rec.session}</td>
             <td>{rec.quantity}</td>
             <td>{rec.status}</td>
             <td>
