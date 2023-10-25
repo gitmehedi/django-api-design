@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {TextField, NumberField,DropdownField} from "src/components/FormField";
+import {TextField, NumberField, SelectField, SubmitButton, RadioField} from "src/components/FormField";
 
 
 const Forms = ({formSubmit, record}) => {
@@ -9,8 +9,14 @@ const Forms = ({formSubmit, record}) => {
     const [fields, setFields] = useState({
         provider: record ? record.provider : '',
         amount: record ? record.amount : '',
-        status: record ? record.status : true,
+        status: !record ? true : record.status,
     });
+
+    const options = [
+        {value: true, label: 'True'},
+        {value: false, label: 'False'},
+    ];
+
 
     useEffect(() => {
         if (Object.keys(errors).length === 0 && submitting) {
@@ -57,30 +63,17 @@ const Forms = ({formSubmit, record}) => {
                                      value={fields.amount}
                                      error={errors.amount}/>
                     </div>
-                    <div className="col-md-12">
-                        <DropdownField name="user"
-                                     event={handleChange}
-                                     value={fields.user}
-                                     error={errors.user}/>
-                    </div>
 
                     <div className="col-12">
-                        <div className="form-check">
-                            <input className="form-check-input"
-                                   type="checkbox"
-                                   id="status"
-                                   name="status"
-                                   value={fields.status}
-                                   onClick={handleChange}
-                            />
-                            <label className="form-check-label" htmlFor="status">Status</label>
-                        </div>
+                        <RadioField name='status'
+                                    event={handleChange}
+                                    value={fields.status}
+                                    error={errors.status}
+                                    options={options}/>
                     </div>
                 </div>
-                <div className="d-grid gap-4 d-md-block">
-                    <button className="btn btn-sm btn-success">Save</button>
-                    <Link to='/category/' style={{marginLeft: '5px'}} className="btn btn-sm btn-danger">Cancel</Link>
-                </div>
+
+                <SubmitButton name='payments'/>
             </form>
 
         </>

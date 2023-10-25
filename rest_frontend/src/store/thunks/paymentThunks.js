@@ -3,7 +3,9 @@ import axios from "axios";
 import {getApiURL, getRecId} from 'src/store/utils/urls';
 
 
-const url = getApiURL('payments');
+const RESOURCE = 'payments';
+
+const url = getApiURL(RESOURCE);
 
 
 const fetchAllPayment = createAsyncThunk('payments/fetchAllPayment', async (dispatch, thunkAPI) => {
@@ -28,6 +30,8 @@ const postPayment = createAsyncThunk('payments/postPayment', async (data, thunkA
 });
 
 const fetchPayment = createAsyncThunk('payments/fetchPayment', async (id, thunkAPI) => {
+    const url = getApiURL(RESOURCE, id);
+
     const response = await axios.get(url);
     try {
         return response.data;
@@ -37,7 +41,9 @@ const fetchPayment = createAsyncThunk('payments/fetchPayment', async (id, thunkA
 });
 
 const putPayment = createAsyncThunk('payments/putPayment', async (data, thunkAPI) => {
-    let {record} = data;
+    let {id, record} = data;
+    const url = getApiURL(RESOURCE, id);
+
     const response = await axios.put(url, record);
     try {
         return response.data;
@@ -47,6 +53,8 @@ const putPayment = createAsyncThunk('payments/putPayment', async (data, thunkAPI
 });
 
 const delPayment = createAsyncThunk('payments/delPayment', async (id, thunkAPI) => {
+    const url = getApiURL(RESOURCE, id);
+
     const response = await axios.delete(url);
     try {
         return id;

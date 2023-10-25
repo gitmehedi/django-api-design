@@ -25,7 +25,7 @@ const UpdateProduct = () => {
         }
     }, [doFetchProduct]);
 
-    const record = useSelector((state) => state.products.record);
+    const record = useSelector(state => state.products.record);
 
     let content;
     if (isLoading) {
