@@ -4,12 +4,16 @@ import {fetchAllUserPayment} from "../thunks/userPaymentThunks";
 const UserPaymentSlice = createSlice({
     name: 'user-payment',
     initialState: {
+        isLoading: false,
+        isError: [],
         data: [],
+        record: {},
+        count: 0,
     },
     reducers: {},
     extraReducers(builder) {
         builder.addCase(fetchAllUserPayment.fulfilled, (state, action) => {
-            state.data = action.payload;
+            state.data = action.payload.results;
         })
     }
 });

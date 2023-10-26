@@ -15,7 +15,8 @@ const DiscountSlice = createSlice({
         builder.addCase(fetchAllDiscount.pending, (state, action) => {
             state.isLoading = true;
         }).addCase(fetchAllDiscount.fulfilled, (state, action) => {
-            state.data = action.payload;
+            state.data = action.payload.results;
+            state.count = action.payload.count;
             state.isLoading = false;
         })
 

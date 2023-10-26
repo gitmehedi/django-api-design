@@ -18,7 +18,7 @@ const TableData = ({rec}) => {
             <td>{rec.name}</td>
             <td>{rec.discount_percent}</td>
             <td>{rec.description}</td>
-            <td>{rec.status}</td>
+            <td>{rec.status ? 'Active' : 'Not Active'}</td>
             <td>
                 <Action recId={rec.id} delCallback={handleDelete}/>
             </td>

@@ -15,9 +15,9 @@ const CartsSlice = createSlice({
         builder.addCase(fetchAllCart.pending, (state, action) => {
             state.isLoading = true;
         }).addCase(fetchAllCart.fulfilled, (state, action) => {
-            state.data = action.payload;
+            state.data = action.payload.results;
+            state.count = action.payload.count;
             state.isLoading = false;
-            console.log(state.data);
         })
 
         builder.addCase(fetchCart.pending, (state, action) => {

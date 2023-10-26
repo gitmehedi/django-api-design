@@ -4,7 +4,7 @@ import {fetchAllInventory} from "src/store";
 import {useThunk} from "src/hooks/useThunk";
 import TableData from "./lists";
 import Pagination from "src/templates/snippets/Pagination";
-import PageHeader from "src/templates/snippets/PageHeader";
+import {NotAvailable, PageHeader} from "src/templates/snippets/PageHeader";
 import {Loader, NotFoundError} from "src/components/Loader";
 
 const IndexInventory = () => {
@@ -42,11 +42,11 @@ const IndexInventory = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    {content}
+                    {count ? content : <NotAvailable/>}
                     </tbody>
                 </table>
             </div>
-            <Pagination/>
+            {count ? <Pagination/> : ''}
         </>
     );
 };

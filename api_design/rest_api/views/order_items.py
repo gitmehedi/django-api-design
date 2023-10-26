@@ -10,7 +10,7 @@ from rest_framework.pagination import PageNumberPagination
 
 class OrderItemsList(APIView):
     # permission_classes = [IsAuthenticated]
-    parser_classes = PageNumberPagination
+    pagination_class = PageNumberPagination
 
     def get(self, request, format=None):
         paginator = self.pagination_class()

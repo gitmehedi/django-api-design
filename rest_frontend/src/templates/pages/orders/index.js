@@ -2,7 +2,7 @@ import {useSelector} from "react-redux";
 import {useEffect} from "react";
 import {fetchAllOrders} from "src/store";
 import Pagination from "src/templates/snippets/Pagination";
-import PageHeader from "src/templates/snippets/PageHeader";
+import {NotAvailable, PageHeader} from "src/templates/snippets/PageHeader";
 import {useThunk} from "src/hooks/useThunk";
 import {Loader, NotFoundError} from "src/components/Loader";
 import TableData from "./lists";
@@ -43,11 +43,11 @@ const IndexOrder = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    {content}
+                    {count ? content : <NotAvailable/>}
                     </tbody>
                 </table>
             </div>
-            <Pagination/>
+            {count ? <Pagination/> : ''}
         </>
     );
 };

@@ -15,7 +15,8 @@ const SessionSlice = createSlice({
         builder.addCase(fetchAllSession.pending, (state, action) => {
             state.isLoading = true;
         }).addCase(fetchAllSession.fulfilled, (state, action) => {
-            state.data = action.payload;
+            state.data = action.payload.results;
+            state.count = action.payload.count;
             state.isLoading = false;
         })
 

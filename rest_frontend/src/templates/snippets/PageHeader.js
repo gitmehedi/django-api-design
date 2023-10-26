@@ -20,4 +20,12 @@ const PageHeader = ({title, count, clink}) => {
     );
 }
 
-export default PageHeader;
+const NotAvailable = () => {
+    return (
+        <tr>
+            <td colSpan='10' className="h6 text-success">No Record Available</td>
+        </tr>
+    );
+}
+
+export {PageHeader, NotAvailable};

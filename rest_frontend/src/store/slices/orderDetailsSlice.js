@@ -15,8 +15,8 @@ const OrderDetailsSlice = createSlice({
         builder.addCase(fetchAllOrders.pending, (state, action) => {
             state.isLoading = true;
         }).addCase(fetchAllOrders.fulfilled, (state, action) => {
-            state.data = action.payload;
-            state.count = 0;
+            state.data = action.payload.results;
+            state.count = action.payload.count;
             state.isLoading = false;
         })
 

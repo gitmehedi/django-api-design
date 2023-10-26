@@ -2,23 +2,21 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {fetchAllUserAddress} from "src/store";
 import Action from "src/components/actions";
-import Pagination from "src/templates/snippets/Pagination"
-import PageHeader from "src/templates/snippets/PageHeader"
+import Pagination from "src/templates/snippets/Pagination";
+import {NotAvailable, PageHeader} from "src/templates/snippets/PageHeader";
 
 const UserAddress = () => {
     const dispatch = useDispatch();
 
-    const {data} = useSelector((state) => {
-        return state.userAddress;
-    })
-
+    const data = useSelector(state => state.userAddress.data);
+    const count = useSelector(state => state.userAddress.count);
 
     useEffect(() => {
         dispatch(fetchAllUserAddress());
     }, [fetchAllUserAddress]);
 
 
-    const renderData = data.map((dt) => {
+    const content = data.map((dt) => {
         return (
             <tr key={dt.id}>
                 <td>{dt.id}</td>
@@ -40,7 +38,7 @@ const UserAddress = () => {
 
     return (
         <>
-            <PageHeader title={'User Address'} count={200} clink={'user-address'}/>
+            <PageHeader title={'User Address'} count={count} clink={'user-address'}/>
             <div className='table-responsive small'>
                 <table className='table table-striped table-sm'>
                     <thead>
@@ -58,11 +56,11 @@ const UserAddress = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    {renderData}
+                    {count ? content : <NotAvailable/>}
                     </tbody>
                 </table>
             </div>
-            <Pagination/>
+            {count ? <Pagination/> : ''}
         </>
     );
 };

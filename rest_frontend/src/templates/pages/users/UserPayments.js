@@ -2,23 +2,21 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {fetchAllUserPayment} from "src/store";
 import Action from "src/components/actions";
-import Pagination from "src/templates/snippets/Pagination"
-import PageHeader from "src/templates/snippets/PageHeader"
+import Pagination from "src/templates/snippets/Pagination";
+import {NotAvailable, PageHeader} from "src/templates/snippets/PageHeader";
 
 const UserPayments = () => {
     const dispatch = useDispatch();
 
-    const {data} = useSelector((state) => {
-        return state.userPayments;
-    })
-
+    const data = useSelector(state => state.userAddress.data);
+    const count = useSelector(state => state.userAddress.count);
 
     useEffect(() => {
         dispatch(fetchAllUserPayment());
     }, [fetchAllUserPayment]);
 
 
-    const renderData = data.map((dt) => {
+    const content = data.map((dt) => {
         return (
             <tr key={dt.id}>
                 <td>{dt.id}</td>
@@ -37,7 +35,7 @@ const UserPayments = () => {
 
     return (
         <div>
-            <PageHeader title={'User Payments'} count={200} clink={'user-payments'}/>
+            <PageHeader title={'User Payments'} count={count} clink={'user-payments'}/>
             <div className='table-responsive small'>
                 <table className='table table-striped table-sm'>
                     <thead>
@@ -52,11 +50,11 @@ const UserPayments = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    {renderData}
+                    {count ? content : <NotAvailable/>}
                     </tbody>
                 </table>
             </div>
-            <Pagination/>
+            {count ? <Pagination/> : ''}
         </div>
     );
 };

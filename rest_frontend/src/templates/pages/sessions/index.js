@@ -1,7 +1,7 @@
 import {useSelector} from "react-redux";
 import {useEffect} from "react";
 import {useThunk} from "src/hooks/useThunk";
-import PageHeader from "src/templates/snippets/PageHeader";
+import {NotAvailable, PageHeader} from "src/templates/snippets/PageHeader";
 import Pagination from "src/templates/snippets/Pagination";
 import {Loader, NotFoundError} from "src/components/Loader";
 import {fetchAllSession} from "src/store";
@@ -41,15 +41,16 @@ const IndexSession = () => {
                         <th>#</th>
                         <th>User</th>
                         <th>Total</th>
+                        <th>Status</th>
                         <th className="action-width">Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {content}
+                    {count ? content : <NotAvailable/>}
                     </tbody>
                 </table>
             </div>
-            <Pagination/>
+            {count ? <Pagination/> : ''}
         </>
     );
 };

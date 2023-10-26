@@ -22,6 +22,7 @@ const InventorySlice = createSlice({
             state.isLoading = true;
         }).addCase(fetchAllInventory.fulfilled, (state, action) => {
             state.data = action.payload.results;
+            state.count = action.payload.count;
             state.isLoading = false;
         })
 
