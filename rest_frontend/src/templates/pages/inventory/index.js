@@ -38,7 +38,7 @@ const IndexInventory = () => {
                         <th>Name</th>
                         <th>Quantity</th>
                         <th>Status</th>
-                        <th>Action</th>
+                        <th className="action-width">Action</th>
                     </tr>
                     </thead>
                     <tbody>

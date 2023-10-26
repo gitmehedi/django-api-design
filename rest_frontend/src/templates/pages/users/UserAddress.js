@@ -54,7 +54,7 @@ const UserAddress = () => {
                         <th>Country</th>
                         <th>Mobile</th>
                         <th>Telephone</th>
-                        <th>Action</th>
+                        <th className="action-width">Action</th>
                     </tr>
                     </thead>
                     <tbody>

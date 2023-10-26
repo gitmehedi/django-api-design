@@ -41,7 +41,7 @@ const IndexSession = () => {
                         <th>#</th>
                         <th>User</th>
                         <th>Total</th>
-                        <th>Action</th>
+                        <th className="action-width">Action</th>
                     </tr>
                     </thead>
                     <tbody>

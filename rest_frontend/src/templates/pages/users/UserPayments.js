@@ -48,7 +48,7 @@ const UserPayments = () => {
                         <th>Account No</th>
                         <th>Expires At</th>
                         <th>User</th>
-                        <th>Action</th>
+                        <th className="action-width">Action</th>
                     </tr>
                     </thead>
                     <tbody>

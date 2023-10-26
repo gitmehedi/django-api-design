@@ -43,7 +43,7 @@ const IndexDiscount = () => {
                         <th>Discount Percent</th>
                         <th>Description</th>
                         <th>Status</th>
-                        <th>Action</th>
+                        <th className="action-width">Action</th>
                     </tr>
                     </thead>
                     <tbody>

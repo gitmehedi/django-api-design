@@ -2,7 +2,7 @@ from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from api_db import models
+from api_db.models import ProductCategory
 from rest_api.serializers.serializers import ProductCategorySerializer, ProductCategoryListSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.pagination import PageNumberPagination
@@ -14,7 +14,7 @@ class ProductCategoryList(APIView):
 
     def get(self, request, format=None):
         paginator = self.pagination_class()
-        queryset = models.ProductCategory.objects.all()
+        queryset = ProductCategory.objects.all()
         lists = paginator.paginate_queryset(queryset, request)
         serializer = ProductCategorySerializer(lists, many=True)
         return paginator.get_paginated_response(serializer.data)

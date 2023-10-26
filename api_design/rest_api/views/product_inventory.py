@@ -8,7 +8,6 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.pagination import PageNumberPagination
 
 
-
 class ProductInventoryList(APIView):
     # permission_classes = [IsAuthenticated]
     pagination_class = PageNumberPagination

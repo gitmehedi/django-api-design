@@ -5,15 +5,19 @@ from rest_framework import status
 from api_db.models import PaymentDetails
 from rest_api.serializers.serializers import PaymentDetailsSerializer, PaymentDetailsPOSTSerializer
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.pagination import PageNumberPagination
 
 
 class PaymentDetailsList(APIView):
     # permission_classes = [IsAuthenticated]
+    parser_classes = PageNumberPagination
 
     def get(self, request, format=None):
-        lists = PaymentDetails.objects.all()
+        paginator = self.pagination_class()
+        queryset = PaymentDetails.objects.all()
+        lists = paginator.paginate_queryset(queryset, request)
         serializer = PaymentDetailsSerializer(lists, many=True)
-        return Response(serializer.data)
+        return paginator.get_paginated_response(serializer.data)
 
     def post(self, request, format=None):
         serializer = PaymentDetailsPOSTSerializer(data=request.data)

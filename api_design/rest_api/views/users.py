@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from rest_api.serializers.serializers import UserSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.models import Token
+from rest_framework.pagination import PageNumberPagination
 
 
 class UsersViews(APIView):

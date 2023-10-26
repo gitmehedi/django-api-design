@@ -12,7 +12,8 @@ const IndexPayment = () => {
     const [doFetchAllPayment, isLoading, isErrors] = useThunk(fetchAllPayment);
 
     const data = useSelector(state => state.payments.data);
-    const count = useSelector(state => state.payments.count);
+    // const count = useSelector(state => state.payments.count);
+    const count = 100;
 
     useEffect(() => {
         doFetchAllPayment();
@@ -42,15 +43,16 @@ const IndexPayment = () => {
                         <th>Provider Name</th>
                         <th>Amount</th>
                         <th>Status</th>
-                        <th>Action</th>
+                        <th className="action-width">Action</th>
                     </tr>
                     </thead>
                     <tbody>
                     {content}
                     </tbody>
                 </table>
+                {count && <Pagination/>}
             </div>
-            <Pagination/>
+
         </>
     );
 };

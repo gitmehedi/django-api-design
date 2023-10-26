@@ -5,15 +5,19 @@ from rest_framework import status
 from api_db.models import Products
 from rest_api.serializers.serializers import ProductsSerializer, ProductsPOSTSerializer
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.pagination import PageNumberPagination
 
 
 class ProductsList(APIView):
     # permission_classes = [IsAuthenticated]
+    parser_classes = PageNumberPagination
 
     def get(self, request, format=None):
-        lists = Products.objects.all()
+        paginator = self.pagination_class()
+        queryset = Products.objects.all()
+        lists = paginator.paginate_queryset(queryset, request)
         serializer = ProductsSerializer(lists, many=True)
-        return Response(serializer.data)
+        return paginator.get_paginated_response(serializer.data)
 
     def post(self, request, format=None):
         serializer = ProductsPOSTSerializer(data=request.data)

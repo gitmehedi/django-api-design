@@ -5,15 +5,19 @@ from rest_framework import status
 from api_db.models import CartItem
 from rest_api.serializers.serializers import CartItemSerializer, CartItemPOSTSerializer
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.pagination import PageNumberPagination
 
 
 class CartItemList(APIView):
     # permission_classes = [IsAuthenticated]
+    parser_classes = PageNumberPagination
 
     def get(self, request, format=None):
-        lists = CartItem.objects.all()
+        paginator = self.pagination_class()
+        queryset = CartItem.objects.all()
+        lists = paginator.paginate_queryset(queryset, request)
         serializer = CartItemSerializer(lists, many=True)
-        return Response(serializer.data)
+        return paginator.get_paginated_response(serializer.data)
 
     def post(self, request, format=None):
         serializer = CartItemPOSTSerializer(data=request.data)

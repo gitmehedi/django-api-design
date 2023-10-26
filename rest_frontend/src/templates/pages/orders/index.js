@@ -39,7 +39,7 @@ const IndexOrder = () => {
                         <th>User</th>
                         <th>Total Price</th>
                         <th>Payment</th>
-                        <th>Action</th>
+                        <th className="action-width">Action</th>
                     </tr>
                     </thead>
                     <tbody>

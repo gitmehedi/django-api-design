@@ -42,7 +42,7 @@ const IndexCart = () => {
                         <th>Product</th>
                         <th>Session</th>
                         <th>Quantity</th>
-                        <th>Action</th>
+                        <th className="action-width">Action</th>
                     </tr>
                     </thead>
                     <tbody>
