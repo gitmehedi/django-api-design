@@ -13,10 +13,15 @@ const IndexCategory = () => {
 
     const data = useSelector(state => state.categories.data);
     const count = useSelector(state => state.categories.count);
+    const page = useSelector(state => state.categories.page);
 
     useEffect(() => {
         doFetchAllCategory();
     }, [doFetchAllCategory]);
+
+    const changePage = (page_no) => {
+        doFetchAllCategory(page_no);
+    }
 
 
     let content;
@@ -51,7 +56,7 @@ const IndexCategory = () => {
                     </tbody>
                 </table>
             </div>
-            {count ? <Pagination/> : ''}
+            {count ? <Pagination pageChange={changePage} current={page} count={count}/> : ''}
         </>
     );
 };

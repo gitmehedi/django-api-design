@@ -11,16 +11,20 @@ const CategorySlice = createSlice({
         previous: '',
         record: {},
         error: null,
+        page: 1,
     },
     reducers: {},
     extraReducers(builder) {
         builder.addCase(fetchAllCategory.pending, (state, action) => {
             state.isLoading = true;
         }).addCase(fetchAllCategory.fulfilled, (state, action) => {
-            state.data = action.payload.results;
-            state.count = action.payload.count;
-            state.next = action.payload.next;
-            state.previous = action.payload.previous;
+            let data = action.payload.data;
+
+            state.page = action.payload.page ? action.payload.page : 1;
+            state.data = data.results;
+            state.count = data.count;
+            state.next = data.next;
+            state.previous = data.previous;
             state.isLoading = false;
         })
 

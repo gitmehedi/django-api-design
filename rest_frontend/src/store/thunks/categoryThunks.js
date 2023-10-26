@@ -3,12 +3,14 @@ import axios from "axios";
 import {getApiURL} from "src/store/utils/urls";
 
 
-const fetchAllCategory = createAsyncThunk('category/fetchall', async (dispatch, thunkAPI) => {
+const fetchAllCategory = createAsyncThunk('category/fetchall', async (page_no, thunkAPI) => {
     const url = getApiURL('categories');
 
-    const response = await axios.get(url);
+    let page_url = page_no ? url + '?page=' + page_no : url;
+
+    const response = await axios.get(page_url);
     try {
-        return response.data;
+        return {'page': parseInt(page_no), 'data': response.data}
     } catch (e) {
         return e.message;
     }

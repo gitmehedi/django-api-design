@@ -7,4 +7,12 @@
 
 .action-width{
     width: 120px;
+    cursor: pointer;
+}
+
+.page-link:hover{
+    cursor: pointer;
+}
+pagination.disabled:hover{
+    cursor: none;
 }

@@ -1,23 +1,44 @@
 import styles from "src/templates/static/css/pages.style.css";
 
+const Pagination = ({pageChange, current, count}) => {
+    let page_size = 20;
+    let last = Math.ceil(count / page_size);
+    let previous = current === 1 ? null : current - 1;
+    let next = current === last ? null : current + 1;
+    let items = [current];
 
-const Pagination = () => {
+    for (let i = current-1; i >= current - 2; i--) {
+        if (i > 0)
+            items = [i, ...items];
+    }
+
+    for (let j = current + 1; j <= current + 2; j++) {
+        if (j < current + 3)
+            items = [...items, j];
+    }
+    const handlePage = (evt) => {
+        evt.preventDefault();
+        let page_no = evt.target.attributes['page'].value;
+        pageChange(page_no);
+    }
+
+
     return (
         <div className={styles.pagination}>
             <nav aria-label="Page navigation example">
                 <ul className="pagination justify-content-center">
-                    <li className="page-item ">
-                        <a className="page-link" href="#" tabIndex="-1">Previous</a>
+                    <li className={`${previous ? "page-item" : "disabled"}`}>
+                        <span className="page-link" page={previous} onClick={handlePage} tabIndex="-1">Previous</span>
                     </li>
-                    <li className="page-item disabled"><a className="page-link" href="#">..</a></li>
-                    <li className="page-item"><a className="page-link" href="#">8</a></li>
-                    <li className="page-item"><a className="page-link" href="#">9</a></li>
-                    <li className="page-item active"><a className="page-link" href="#">10</a></li>
-                    <li className="page-item"><a className="page-link" href="#">11</a></li>
-                    <li className="page-item"><a className="page-link" href="#">12</a></li>
-                    <li className="page-item disabled"><a className="page-link" href="#">...</a></li>
-                    <li className="page-item">
-                        <a className="page-link" href="#">Next</a>
+
+                    {items.map(item => (
+                        <li className={`page-item ${item === current ? 'active' : ''}`}>
+                            <a className="page-link" onClick={handlePage} page={item}>{item}</a>
+                        </li>
+                    ))}
+
+                    <li className={`${next ? "page-item" : "disabled"}`}>
+                        <a className="page-link" page={next} onClick={handlePage} href="#">Next</a>
                     </li>
                 </ul>
             </nav>
