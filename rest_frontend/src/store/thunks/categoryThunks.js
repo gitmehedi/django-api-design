@@ -2,10 +2,8 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 import {getApiURL} from "src/store/utils/urls";
 
-
+const url = getApiURL('categories');
 const fetchAllCategory = createAsyncThunk('category/fetchall', async (page_no, thunkAPI) => {
-    const url = getApiURL('categories');
-
     let page_url = page_no ? url + '?page=' + page_no : url;
 
     const response = await axios.get(page_url);

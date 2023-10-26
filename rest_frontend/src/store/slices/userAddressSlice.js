@@ -9,6 +9,7 @@ const UserAddressSlice = createSlice({
         data: [],
         record: {},
         count: 0,
+        page:1
     },
     reducers: {},
     extraReducers(builder) {

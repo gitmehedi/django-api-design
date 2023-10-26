@@ -9,13 +9,15 @@ import TableData from "./lists";
 
 const IndexOrder = () => {
     const [doFetchAllOrders, isLoading, isError] = useThunk(fetchAllOrders);
-    const data = useSelector(state => state.orders.data);
-    const count = useSelector(state => state.orders.count);
+    const {data, count, page} = useSelector(state => state.orders);
 
     useEffect(() => {
         doFetchAllOrders();
     }, [doFetchAllOrders]);
 
+    const changePage = (page_no) => {
+        doFetchAllOrders(page_no);
+    }
 
     let content;
     if (isLoading)
@@ -47,7 +49,7 @@ const IndexOrder = () => {
                     </tbody>
                 </table>
             </div>
-            {count ? <Pagination/> : ''}
+            {count ? <Pagination pageChange={changePage} current={page} count={count}/> : ''}
         </>
     );
 };

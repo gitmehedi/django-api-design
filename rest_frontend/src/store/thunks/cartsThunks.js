@@ -7,11 +7,12 @@ const RESOURCE = 'carts';
 const url = getApiURL(RESOURCE);
 
 
-const fetchAllCart = createAsyncThunk('carts/fetchAllCart', async (dispatch, thunkAPI) => {
+const fetchAllCart = createAsyncThunk('carts/fetchAllCart', async (page_no, thunkAPI) => {
+    let page_url = page_no ? url + '?page=' + page_no : url;
 
-    const response = await axios.get(url);
+    const response = await axios.get(page_url);
     try {
-        return response.data;
+        return {'page': parseInt(page_no), 'data': response.data}
     } catch (e) {
         return e.message;
     }

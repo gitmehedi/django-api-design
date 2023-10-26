@@ -10,10 +10,7 @@ import TableData from "./lists";
 
 const IndexCategory = () => {
     const [doFetchAllCategory, isLoading, isErrors] = useThunk(fetchAllCategory);
-
-    const data = useSelector(state => state.categories.data);
-    const count = useSelector(state => state.categories.count);
-    const page = useSelector(state => state.categories.page);
+    const {data, count, page} = useSelector(state => state.categories);
 
     useEffect(() => {
         doFetchAllCategory();

@@ -6,11 +6,13 @@ const RESOURCE = 'discounts';
 const url = getApiURL(RESOURCE);
 
 
-const fetchAllDiscount = createAsyncThunk('discounts/fetchAllDiscount', async (dispatch, thunkAPI) => {
+const fetchAllDiscount = createAsyncThunk('discounts/fetchAllDiscount', async (page_no, thunkAPI) => {
 
-    const response = await axios.get(url);
+    let page_url = page_no ? url + '?page=' + page_no : url;
+
+    const response = await axios.get(page_url);
     try {
-        return response.data;
+        return {'page': parseInt(page_no), 'data': response.data}
     } catch (e) {
         return e.message;
     }

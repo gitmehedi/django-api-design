@@ -8,15 +8,21 @@ const SessionSlice = createSlice({
         isError: [],
         data: [],
         record: {},
-        count: 0
+        count: 0,
+        page: 1
     },
     reducers: {},
     extraReducers(builder) {
         builder.addCase(fetchAllSession.pending, (state, action) => {
             state.isLoading = true;
         }).addCase(fetchAllSession.fulfilled, (state, action) => {
-            state.data = action.payload.results;
-            state.count = action.payload.count;
+            let data = action.payload.data;
+
+            state.page = action.payload.page ? action.payload.page : 1;
+            state.data = data.results;
+            state.count = data.count;
+            state.next = data.next;
+            state.previous = data.previous;
             state.isLoading = false;
         })
 

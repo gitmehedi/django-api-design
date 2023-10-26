@@ -5,12 +5,12 @@ import {getApiURL, getRecId} from 'src/store/utils/urls';
 const RESOURCE = 'products';
 const url = getApiURL(RESOURCE);
 
+const fetchAllProduct = createAsyncThunk('products/fetchAllProduct', async (page_no, thunkAPI) => {
+    let page_url = page_no ? url + '?page=' + page_no : url;
 
-const fetchAllProduct = createAsyncThunk('products/fetchAllProduct', async (dispatch, thunkAPI) => {
-
-    const response = await axios.get(url);
+    const response = await axios.get(page_url);
     try {
-        return response.data;
+        return {'page': parseInt(page_no), 'data': response.data}
     } catch (e) {
         return e.message;
     }

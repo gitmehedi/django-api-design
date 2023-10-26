@@ -5,12 +5,12 @@ import {getApiURL, getRecId} from 'src/store/utils/urls';
 const RESOURCE = 'session'
 const url = getApiURL(RESOURCE);
 
+const fetchAllSession = createAsyncThunk('sessions/fetchAllSession', async (page_no, thunkAPI) => {
+    let page_url = page_no ? url + '?page=' + page_no : url;
 
-const fetchAllSession = createAsyncThunk('sessions/fetchAllSession', async (dispatch, thunkAPI) => {
-
-    const response = await axios.get(url);
+    const response = await axios.get(page_url);
     try {
-        return response.data;
+        return {'page': parseInt(page_no), 'data': response.data}
     } catch (e) {
         return e.message;
     }

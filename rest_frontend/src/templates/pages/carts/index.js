@@ -10,14 +10,15 @@ import TableData from "./lists";
 
 const IndexCart = () => {
     const [doFetchAllCart, isLoading, isErrors] = useThunk(fetchAllCart);
-
-    const data = useSelector(state => state.carts.data);
-    const count = useSelector(state => state.carts.count);
+    const {data, count, page} = useSelector(state => state.carts);
 
     useEffect(() => {
         doFetchAllCart();
     }, [doFetchAllCart]);
 
+    const changePage = (page_no) => {
+        doFetchAllCart(page_no);
+    }
 
     let content;
     if (isLoading)
@@ -51,7 +52,7 @@ const IndexCart = () => {
                     </tbody>
                 </table>
             </div>
-            {count ? <Pagination/> : ''}
+            {count ? <Pagination pageChange={changePage} current={page} count={count}/> : ''}
         </>
     );
 };

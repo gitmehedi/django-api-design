@@ -10,14 +10,15 @@ import TableData from "./lists";
 
 const IndexDiscount = () => {
     const [doFetchAllDiscount, isLoading, isErrors] = useThunk(fetchAllDiscount);
-
-    const data = useSelector(state => state.discounts.data);
-    const count = useSelector(state => state.discounts.count);
+    const {data, count, page} = useSelector(state => state.discounts);
 
     useEffect(() => {
         doFetchAllDiscount();
     }, [doFetchAllDiscount]);
 
+    const changePage = (page_no) => {
+        doFetchAllDiscount(page_no);
+    }
 
     let content;
     if (isLoading)
@@ -51,7 +52,7 @@ const IndexDiscount = () => {
                     </tbody>
                 </table>
             </div>
-            {count ? <Pagination/> : ''}
+            {count ? <Pagination pageChange={changePage} current={page} count={count}/> : ''}
         </>
     );
 };

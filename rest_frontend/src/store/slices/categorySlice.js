@@ -10,7 +10,7 @@ const CategorySlice = createSlice({
         next: '',
         previous: '',
         record: {},
-        error: null,
+        error: [],
         page: 1,
     },
     reducers: {},

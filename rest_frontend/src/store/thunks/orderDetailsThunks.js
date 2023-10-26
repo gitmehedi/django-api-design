@@ -2,12 +2,14 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 import {getApiURL} from "../utils/urls";
 
-const fetchAllOrders = createAsyncThunk('orders/fetchAll', async (dispatch, thunkAPI) => {
-    let url = getApiURL('orders');
+const RESOURCE = 'orders';
+const url = getApiURL(RESOURCE);
+const fetchAllOrders = createAsyncThunk('orders/fetchAll', async (page_no, thunkAPI) => {
+    let page_url = page_no ? url + '?page=' + page_no : url;
 
-    const response = await axios.get(url);
+    const response = await axios.get(page_url);
     try {
-        return response.data;
+        return {'page': parseInt(page_no), 'data': response.data}
     } catch (e) {
         return e.message;
     }

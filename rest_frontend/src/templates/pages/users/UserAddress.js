@@ -1,20 +1,23 @@
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {useEffect} from "react";
-import {fetchAllUserAddress} from "src/store";
+import {fetchAllDiscount, fetchAllUserAddress} from "src/store";
 import Action from "src/components/actions";
 import Pagination from "src/templates/snippets/Pagination";
 import {NotAvailable, PageHeader} from "src/templates/snippets/PageHeader";
+import {useThunk} from "src/hooks/useThunk";
 
 const UserAddress = () => {
-    const dispatch = useDispatch();
+    const [doFetchAllUserAddress, isLoading, isErrors] = useThunk(fetchAllUserAddress);
 
-    const data = useSelector(state => state.userAddress.data);
-    const count = useSelector(state => state.userAddress.count);
+    const {data, count, page} = useSelector(state => state.userAddress);
 
     useEffect(() => {
-        dispatch(fetchAllUserAddress());
-    }, [fetchAllUserAddress]);
+        doFetchAllUserAddress();
+    }, [doFetchAllUserAddress]);
 
+    const changePage = (page_no) => {
+        doFetchAllUserAddress(page_no);
+    }
 
     const content = data.map((dt) => {
         return (
@@ -60,7 +63,7 @@ const UserAddress = () => {
                     </tbody>
                 </table>
             </div>
-            {count ? <Pagination/> : ''}
+            {count ? <Pagination pageChange={changePage} current={page} count={count}/> : ''}
         </>
     );
 };

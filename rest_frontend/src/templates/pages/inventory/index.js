@@ -9,13 +9,15 @@ import {Loader, NotFoundError} from "src/components/Loader";
 
 const IndexInventory = () => {
     const [doAllInventory, isLoading, isError] = useThunk(fetchAllInventory);
-    const data = useSelector(state => state.inventory.data);
-    const count = useSelector(state => state.inventory.count);
+    const {data, count, page} = useSelector(state => state.inventory);
 
     useEffect(() => {
         doAllInventory();
     }, [doAllInventory]);
 
+    const changePage = (page_no) => {
+        doAllInventory(page_no);
+    }
 
     let content;
     if (isLoading)
@@ -46,7 +48,7 @@ const IndexInventory = () => {
                     </tbody>
                 </table>
             </div>
-            {count ? <Pagination/> : ''}
+            {count ? <Pagination pageChange={changePage} current={page} count={count}/> : ''}
         </>
     );
 };
