@@ -13,7 +13,7 @@ const Pagination = ({pageChange, current, count}) => {
     }
 
     for (let j = current + 1; j <= current + 2; j++) {
-        if (j < current + 3)
+        if (j < last)
             items = [...items, j];
     }
     const handlePage = (evt) => {

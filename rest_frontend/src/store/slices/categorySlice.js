@@ -12,8 +12,13 @@ const CategorySlice = createSlice({
         record: {},
         error: [],
         page: 1,
+        search: ''
     },
-    reducers: {},
+    reducers: {
+        setSearch(state, action) {
+            state.search = action.payload;
+        },
+    },
     extraReducers(builder) {
         builder.addCase(fetchAllCategory.pending, (state, action) => {
             state.isLoading = true;
@@ -55,4 +60,5 @@ const CategorySlice = createSlice({
     }
 });
 
+export const {setSearch} = CategorySlice.actions;
 export const CategoryReducer = CategorySlice.reducer;

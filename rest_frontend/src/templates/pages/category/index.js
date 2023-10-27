@@ -1,25 +1,42 @@
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {useThunk} from "src/hooks/useThunk";
-import {NotAvailable, PageHeader} from "src/templates/snippets/PageHeader";
+import {NotAvailable, PageHeader, SearchHeader} from "src/templates/snippets/PageHeader";
 import Pagination from "src/templates/snippets/Pagination";
 import {Loader, NotFoundError} from "src/components/Loader";
-import {fetchAllCategory} from "src/store";
+import {fetchAllCategory, setSearch} from "src/store";
 import TableData from "./lists";
+import {Link} from "react-router-dom";
 
 
 const IndexCategory = () => {
+    const dispatch = useDispatch();
     const [doFetchAllCategory, isLoading, isErrors] = useThunk(fetchAllCategory);
-    const {data, count, page} = useSelector(state => state.categories);
+    const [doSearch] = useThunk(setSearch);
+    const {data, count, page, search} = useSelector(state => state.categories);
 
     useEffect(() => {
-        doFetchAllCategory();
+        let params = {page: null, search: null}
+        doFetchAllCategory(params);
     }, [doFetchAllCategory]);
 
     const changePage = (page_no) => {
-        doFetchAllCategory(page_no);
+        console.log(data);
+        console.log(count);
+        console.log(page);
+        console.log(data);
+        let params = {page: page_no, search: search}
+
+        doFetchAllCategory(params);
     }
 
+    const searchChange = (value) => {
+        if (value !== search) {
+            let params = {page: null, search: value}
+            dispatch(setSearch(value));
+            doFetchAllCategory(params);
+        }
+    }
 
     let content;
     if (isLoading)
@@ -37,6 +54,9 @@ const IndexCategory = () => {
         <>
             <PageHeader title={'Product Category'} count={count} clink={'category'}/>
             <div className='table-responsive small'>
+
+                <SearchHeader count={count} onsearch={searchChange}/>
+
                 <table className='table table-striped table-sm'>
                     <thead>
                     <tr>
@@ -59,6 +79,8 @@ const IndexCategory = () => {
 };
 
 
-export {IndexCategory};
+export {
+    IndexCategory
+};
 export * from './create';
 export * from './update';

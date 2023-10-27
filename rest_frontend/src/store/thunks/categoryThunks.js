@@ -2,13 +2,44 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 import {getApiURL} from "src/store/utils/urls";
 
-const url = getApiURL('categories');
-const fetchAllCategory = createAsyncThunk('category/fetchall', async (page_no, thunkAPI) => {
-    let page_url = page_no ? url + '?page=' + page_no : url;
+const RESOURCE = 'categories';
+const url = getApiURL(RESOURCE);
+const fetchAllCategory = createAsyncThunk('category/fetchall', async (params, thunkAPI) => {
+    let page_url;
+    let {page, search} = params;
+
+    if (page && search) {
+        page_url = url + '?page=' + page + '&search=' + search;
+    } else if (page) {
+        page_url = url + '?page=' + page;
+    } else if (search) {
+        page_url = url + '?search=' + search;
+    } else {
+        page_url = url;
+    }
+
+    //
+    //
+    //     console.log('Page No---' + page_no);
+    // console.log('Search---' + search);
+    //
+    // if (page_no) {
+    //     if (search.length > 0) {
+    //         page_url = url + '?page=' + page_no + '&search=' + search;
+    //     }
+    //     page_url = url + '?page=' + page_no;
+    //
+    // } else {
+    //     page_url = url
+    //     if (search.length > 0) {
+    //         page_url = url + '?search=' + search;
+    //     }
+    //
+    // }
 
     const response = await axios.get(page_url);
     try {
-        return {'page': parseInt(page_no), 'data': response.data}
+        return {'page': parseInt(page), 'data': response.data}
     } catch (e) {
         return e.message;
     }

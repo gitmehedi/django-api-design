@@ -37,5 +37,6 @@ export * from 'src/store/thunks/paymentThunks';
 export * from 'src/store/thunks/orderDetailsThunks';
 export * from 'src/store/thunks/userPaymentThunks';
 export * from 'src/store/thunks/userAddressThunks';
+export * from 'src/store/slices/categorySlice';
 
 
