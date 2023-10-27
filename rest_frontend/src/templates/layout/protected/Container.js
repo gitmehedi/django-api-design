@@ -1,5 +1,5 @@
 import Navigation from "./Navigation";
-import RoutePath from "./RoutePath";
+import RoutePath from "../RoutePath";
 
 const Container = () => {
     return (

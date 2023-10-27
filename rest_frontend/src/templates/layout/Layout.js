@@ -1,16 +1,13 @@
-import Container from './Container';
-import Header from './Header';
-import Footer from './Footer';
-import Navigation from './Navigation';
-import RoutePath from './RoutePath';
-import {Outlet} from "react-router-dom";
+import {useSelector} from "react-redux";
+import Protected from "./protected/Protected";
+import Public from "./public/Public";
 
 const Layout = () => {
+    const {loggedIn} = useSelector(state => state.auth);
+
     return (
         <>
-            <Header/>
-            <Container/>
-            <Footer/>
+            {loggedIn ? <Protected/> : <Public/>}
         </>
     );
 };

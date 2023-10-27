@@ -8,8 +8,11 @@ import {IndexDiscount, CreateDiscount, UpdateDiscount} from 'src/templates/pages
 import {IndexProduct, CreateProduct, UpdateProduct} from 'src/templates/pages/products';
 import {IndexSession, CreateSession, UpdateSession} from 'src/templates/pages/sessions';
 import {IndexPayment, CreatePayment, UpdatePayment} from 'src/templates/pages/payments';
+import LoginPage from 'src/templates/pages/auth/LoginPage';
 import UserAddress from 'src/templates/pages/users/UserAddress';
 import UserPayments from 'src/templates/pages/users/UserPayments';
+
+import ProtectedPage from "./protected/ProtectedPage";
 
 
 const RoutePath = () => {
@@ -17,50 +20,53 @@ const RoutePath = () => {
         <div className="row">
             <Routes>
                 <Route path='/'>
-                    <Route index element={<Index/>}/>
+                    <Route index element={<ProtectedPage><Index/></ProtectedPage>}/>
                     <Route path='category/'>
-                        <Route path='create/' element={<CreateCategory/>}/>
-                        <Route path='update/:did/' element={<UpdateCategory/>}/>
-                        <Route index element={<IndexCategory/>}/>
+                        <Route path='create/' element={<ProtectedPage><CreateCategory/></ProtectedPage>}/>
+                        <Route path='update/:did/' element={<ProtectedPage><UpdateCategory/></ProtectedPage>}/>
+                        <Route index element={<ProtectedPage><IndexCategory/></ProtectedPage>}/>
                     </Route>
                     <Route path='inventory/'>
-                        <Route path='create/' element={<CreateInventory/>}/>
-                        <Route path='update/:did/' element={<UpdateInventory/>}/>
-                        <Route index element={<IndexInventory/>}/>
+                        <Route path='create/' element={<ProtectedPage><CreateInventory/></ProtectedPage>}/>
+                        <Route path='update/:did/' element={<ProtectedPage><UpdateInventory/></ProtectedPage>}/>
+                        <Route index element={<ProtectedPage><IndexInventory/></ProtectedPage>}/>
                     </Route>
                     <Route path='orders/'>
-                        <Route path='create/' element={<CreateOrder/>}/>
-                        <Route path='update/:did/' element={<UpdateOrder/>}/>
-                        <Route index element={<IndexOrder/>}/>
+                        <Route path='create/' element={<ProtectedPage><CreateOrder/></ProtectedPage>}/>
+                        <Route path='update/:did/' element={<ProtectedPage><UpdateOrder/></ProtectedPage>}/>
+                        <Route index element={<ProtectedPage><IndexOrder/></ProtectedPage>}/>
                     </Route>
                     <Route path='products/'>
-                        <Route path='create/' element={<CreateProduct/>}/>
-                        <Route path='update/:did/' element={<UpdateProduct/>}/>
-                        <Route index element={<IndexProduct/>}/>
+                        <Route path='create/' element={<ProtectedPage><CreateProduct/></ProtectedPage>}/>
+                        <Route path='update/:did/' element={<ProtectedPage><UpdateProduct/></ProtectedPage>}/>
+                        <Route index element={<ProtectedPage><IndexProduct/></ProtectedPage>}/>
                     </Route>
                     <Route path='session/'>
-                        <Route path='create/' element={<CreateSession/>}/>
-                        <Route path='update/:did/' element={<UpdateSession/>}/>
-                        <Route index element={<IndexSession/>}/>
+                        <Route path='create/' element={<ProtectedPage><CreateSession/></ProtectedPage>}/>
+                        <Route path='update/:did/' element={<ProtectedPage><UpdateSession/></ProtectedPage>}/>
+                        <Route index element={<ProtectedPage><IndexSession/></ProtectedPage>}/>
                     </Route>
                     <Route path='payments/'>
-                        <Route path='create/' element={<CreatePayment/>}/>
-                        <Route path='update/:did/' element={<UpdatePayment/>}/>
-                        <Route index element={<IndexPayment/>}/>
+                        <Route path='create/' element={<ProtectedPage><CreatePayment/></ProtectedPage>}/>
+                        <Route path='update/:did/' element={<ProtectedPage><UpdatePayment/></ProtectedPage>}/>
+                        <Route index element={<ProtectedPage><IndexPayment/></ProtectedPage>}/>
                     </Route>
                     <Route path='discounts/'>
-                        <Route path='create/' element={<CreateDiscount/>}/>
-                        <Route path='update/:did/' element={<UpdateDiscount/>}/>
-                        <Route index element={<IndexDiscount/>}/>
+                        <Route path='create/' element={<ProtectedPage><CreateDiscount/></ProtectedPage>}/>
+                        <Route path='update/:did/' element={<ProtectedPage><UpdateDiscount/></ProtectedPage>}/>
+                        <Route index element={<ProtectedPage><IndexDiscount/></ProtectedPage>}/>
                     </Route>
                     <Route path='carts/'>
-                        <Route path='create/' element={<CreateCart/>}/>
-                        <Route path='update/:did/' element={<UpdateCart/>}/>
-                        <Route index element={<IndexCart/>}/>
+                        <Route path='create/' element={<ProtectedPage><CreateCart/></ProtectedPage>}/>
+                        <Route path='update/:did/' element={<ProtectedPage><UpdateCart/></ProtectedPage>}/>
+                        <Route index element={<ProtectedPage><IndexCart/></ProtectedPage>}/>
                     </Route>
                     <Route path='user/'>
-                        <Route path='payments/' element={<UserPayments/>}/>
-                        <Route path='address/' element={<UserAddress/>}/>
+                        <Route path='payments/' element={<ProtectedPage><UserPayments/> </ProtectedPage>}/>
+                        <Route path='address/' element={<ProtectedPage><UserAddress/></ProtectedPage>}/>
+                    </Route>
+                    <Route path='/login'>
+                        <Route index element={<LoginPage/>}/>
                     </Route>
                 </Route>
             </Routes>

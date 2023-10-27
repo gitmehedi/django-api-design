@@ -9,6 +9,7 @@ import {PaymentReducer} from "src/store/slices/paymentSlice";
 import {OrderDetailsReducer} from "./slices/orderDetailsSlice";
 import {UserPaymentReducer} from "./slices/userPaymentSlice";
 import {UserAddressReducer} from "./slices/userAddressSlice";
+import {AuthReducer} from "./slices/authSlice";
 
 
 const store = configureStore({
@@ -23,6 +24,7 @@ const store = configureStore({
         orders: OrderDetailsReducer,
         userPayments: UserPaymentReducer,
         userAddress: UserAddressReducer,
+        auth: AuthReducer,
     }
 });
 
@@ -38,5 +40,6 @@ export * from 'src/store/thunks/orderDetailsThunks';
 export * from 'src/store/thunks/userPaymentThunks';
 export * from 'src/store/thunks/userAddressThunks';
 export * from 'src/store/slices/categorySlice';
+export * from 'src/store/thunks/authThunks';
 
 
