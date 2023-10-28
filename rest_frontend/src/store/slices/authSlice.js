@@ -32,11 +32,12 @@ const AuthSlice = createSlice({
         builder.addCase(logoutUser.pending, (state, action) => {
             state.isLoading = true;
         }).addCase(logoutUser.fulfilled, (state, action) => {
-            state.isLoading = false;
-            state.loggedIn = true;
+            state.data = {'access': access, 'refresh': ''}
             localStorage.removeItem('access');
             localStorage.removeItem('refresh');
             localStorage.removeItem('loggedIn');
+            state.loggedIn = false;
+            state.isLoading = false;
         })
     }
 });

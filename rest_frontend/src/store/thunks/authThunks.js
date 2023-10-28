@@ -2,12 +2,11 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 import {getApiURL, getRecId} from "src/store/utils/urls";
 
-const RESOURCE = 'api/token/';
 const baseUrl = 'http://localhost:8000/';
 
 
 const checkAuthUser = createAsyncThunk('auth/token', async (credential, thunkAPI) => {
-    let url = baseUrl + RESOURCE;
+    let url = baseUrl + 'api/token/';
     const response = await axios.post(url, credential);
 
     try {
@@ -19,13 +18,20 @@ const checkAuthUser = createAsyncThunk('auth/token', async (credential, thunkAPI
 
 const logoutUser = createAsyncThunk('auth/logout', async (credential, thunkAPI) => {
 
+    let auth = thunkAPI.getState().auth.data;
     let headers = {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + thunkAPI.getState().auth.data.access
+        'Authorization': 'Bearer ' + auth.access
     }
 
-    let url = baseUrl + 'rest/logout/';
-    const response = await axios.post(url, credential, headers);
+
+    let credentials = {
+        'access': auth.access,
+        'refresh_token': auth.refresh
+    }
+
+    let url = baseUrl + 'api/logout/';
+    const response = await axios.post(url, credentials, headers);
 
     try {
         return response.data;

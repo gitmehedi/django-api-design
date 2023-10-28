@@ -10,7 +10,7 @@ from django.db.models import Q
 
 
 class ProductCategoryList(APIView):
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     pagination_class = PageNumberPagination
 
     def get(self, request, format=None):
@@ -40,8 +40,8 @@ class ProductCategoryViews(APIView):
 
     def get_object(self, pk):
         try:
-            return models.ProductCategory.objects.get(pk=pk)
-        except models.ProductCategory.DoesNotExist:
+            return ProductCategory.objects.get(pk=pk)
+        except ProductCategory.DoesNotExist:
             raise Http404
 
     def get(self, request, pk, format=None):

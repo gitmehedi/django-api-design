@@ -1,104 +1,63 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
-import {getApiURL} from "src/store/utils/urls";
+import {getApiURL, getAuthRequestHeader, sendAsync, getQueryStr} from "src/store/utils/urls";
 
 const RESOURCE = 'categories';
-const url = getApiURL(RESOURCE);
+// const url = getApiURL(RESOURCE);
 const fetchAllCategory = createAsyncThunk('category/fetchall', async (params, thunkAPI) => {
-    let page_url;
+    let method = 'get';
+    let header = thunkAPI.getState().auth.data;
     let {page, search} = params;
+    let url = getQueryStr(RESOURCE, page, search);
 
-    if (page && search) {
-        page_url = url + '?page=' + page + '&search=' + search;
-    } else if (page) {
-        page_url = url + '?page=' + page;
-    } else if (search) {
-        page_url = url + '?search=' + search;
-    } else {
-        page_url = url;
-    }
-
-    //
-    //
-    //     console.log('Page No---' + page_no);
-    // console.log('Search---' + search);
-    //
-    // if (page_no) {
-    //     if (search.length > 0) {
-    //         page_url = url + '?page=' + page_no + '&search=' + search;
-    //     }
-    //     page_url = url + '?page=' + page_no;
-    //
-    // } else {
-    //     page_url = url
-    //     if (search.length > 0) {
-    //         page_url = url + '?search=' + search;
-    //     }
-    //
-    // }
-
-    const response = await axios.get(page_url);
+    const response = await sendAsync(url, method, header);
     try {
-        return {'page': parseInt(page), 'data': response.data}
+        return {'page': parseInt(page), 'data': response.data, 'status': response.status}
     } catch (e) {
         return e.message;
     }
 });
 
 const fetchCategory = createAsyncThunk('category/fetch', async (id, thunkAPI) => {
-    const url = getApiURL('categories' + id);
+    const url = getApiURL(RESOURCE, id);
+    let method = 'get';
+    let header = thunkAPI.getState().auth.data;
 
-    const response = await axios.get(url);
-    try {
-        return response.data;
-    } catch (e) {
-        return e.message;
-    }
+    const res = await sendAsync(url, method, header);
+    return res.data;
 });
 
 const postCategory = createAsyncThunk('category/post', async (data, thunkAPI) => {
     const {record} = data;
-    const url = getApiURL('categories');
+    const url = getApiURL(RESOURCE);
+    let method = 'post';
+    let header = thunkAPI.getState().auth.data;
 
-    const response = await axios.post(url, record);
-    try {
-        return response.data;
-    } catch (e) {
-        return e.message;
-    }
+    const res = await sendAsync(url, method, header, record);
+    return res.data;
 });
 
 const putCategory = createAsyncThunk('category/put', async (data, thunkAPI) => {
-    let recId = data['recId'];
-    let record = data['data'];
+    const {id, record} = data;
+    const url = getApiURL(RESOURCE, id);
+    let method = 'put';
+    let header = thunkAPI.getState().auth.data;
 
-    const response = await axios({
-        url: getApiURL('categories/' + recId),
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        data: record
-    });
-    return response.data;
+    const res = await sendAsync(url, method, header, record);
+    return res.data;
 });
 
-const delCategory = createAsyncThunk('category/delete', async (recId, thunkAPI) => {
+const delCategory = createAsyncThunk('category/delete', async (id, thunkAPI) => {
+    const url = getApiURL(RESOURCE, id);
+    let method = 'delete';
+    let header = thunkAPI.getState().auth.data;
 
-    try {
-        const response = await axios({
-            url: getApiURL('categories/' + recId),
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        });
-        if (response.status)
-            return recId;
-    } catch (error) {
-        return error.message;
+    const res = await sendAsync(url, method, header);
+    if (res.status === 204) {
+        return id;
+    } else {
+        return false;
     }
-
 });
 
 export {fetchAllCategory, fetchCategory, postCategory, putCategory, delCategory};

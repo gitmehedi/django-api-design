@@ -23,10 +23,3 @@ class UsersViews(APIView):
         serializer = UserSerializer(data)
         return Response(serializer.data)
 
-
-class LogoutViews(APIView):
-    # permission_classes = (IsAuthenticated,)
-
-    def post(self, request):
-        request.user.auth_token.delete()
-        return Response(status=status.HTTP_200_OK)
