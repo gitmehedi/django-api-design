@@ -9,9 +9,14 @@ const SessionSlice = createSlice({
         data: [],
         record: {},
         count: 0,
-        page: 1
+        page: 1,
+        search: ''
     },
-    reducers: {},
+    reducers: {
+        setSearch(state, action) {
+            state.search = action.payload;
+        },
+    },
     extraReducers(builder) {
         builder.addCase(fetchAllSession.pending, (state, action) => {
             state.isLoading = true;
@@ -57,4 +62,5 @@ const SessionSlice = createSlice({
     }
 });
 
+export const {setSearch} = SessionSlice.actions;
 export const SessionReducer = SessionSlice.reducer;

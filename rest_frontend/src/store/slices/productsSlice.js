@@ -10,9 +10,14 @@ const ProductsSlice = createSlice({
         data: [],
         record: {},
         count: 0,
-        page:1
+        page: 1,
+        search: ''
     },
-    reducers: {},
+    reducers: {
+        setSearch(state, action) {
+            state.search = action.payload;
+        },
+    },
     extraReducers(builder) {
         builder.addCase(fetchAllProduct.pending, (state, action) => {
             state.isLoading = true;
@@ -58,4 +63,5 @@ const ProductsSlice = createSlice({
     }
 });
 
+export const {setSearch} = ProductsSlice.actions;
 export const ProductsReducer = ProductsSlice.reducer;

@@ -9,9 +9,14 @@ const CartsSlice = createSlice({
         data: [],
         record: {},
         count: 0,
-        page: 1
+        page: 1,
+        search: ''
     },
-    reducers: {},
+    reducers: {
+        setSearch(state, action) {
+            state.search = action.payload;
+        },
+    },
     extraReducers(builder) {
         builder.addCase(fetchAllCart.pending, (state, action) => {
             state.isLoading = true;

@@ -6,13 +6,11 @@ import Pagination from "src/templates/snippets/Pagination";
 import {Loader, NotFoundError} from "src/components/Loader";
 import {fetchAllCategory, setSearch} from "src/store";
 import TableData from "./lists";
-import {Link} from "react-router-dom";
 
 
 const IndexCategory = () => {
     const dispatch = useDispatch();
     const [doFetchAllCategory, isLoading, isErrors] = useThunk(fetchAllCategory);
-    const [doSearch] = useThunk(setSearch);
     const {data, count, page, search} = useSelector(state => state.categories);
 
     useEffect(() => {
@@ -21,12 +19,7 @@ const IndexCategory = () => {
     }, [doFetchAllCategory]);
 
     const changePage = (page_no) => {
-        console.log(data);
-        console.log(count);
-        console.log(page);
-        console.log(data);
         let params = {page: page_no, search: search}
-
         doFetchAllCategory(params);
     }
 
@@ -54,9 +47,7 @@ const IndexCategory = () => {
         <>
             <PageHeader title={'Product Category'} count={count} clink={'category'}/>
             <div className='table-responsive small'>
-
                 <SearchHeader count={count} onsearch={searchChange}/>
-
                 <table className='table table-striped table-sm'>
                     <thead>
                     <tr>

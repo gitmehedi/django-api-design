@@ -7,8 +7,6 @@ const CategorySlice = createSlice({
         isLoading: false,
         data: [],
         count: 0,
-        next: '',
-        previous: '',
         record: {},
         error: [],
         page: 1,

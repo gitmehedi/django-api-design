@@ -9,9 +9,14 @@ const DiscountSlice = createSlice({
         data: [],
         record: {},
         count: 0,
-        page: 1
+        page: 1,
+        search: ''
     },
-    reducers: {},
+    reducers: {
+        setSearch(state, action) {
+            state.search = action.payload;
+        },
+    },
     extraReducers(builder) {
         builder.addCase(fetchAllDiscount.pending, (state, action) => {
             state.isLoading = true;
@@ -57,4 +62,6 @@ const DiscountSlice = createSlice({
     }
 
 })
+
+export const {setSearch} = DiscountSlice.actions;
 export const DiscountReducer = DiscountSlice.reducer;

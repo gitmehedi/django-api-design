@@ -9,9 +9,14 @@ const UserAddressSlice = createSlice({
         data: [],
         record: {},
         count: 0,
-        page:1
+        page: 1,
+        search: ''
     },
-    reducers: {},
+    reducers: {
+        setSearch(state, action) {
+            state.search = action.payload;
+        },
+    },
     extraReducers(builder) {
         builder.addCase(fetchAllUserAddress.fulfilled, (state, action) => {
             state.data = action.payload.results;
@@ -19,4 +24,5 @@ const UserAddressSlice = createSlice({
     }
 });
 
+export const {setSearch} = UserAddressSlice.actions;
 export const UserAddressReducer = UserAddressSlice.reducer;

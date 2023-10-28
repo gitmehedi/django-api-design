@@ -15,9 +15,14 @@ const InventorySlice = createSlice({
         data: [],
         count: 0,
         record: {},
-        page: 1
+        page: 1,
+        search: ''
     },
-    reducers: {},
+    reducers: {
+        setSearch(state, action) {
+            state.search = action.payload;
+        },
+    },
     extraReducers(builder) {
         builder.addCase(fetchAllInventory.pending, (state, action) => {
             state.isLoading = true;
@@ -66,4 +71,5 @@ const InventorySlice = createSlice({
     }
 });
 
+export const {setSearch} = InventorySlice.actions;
 export const InventoryReducer = InventorySlice.reducer;

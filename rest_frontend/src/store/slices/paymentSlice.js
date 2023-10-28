@@ -10,9 +10,14 @@ const PaymentSlice = createSlice({
         data: [],
         record: {},
         count: 0,
-        page:1
+        page: 1,
+        search: ''
     },
-    reducers: {},
+    reducers: {
+        setSearch(state, action) {
+            state.search = action.payload;
+        },
+    },
     extraReducers(builder) {
         builder.addCase(fetchAllPayment.pending, (state, action) => {
             state.isLoading = true;
@@ -58,4 +63,6 @@ const PaymentSlice = createSlice({
     }
 
 });
+
+export const {setSearch} = PaymentSlice.actions;
 export const PaymentReducer = PaymentSlice.reducer;

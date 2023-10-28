@@ -1,15 +1,15 @@
 import {useEffect} from "react";
 import {useSelector} from "react-redux";
-import {fetchAllInventory} from "src/store";
+import {fetchAllInventory, setSearch} from "src/store";
 import {useThunk} from "src/hooks/useThunk";
 import TableData from "./lists";
 import Pagination from "src/templates/snippets/Pagination";
-import {NotAvailable, PageHeader} from "src/templates/snippets/PageHeader";
+import {NotAvailable, PageHeader, SearchHeader} from "src/templates/snippets/PageHeader";
 import {Loader, NotFoundError} from "src/components/Loader";
 
 const IndexInventory = () => {
     const [doAllInventory, isLoading, isError] = useThunk(fetchAllInventory);
-    const {data, count, page} = useSelector(state => state.inventory);
+    const {data, count, page,search} = useSelector(state => state.inventory);
 
     useEffect(() => {
         doAllInventory();
@@ -17,6 +17,13 @@ const IndexInventory = () => {
 
     const changePage = (page_no) => {
         doAllInventory(page_no);
+    }
+    const searchChange = (value) => {
+        if (value !== search) {
+            let params = {page: null, search: value}
+            dispatch(setSearch(value));
+            doFetchAllCategory(params);
+        }
     }
 
     let content;
@@ -33,6 +40,7 @@ const IndexInventory = () => {
         <>
             <PageHeader title={'Product Inventory'} count={count} clink={'inventory'}/>
             <div className='table-responsive small'>
+                <SearchHeader count={count} onsearch={searchChange}/>
                 <table className='table table-striped table-sm'>
                     <thead>
                     <tr>
