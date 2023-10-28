@@ -17,7 +17,7 @@ class OrderDetailsList(APIView):
         queryset = OrderDetails.objects.all()
         search = request.GET.get('search')
         if search:
-            queryset = queryset.filter(Q(name__icontains=search) | Q(description__icontains=search))
+            queryset = queryset.filter(Q(total_price__icontains=search))
 
         lists = paginator.paginate_queryset(queryset, request)
         serializer = OrderDetailsSerializer(lists, many=True)

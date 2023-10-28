@@ -1,23 +1,34 @@
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {useThunk} from "src/hooks/useThunk";
-import {NotAvailable, PageHeader} from "src/templates/snippets/PageHeader";
+import {NotAvailable, PageHeader, SearchHeader} from "src/templates/snippets/PageHeader";
 import Pagination from "src/templates/snippets/Pagination";
 import {Loader, NotFoundError} from "src/components/Loader";
-import {fetchAllDiscount} from "src/store";
+import {fetchAllDiscount, setSearch} from "src/store";
 import TableData from "./lists";
 
 
 const IndexDiscount = () => {
+    const dispatch = useDispatch();
     const [doFetchAllDiscount, isLoading, isErrors] = useThunk(fetchAllDiscount);
-    const {data, count, page} = useSelector(state => state.discounts);
+    const {data, count, page, search} = useSelector(state => state.discounts);
 
     useEffect(() => {
-        doFetchAllDiscount();
+        let params = {page: null, search: null}
+        doFetchAllDiscount(params);
     }, [doFetchAllDiscount]);
 
     const changePage = (page_no) => {
-        doFetchAllDiscount(page_no);
+        let params = {page: page_no, search: search}
+        doFetchAllDiscount(params);
+    }
+
+    const searchChange = (value) => {
+        if (value !== search) {
+            let params = {page: null, search: value}
+            dispatch(setSearch(value));
+            doFetchAllDiscount(params);
+        }
     }
 
     let content;
@@ -36,6 +47,7 @@ const IndexDiscount = () => {
         <>
             <PageHeader title={'Discounts'} count={count} clink={'discounts'}/>
             <div className='table-responsive small'>
+                <SearchHeader count={count} onsearch={searchChange}/>
                 <table className='table table-striped table-sm'>
                     <thead>
                     <tr>

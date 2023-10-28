@@ -1,23 +1,33 @@
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {useThunk} from "src/hooks/useThunk";
-import {NotAvailable, PageHeader} from "src/templates/snippets/PageHeader";
+import {NotAvailable, PageHeader, SearchHeader} from "src/templates/snippets/PageHeader";
 import Pagination from "src/templates/snippets/Pagination";
 import {Loader, NotFoundError} from "src/components/Loader";
-import {fetchAllPayment} from "src/store";
+import {fetchAllPayment, setSearch} from "src/store";
 import TableData from "./lists";
 
 
 const IndexPayment = () => {
+    const dispatch = useDispatch();
     const [doFetchAllPayment, isLoading, isErrors] = useThunk(fetchAllPayment);
-    const {data, count, page} = useSelector(state => state.payments);
+    const {data, count, page, search} = useSelector(state => state.payments);
 
     useEffect(() => {
-        doFetchAllPayment();
+        let params = {page: null, search: null}
+        doFetchAllPayment(params);
     }, [doFetchAllPayment]);
 
     const changePage = (page_no) => {
-        doFetchAllPayment(page_no);
+        let params = {page: page_no, search: search}
+        doFetchAllPayment(params);
+    }
+    const searchChange = (value) => {
+        if (value !== search) {
+            let params = {page: null, search: value}
+            dispatch(setSearch(value));
+            doFetchAllPayment(params);
+        }
     }
 
     let content;
@@ -36,6 +46,7 @@ const IndexPayment = () => {
         <>
             <PageHeader title={'Payment Details'} count={count} clink={'payments'}/>
             <div className='table-responsive small'>
+                <SearchHeader count={count} onsearch={searchChange}/>
                 <table className='table table-striped table-sm'>
                     <thead>
                     <tr>

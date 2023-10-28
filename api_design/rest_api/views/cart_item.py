@@ -18,7 +18,7 @@ class CartItemList(APIView):
         queryset = CartItem.objects.all()
         search = request.GET.get('search')
         if search:
-            queryset = queryset.filter(Q(name__icontains=search) | Q(description__icontains=search))
+            queryset = queryset.filter(Q(quantity__icontains=search))
         lists = paginator.paginate_queryset(queryset, request)
         serializer = CartItemSerializer(lists, many=True)
         return paginator.get_paginated_response(serializer.data)

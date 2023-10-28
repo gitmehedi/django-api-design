@@ -8,6 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.pagination import PageNumberPagination
 from django.db.models import Q
 
+
 class PaymentDetailsList(APIView):
     permission_classes = [IsAuthenticated]
     pagination_class = PageNumberPagination
@@ -17,7 +18,7 @@ class PaymentDetailsList(APIView):
         queryset = PaymentDetails.objects.all()
         search = request.GET.get('search')
         if search:
-            queryset = queryset.filter(Q(name__icontains=search) | Q(description__icontains=search))
+            queryset = queryset.filter(Q(provider__icontains=search) | Q(amount__icontains=search))
 
         lists = paginator.paginate_queryset(queryset, request)
         serializer = PaymentDetailsSerializer(lists, many=True)

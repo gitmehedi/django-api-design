@@ -17,7 +17,7 @@ class ShoppingSessionList(APIView):
         queryset = ShoppingSession.objects.all()
         search = request.GET.get('search')
         if search:
-            queryset = queryset.filter(Q(name__icontains=search) | Q(description__icontains=search))
+            queryset = queryset.filter(Q(total__icontains=search))
 
         lists = paginator.paginate_queryset(queryset, request)
         serializer = ShoppingSessionSerializer(lists, many=True)

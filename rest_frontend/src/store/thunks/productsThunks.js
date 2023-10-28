@@ -1,64 +1,62 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
-import {getApiURL, getRecId} from 'src/store/utils/urls';
+import {getApiURL, getQueryStr, getRecId, sendAsync} from 'src/store/utils/urls';
 
 const RESOURCE = 'products';
-const url = getApiURL(RESOURCE);
 
-const fetchAllProduct = createAsyncThunk('products/fetchAllProduct', async (page_no, thunkAPI) => {
-    let page_url = page_no ? url + '?page=' + page_no : url;
+const fetchAllProduct = createAsyncThunk('products/fetchAllProduct', async (params, thunkAPI) => {
+    let method = 'get';
+    let header = thunkAPI.getState().auth.data;
+    let {page, search} = params;
+    let url = getQueryStr(RESOURCE, page, search);
 
-    const response = await axios.get(page_url);
+    const response = await sendAsync(url, method, header);
     try {
-        return {'page': parseInt(page_no), 'data': response.data}
+        return {'page': parseInt(page), 'data': response.data, 'status': response.status}
     } catch (e) {
         return e.message;
     }
 });
 
 const postProduct = createAsyncThunk('products/postProduct', async (data, thunkAPI) => {
-    let {record} = data;
-    let url = getApiURL(RESOURCE);
+    const {record} = data;
+    const url = getApiURL(RESOURCE);
+    let method = 'post';
+    let header = thunkAPI.getState().auth.data;
 
-    const response = await axios.post(url, record);
-    try {
-        return response.data;
-    } catch (e) {
-        return e.message;
-    }
+    const res = await sendAsync(url, method, header, record);
+    return res.data;
 });
 
 const fetchProduct = createAsyncThunk('products/fetchProduct', async (id, thunkAPI) => {
-    let url = getApiURL(RESOURCE, id);
+    const url = getApiURL(RESOURCE, id);
+    let method = 'get';
+    let header = thunkAPI.getState().auth.data;
 
-    const response = await axios.get(url);
-    try {
-        return response.data;
-    } catch (e) {
-        return e.message;
-    }
+    const res = await sendAsync(url, method, header);
+    return res.data;
 });
 
 const putProduct = createAsyncThunk('products/putProduct', async (data, thunkAPI) => {
-    let {id, record} = data;
-    let url = getApiURL(RESOURCE, id);
+    const {id, record} = data;
+    const url = getApiURL(RESOURCE, id);
+    let method = 'put';
+    let header = thunkAPI.getState().auth.data;
 
-    const response = await axios.put(url, record);
-    try {
-        return response.data;
-    } catch (e) {
-        return e.message;
-    }
+    const res = await sendAsync(url, method, header, record);
+    return res.data;
 });
 
 const delProduct = createAsyncThunk('products/delProduct', async (id, thunkAPI) => {
-    let url = getApiURL(RESOURCE, id);
+    const url = getApiURL(RESOURCE, id);
+    let method = 'delete';
+    let header = thunkAPI.getState().auth.data;
 
-    const response = await axios.delete(url);
-    try {
+    const res = await sendAsync(url, method, header);
+    if (res.status === 204) {
         return id;
-    } catch (e) {
-        return e.message;
+    } else {
+        return false;
     }
 });
 

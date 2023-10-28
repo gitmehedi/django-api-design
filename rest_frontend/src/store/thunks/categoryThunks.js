@@ -16,15 +16,6 @@ const fetchAllCategory = createAsyncThunk('category/fetchall', async (params, th
     }
 });
 
-const fetchCategory = createAsyncThunk('category/fetch', async (id, thunkAPI) => {
-    const url = getApiURL(RESOURCE, id);
-    let method = 'get';
-    let header = thunkAPI.getState().auth.data;
-
-    const res = await sendAsync(url, method, header);
-    return res.data;
-});
-
 const postCategory = createAsyncThunk('category/post', async (data, thunkAPI) => {
     const {record} = data;
     const url = getApiURL(RESOURCE);
@@ -32,6 +23,15 @@ const postCategory = createAsyncThunk('category/post', async (data, thunkAPI) =>
     let header = thunkAPI.getState().auth.data;
 
     const res = await sendAsync(url, method, header, record);
+    return res.data;
+});
+
+const fetchCategory = createAsyncThunk('category/fetch', async (id, thunkAPI) => {
+    const url = getApiURL(RESOURCE, id);
+    let method = 'get';
+    let header = thunkAPI.getState().auth.data;
+
+    const res = await sendAsync(url, method, header);
     return res.data;
 });
 

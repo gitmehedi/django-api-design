@@ -1,23 +1,33 @@
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {useThunk} from "src/hooks/useThunk";
-import {NotAvailable, PageHeader} from "src/templates/snippets/PageHeader";
+import {NotAvailable, PageHeader, SearchHeader} from "src/templates/snippets/PageHeader";
 import Pagination from "src/templates/snippets/Pagination";
 import {Loader, NotFoundError} from "src/components/Loader";
-import {fetchAllProduct} from "src/store";
+import {fetchAllProduct, setSearch} from "src/store";
 import TableData from "./lists";
 
 
 const IndexProduct = () => {
+    const dispatch = useDispatch();
     const [doFetchAllProduct, isLoading, isErrors] = useThunk(fetchAllProduct);
-    const {data, count, page} = useSelector(state => state.products);
+    const {data, count, page,search} = useSelector(state => state.products);
 
     useEffect(() => {
-        doFetchAllProduct();
+        let params = {page: null, search: null}
+        doFetchAllProduct(params);
     }, [doFetchAllProduct]);
 
     const changePage = (page_no) => {
-        doFetchAllProduct(page_no);
+        let params = {page: page_no, search: search}
+        doFetchAllProduct(params);
+    }
+    const searchChange = (value) => {
+        if (value !== search) {
+            let params = {page: null, search: value}
+            dispatch(setSearch(value));
+            doFetchAllProduct(params);
+        }
     }
 
     let content;
@@ -36,6 +46,7 @@ const IndexProduct = () => {
         <>
             <PageHeader title={'Products'} count={count} clink={'products'}/>
             <div className='table-responsive small'>
+                <SearchHeader count={count} onsearch={searchChange}/>
                 <table className='table table-striped table-sm'>
                     <thead>
                     <tr>

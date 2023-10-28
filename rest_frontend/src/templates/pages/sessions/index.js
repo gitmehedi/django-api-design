@@ -1,23 +1,34 @@
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {useThunk} from "src/hooks/useThunk";
-import {NotAvailable, PageHeader} from "src/templates/snippets/PageHeader";
+import {NotAvailable, PageHeader, SearchHeader} from "src/templates/snippets/PageHeader";
 import Pagination from "src/templates/snippets/Pagination";
 import {Loader, NotFoundError} from "src/components/Loader";
-import {fetchAllSession} from "src/store";
+import {fetchAllSession, setSearch} from "src/store";
 import TableData from "./lists";
 
 
 const IndexSession = () => {
+    const dispatch = useDispatch();
     const [doFetchAllSession, isLoading, isErrors] = useThunk(fetchAllSession);
-    const {data, count, page} = useSelector(state => state.sessions);
+    const {data, count, page, search} = useSelector(state => state.sessions);
 
     useEffect(() => {
-        doFetchAllSession();
+        let params = {page: null, search: null}
+        doFetchAllSession(params);
     }, [doFetchAllSession]);
 
     const changePage = (page_no) => {
-        doFetchAllSession(page_no);
+        let params = {page: page_no, search: search}
+        doFetchAllSession(params);
+    }
+
+    const searchChange = (value) => {
+        if (value !== search) {
+            let params = {page: null, search: value}
+            dispatch(setSearch(value));
+            doFetchAllSession(params);
+        }
     }
 
     let content;
@@ -36,6 +47,7 @@ const IndexSession = () => {
         <>
             <PageHeader title={'Sessions'} count={count} clink={'session'}/>
             <div className='table-responsive small'>
+                <SearchHeader count={count} onsearch={searchChange}/>
                 <table className='table table-striped table-sm'>
                     <thead>
                     <tr>
