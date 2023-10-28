@@ -6,7 +6,7 @@ from api_db.models import OrderDetails
 from rest_api.serializers.serializers import OrderDetailsSerializer, OrderDetailsPOSTSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.pagination import PageNumberPagination
-
+from django.db.models import Q
 
 class OrderDetailsList(APIView):
     permission_classes = [IsAuthenticated]
@@ -15,6 +15,10 @@ class OrderDetailsList(APIView):
     def get(self, request, format=None):
         paginator = self.pagination_class()
         queryset = OrderDetails.objects.all()
+        search = request.GET.get('search')
+        if search:
+            queryset = queryset.filter(Q(name__icontains=search) | Q(description__icontains=search))
+
         lists = paginator.paginate_queryset(queryset, request)
         serializer = OrderDetailsSerializer(lists, many=True)
         return paginator.get_paginated_response(serializer.data)

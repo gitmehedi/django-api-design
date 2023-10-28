@@ -6,6 +6,7 @@ from api_db.models import Products
 from rest_api.serializers.serializers import ProductsSerializer, ProductsPOSTSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.pagination import PageNumberPagination
+from django.db.models import Q
 
 
 class ProductsList(APIView):
@@ -15,6 +16,11 @@ class ProductsList(APIView):
     def get(self, request, format=None):
         paginator = self.pagination_class()
         queryset = Products.objects.all()
+        search = request.GET.get('search')
+        if search:
+            queryset = queryset.filter(
+                Q(name__icontains=search) | Q(sku__icontains=search) | Q(description__icontains=search))
+
         lists = paginator.paginate_queryset(queryset, request)
         serializer = ProductsSerializer(lists, many=True)
         return paginator.get_paginated_response(serializer.data)

@@ -6,7 +6,7 @@ from api_db.models import ProductInventory
 from rest_api.serializers.serializers import ProductInventorySerializer, ProductInventoryListSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.pagination import PageNumberPagination
-
+from django.db.models import Q
 
 class ProductInventoryList(APIView):
     permission_classes = [IsAuthenticated]
@@ -15,6 +15,10 @@ class ProductInventoryList(APIView):
     def get(self, request, format=None):
         queryset = ProductInventory.objects.all()
         paginator = self.pagination_class()
+        search = request.GET.get('search')
+        if search:
+            queryset = queryset.filter(Q(name__icontains=search))
+
         lists = paginator.paginate_queryset(queryset, request)
         serializer = ProductInventorySerializer(lists, many=True)
         return paginator.get_paginated_response(serializer.data)

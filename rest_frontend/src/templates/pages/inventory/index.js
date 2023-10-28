@@ -1,5 +1,5 @@
 import {useEffect} from "react";
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
 import {fetchAllInventory, setSearch} from "src/store";
 import {useThunk} from "src/hooks/useThunk";
 import TableData from "./lists";
@@ -8,21 +8,24 @@ import {NotAvailable, PageHeader, SearchHeader} from "src/templates/snippets/Pag
 import {Loader, NotFoundError} from "src/components/Loader";
 
 const IndexInventory = () => {
+    const dispatch = useDispatch();
     const [doAllInventory, isLoading, isError] = useThunk(fetchAllInventory);
-    const {data, count, page,search} = useSelector(state => state.inventory);
+    const {data, count, page, search} = useSelector(state => state.inventory);
 
     useEffect(() => {
-        doAllInventory();
+        let params = {page: null, search: null}
+        doAllInventory(params);
     }, [doAllInventory]);
 
     const changePage = (page_no) => {
-        doAllInventory(page_no);
+        let params = {page: page_no, search: search}
+        doAllInventory(params);
     }
     const searchChange = (value) => {
         if (value !== search) {
             let params = {page: null, search: value}
             dispatch(setSearch(value));
-            doFetchAllCategory(params);
+            doAllInventory(params);
         }
     }
 

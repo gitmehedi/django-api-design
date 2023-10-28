@@ -7,7 +7,6 @@ import {Loader, NotFoundError} from "src/components/Loader";
 import {fetchAllCategory, setSearch} from "src/store";
 import TableData from "./lists";
 
-
 const IndexCategory = () => {
     const dispatch = useDispatch();
     const [doFetchAllCategory, isLoading, isErrors] = useThunk(fetchAllCategory);

@@ -1,9 +1,7 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import axios from "axios";
-import {getApiURL, getAuthRequestHeader, sendAsync, getQueryStr} from "src/store/utils/urls";
+import {getApiURL, sendAsync, getQueryStr} from "src/store/utils/urls";
 
 const RESOURCE = 'categories';
-// const url = getApiURL(RESOURCE);
 const fetchAllCategory = createAsyncThunk('category/fetchall', async (params, thunkAPI) => {
     let method = 'get';
     let header = thunkAPI.getState().auth.data;

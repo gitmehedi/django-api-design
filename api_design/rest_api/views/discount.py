@@ -6,7 +6,7 @@ from api_db.models import Discount
 from rest_api.serializers.serializers import DiscountSerializer, DiscountPOSTSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.pagination import PageNumberPagination
-
+from django.db.models import Q
 
 class DiscountList(APIView):
     permission_classes = [IsAuthenticated]
@@ -15,6 +15,10 @@ class DiscountList(APIView):
     def get(self, request, format=None):
         paginator = self.pagination_class()
         queryset = Discount.objects.all()
+        search = request.GET.get('search')
+        if search:
+            queryset = queryset.filter(Q(name__icontains=search) | Q(description__icontains=search))
+
         lists = paginator.paginate_queryset(queryset, request)
         serializer = DiscountSerializer(lists, many=True)
         return paginator.get_paginated_response(serializer.data)
