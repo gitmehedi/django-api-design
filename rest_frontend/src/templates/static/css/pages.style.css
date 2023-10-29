@@ -5,14 +5,19 @@
     text-align: center;
 }
 
-.action-width{
+.action-width {
     width: 120px;
     cursor: pointer;
 }
 
-.page-link:hover{
+.page-link:hover {
     cursor: pointer;
 }
-pagination.disabled:hover{
+
+pagination.disabled:hover {
     cursor: none;
+}
+
+.inactive {
+    background-color: aliceblue;
 }

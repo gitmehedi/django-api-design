@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 const TextField = ({name, event, value, error, lblText = false}) => {
     let label = lblText ? lblText : name.charAt(0).toUpperCase() + name.slice(1);
     return (
-        <div className="mt-2">
+        <>
             <label htmlFor={name} className="form-label">{label}</label>
             <input type="text"
                    name={name}
@@ -12,7 +12,7 @@ const TextField = ({name, event, value, error, lblText = false}) => {
                    id={name}
                    className={`form-control ${error ? 'is-invalid' : ''}`}
             />
-        </div>
+        </>
     );
 }
 

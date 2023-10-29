@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import {registerUser} from "src/store";
 import {TextField, EmailField, PasswordField} from "src/components/FormField";
 import {useThunk} from "src/hooks/useThunk";
+import {Link} from "react-router-dom";
 
 
 function Register() {
@@ -79,23 +80,35 @@ function Register() {
                     </button>
                 </div>
 
+                <div className="form-row">
+                    <div className="form-group col-md-4">
+                        <label htmlFor="inputEmail4">Email</label>
+                        <input type="email" className="form-control" id="inputEmail4" placeholder="Email"/>
+                    </div>
+                    <div className="form-group col-md-6">
+                        <label htmlFor="inputPassword4">Password</label>
+                        <input type="password" className="form-control" id="inputPassword4" placeholder="Password"/>
+                    </div>
+                </div>
+
                 <p className="text-center">OR:</p>
 
-                <div className="form-outline mb-4 col-12">
-                    <div className="col-6">
+                <div className="form-row">
+                    <div className="form-group col-md-6">
                         <TextField name='first_name'
                                    event={handleChange}
                                    value={fields.first_name}
                                    error={errors.first_name}
                                    lblText='First Name'/>
                     </div>
-                    <div className="col-6">
+                    <div className="form-group col-md-6">
                         <TextField name='last_name'
                                    event={handleChange}
                                    value={fields.last_name}
                                    error={errors.last_name}
                                    lblText='Last Name'/>
                     </div>
+
                 </div>
 
                 <div className="form-outline mb-4">
@@ -135,10 +148,13 @@ function Register() {
                     </label>
                 </div>
 
-                <button type="submit" className="btn btn-primary btn-block mb-3">Sign in</button>
+                <div className="d-grid gap-4 d-md-block">
+                    <button className="btn btn-sm btn-success">Register</button>
+                    <Link to='/login/' style={{marginLeft: '5px'}} className="btn btn-sm btn-danger">Cancel</Link>
+                </div>
             </form>
         </>
-    );
+);
 }
 
 export default Register;

@@ -1,6 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import axios from "axios";
-import {getApiURL, getQueryStr, getRecId, sendAsync} from 'src/store/utils/urls';
+import {getApiURL, getQueryStr, sendAsync} from 'src/store/utils/urls';
 
 
 const RESOURCE = 'carts';

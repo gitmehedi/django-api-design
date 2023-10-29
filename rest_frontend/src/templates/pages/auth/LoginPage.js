@@ -39,18 +39,18 @@ const LoginPage = () => {
             <div style={{marginTop: `80px`}}>
                 <section className="vh-100">
                     <div className="container-fluid h-custom">
-                        <div className="row d-flex justify-content-center align-items-center h-100">
+                        <div className="row d-flex justify-content-center h-100">
                             <SideSection/>
                             <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                                 <ul className="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
                                     <li className="nav-item" role="presentation">
-                                        <a className={`nav-link  ${register ? '' : 'active'}`} id="tab-login"
+                                        <a className={`nav-link  ${register ? 'inactive' : 'active'}`} id="tab-login"
                                            data-mdb-toggle="pill"
                                            href="#pills-login" role="tab" onClick={handleRegister}
                                            aria-controls="pills-login" aria-selected="true">Login</a>
                                     </li>
                                     <li className="nav-item" role="presentation">
-                                        <a className={`nav-link  ${register ? 'active' : ''}`} id="tab-register"
+                                        <a className={`nav-link  ${register ? 'active' : 'inactive'}`} id="tab-register"
                                            data-mdb-toggle="pill"
                                            href="#pills-register" role="tab" onClick={handleRegister}
                                            aria-controls="pills-register" aria-selected="false">Register</a>
