@@ -6,12 +6,14 @@ import Register from "./Register";
 import SideSection from "./SideSection";
 import {useSelector} from "react-redux";
 import {Navigate} from "react-router-dom";
+import {useState} from "react";
 
 
 const LoginPage = () => {
     const navigate = useNavigate();
     const [doCheckUser, isLoading, isError] = useThunk(checkAuthUser);
     const {loggedIn} = useSelector(state => state.auth);
+    const [register, setRegister] = useState(false)
 
     const formSubmit = (credential) => {
         doCheckUser(credential);
@@ -22,9 +24,19 @@ const LoginPage = () => {
         return <Navigate to='/' replace/>;
     }
 
+    const handleRegister = (evt) => {
+        evt.preventDefault();
+        let value = evt.target.text;
+        if (value === 'Login') {
+            setRegister(false);
+        } else {
+            setRegister(true)
+        }
+    }
+
     return (
         <>
-            <div>
+            <div style={{marginTop: `80px`}}>
                 <section className="vh-100">
                     <div className="container-fluid h-custom">
                         <div className="row d-flex justify-content-center align-items-center h-100">
@@ -32,22 +44,26 @@ const LoginPage = () => {
                             <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                                 <ul className="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
                                     <li className="nav-item" role="presentation">
-                                        <a className="nav-link active" id="tab-login" data-mdb-toggle="pill"
-                                           href="#pills-login" role="tab"
+                                        <a className={`nav-link  ${register ? '' : 'active'}`} id="tab-login"
+                                           data-mdb-toggle="pill"
+                                           href="#pills-login" role="tab" onClick={handleRegister}
                                            aria-controls="pills-login" aria-selected="true">Login</a>
                                     </li>
                                     <li className="nav-item" role="presentation">
-                                        <a className="nav-link" id="tab-register" data-mdb-toggle="pill"
-                                           href="#pills-register" role="tab"
+                                        <a className={`nav-link  ${register ? 'active' : ''}`} id="tab-register"
+                                           data-mdb-toggle="pill"
+                                           href="#pills-register" role="tab" onClick={handleRegister}
                                            aria-controls="pills-register" aria-selected="false">Register</a>
                                     </li>
                                 </ul>
                                 <div className="tab-content">
-                                    <div className="tab-pane fade show active" id="pills-login" role="tabpanel"
+                                    <div className={`tab-pane fade  ${register ? '' : 'active show'}`} id="pills-login"
+                                         role="tabpanel"
                                          aria-labelledby="tab-login">
                                         <Login loginCheck={formSubmit}/>
                                     </div>
-                                    <div className="tab-pane fade" id="pills-register" role="tabpanel"
+                                    <div className={`tab-pane fade  ${register ? 'active show' : ''}`}
+                                         id="pills-register" role="tabpanel"
                                          aria-labelledby="tab-register">
                                         <Register/>
                                     </div>

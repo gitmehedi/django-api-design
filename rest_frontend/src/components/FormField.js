@@ -1,7 +1,7 @@
 import {Link} from "react-router-dom";
 
-const TextField = ({name, event, value, error}) => {
-    let label = name.charAt(0).toUpperCase() + name.slice(1);
+const TextField = ({name, event, value, error, lblText = false}) => {
+    let label = lblText ? lblText : name.charAt(0).toUpperCase() + name.slice(1);
     return (
         <div className="mt-2">
             <label htmlFor={name} className="form-label">{label}</label>
@@ -16,8 +16,8 @@ const TextField = ({name, event, value, error}) => {
     );
 }
 
-const NumberField = ({name, event, value, error}) => {
-    let label = name.charAt(0).toUpperCase() + name.slice(1);
+const NumberField = ({name, event, value, error, lblText = false}) => {
+    let label = lblText ? lblText : name.charAt(0).toUpperCase() + name.slice(1);
     return (
         <div className="mt-2">
             <label htmlFor={name} className="form-label">{label}</label>
@@ -26,27 +26,56 @@ const NumberField = ({name, event, value, error}) => {
                    onChange={event}
                    value={value}
                    id={name}
+                   pattern='^[0-9]*$'
                    className={`form-control ${error ? 'is-invalid' : ''}`}
             />
         </div>
     );
 }
-const EmailField = ({name, event, value, error}) => {
+const EmailField = ({name, event, value, error, lblText = false}) => {
+    let label = lblText ? lblText : name.charAt(0).toUpperCase() + name.slice(1);
+    return (
+        <div className="mt-2">
+            <label htmlFor={name} className="form-label">{label}</label>
+            <input type="email"
+                   name={name}
+                   onChange={event}
+                   value={value}
+                   id={name}
+                   pattern='^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'
+                   className={`form-control ${error ? 'is-invalid' : ''}`}
+            />
+        </div>
+    );
 }
-const PasswordField = ({name, event, value, error}) => {
+const PasswordField = ({name, event, value, error, lblText = false}) => {
+    let label = lblText ? lblText : name.charAt(0).toUpperCase() + name.slice(1);
+    return (
+        <div className="mt-2">
+            <label htmlFor={name} className="form-label">{label}</label>
+            <input type="password"
+                   name={name}
+                   onChange={event}
+                   value={value}
+                   id={name}
+                   // pattern="^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$"
+                   className={`form-control ${error ? 'is-invalid' : ''}`}
+            />
+        </div>
+    );
 }
 
-const DateField = ({name, event, value, error}) => {
+const DateField = ({name, event, value, error, lblText = false}) => {
 }
 
-const ImageField = ({name, event, value, error}) => {
+const ImageField = ({name, event, value, error, lblText = false}) => {
 }
-const FileField = ({name, event, value, error}) => {
+const FileField = ({name, event, value, error, lblText = false}) => {
 }
 
-const CheckboxField = ({name, event, value, error}) => {
+const CheckboxField = ({name, event, value, error, lblText = false}) => {
 }
-const RadioField = ({name, event, value, error,options}) => {
+const RadioField = ({name, event, value, error, options}) => {
     let label = name.charAt(0).toUpperCase() + name.slice(1);
 
     return (
@@ -93,13 +122,9 @@ const SelectField = ({name, event, value, error}) => {
     )
         ;
 }
-const Button = ({
-                    name, event, value, error
-                }) => {
+const Button = ({name, event, value, error}) => {
 }
-const SubmitButton = ({
-                          name
-                      }) => {
+const SubmitButton = ({name}) => {
     return (
         <>
             <div className="d-grid gap-4 d-md-block">

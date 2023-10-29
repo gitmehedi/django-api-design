@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
-import {getApiURL, getRecId} from "src/store/utils/urls";
+import {getApiURL, getRecId, sendAsync} from "src/store/utils/urls";
 
 const baseUrl = 'http://localhost:8000/';
 
@@ -40,4 +40,17 @@ const logoutUser = createAsyncThunk('auth/logout', async (credential, thunkAPI) 
     }
 })
 
-export {checkAuthUser, logoutUser};
+const registerUser = createAsyncThunk('auth/register', async (record, thunkAPI) => {
+    const RESOURCE = 'api/register';
+    const url = getApiURL(baseUrl + RESOURCE);
+
+    const response = await axios.post(url, record);
+
+    try {
+        return response.data;
+    } catch (e) {
+        return e.message;
+    }
+})
+
+export {checkAuthUser, logoutUser, registerUser};

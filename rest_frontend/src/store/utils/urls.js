@@ -67,7 +67,7 @@ const sendAsync = async (url, method, header, data = {}) => {
             localStorage.removeItem('access');
             localStorage.removeItem('refresh');
             localStorage.removeItem('loggedIn');
-            window.location.href = '/login/'
+            window.location.href = '/login/';
         }
     });
 

@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {checkAuthUser, logoutUser} from "src/store/thunks/authThunks";
+import {checkAuthUser, logoutUser, registerUser} from "src/store/thunks/authThunks";
 
 const access = localStorage.getItem('access') ? localStorage.getItem('access') : null;
 const loggedIn = localStorage.getItem('loggedIn') ? localStorage.getItem('loggedIn') : false;
@@ -36,6 +36,13 @@ const AuthSlice = createSlice({
             localStorage.removeItem('access');
             localStorage.removeItem('refresh');
             localStorage.removeItem('loggedIn');
+            state.loggedIn = false;
+            state.isLoading = false;
+        })
+
+        builder.addCase(registerUser.pending, (state, action) => {
+            state.isLoading = true;
+        }).addCase(registerUser.fulfilled, (state, action) => {
             state.loggedIn = false;
             state.isLoading = false;
         })
