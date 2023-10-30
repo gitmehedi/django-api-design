@@ -9,6 +9,7 @@ import {IndexProduct, CreateProduct, UpdateProduct} from 'src/templates/pages/pr
 import {IndexSession, CreateSession, UpdateSession} from 'src/templates/pages/sessions';
 import {IndexPayment, CreatePayment, UpdatePayment} from 'src/templates/pages/payments';
 import LoginPage from 'src/templates/pages/auth/LoginPage';
+import Profile from 'src/templates/pages/auth/Profile';
 import UserAddress from 'src/templates/pages/users/UserAddress';
 import UserPayments from 'src/templates/pages/users/UserPayments';
 
@@ -67,6 +68,9 @@ const RoutePath = () => {
                     </Route>
                     <Route path='/login'>
                         <Route index element={<LoginPage/>}/>
+                    </Route>
+                    <Route path='/profile'>
+                        <Route index element={<Profile/>}/>
                     </Route>
                 </Route>
             </Routes>
