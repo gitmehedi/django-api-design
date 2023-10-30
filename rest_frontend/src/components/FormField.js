@@ -58,7 +58,9 @@ const PasswordField = ({name, event, value, error, lblText = false}) => {
                    onChange={event}
                    value={value}
                    id={name}
-                   // pattern="^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$"
+                   maxlength="100"
+                   minLength="8"
+                // pattern="^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$"
                    className={`form-control ${error ? 'is-invalid' : ''}`}
             />
         </div>
@@ -124,12 +126,12 @@ const SelectField = ({name, event, value, error}) => {
 }
 const Button = ({name, event, value, error}) => {
 }
-const SubmitButton = ({name}) => {
+const SubmitButton = ({clink, name = 'Save'}) => {
     return (
         <>
-            <div className="d-grid gap-4 d-md-block">
-                <button className="btn btn-sm btn-success">Save</button>
-                <Link to={`/${name}/`} style={{marginLeft: '5px'}} className="btn btn-sm btn-danger">Cancel</Link>
+            <div className="d-grid gap-4 d-md-block" style={{marginTop: `10px`}}>
+                <button className="btn btn-sm btn-success">{name}</button>
+                <Link to={`/${clink}/`} style={{marginLeft: '5px'}} className="btn btn-sm btn-danger">Cancel</Link>
             </div>
         </>
     );

@@ -10,6 +10,7 @@ import {IndexSession, CreateSession, UpdateSession} from 'src/templates/pages/se
 import {IndexPayment, CreatePayment, UpdatePayment} from 'src/templates/pages/payments';
 import LoginPage from 'src/templates/pages/auth/LoginPage';
 import Profile from 'src/templates/pages/auth/Profile';
+import ChangePassword from 'src/templates/pages/auth/ChangePassword';
 import UserAddress from 'src/templates/pages/users/UserAddress';
 import UserPayments from 'src/templates/pages/users/UserPayments';
 
@@ -70,7 +71,10 @@ const RoutePath = () => {
                         <Route index element={<LoginPage/>}/>
                     </Route>
                     <Route path='/profile'>
-                        <Route index element={<Profile/>}/>
+                        <Route index element={<ProtectedPage><Profile/></ProtectedPage>}/>
+                    </Route>
+                    <Route path='/change-password'>
+                        <Route index element={<ProtectedPage><ChangePassword/></ProtectedPage>}/>
                     </Route>
                 </Route>
             </Routes>

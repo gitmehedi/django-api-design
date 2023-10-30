@@ -64,7 +64,7 @@ const Forms = ({formSubmit, record}) => {
                                      error={errors.amount}/>
                     </div>
 
-                    <div className="col-12">
+                    <div className="col-md-12">
                         <RadioField name='status'
                                     event={handleChange}
                                     value={fields.status}
@@ -73,7 +73,7 @@ const Forms = ({formSubmit, record}) => {
                     </div>
                 </div>
 
-                <SubmitButton name='payments'/>
+                <SubmitButton clink='payments'/>
             </form>
 
         </>

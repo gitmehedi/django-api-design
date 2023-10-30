@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {checkAuthUser, logoutUser, registerUser} from "src/store/thunks/authThunks";
+import {checkAuthUser, logoutUser, registerUser, updateProfile, userProfile} from "src/store/thunks/authThunks";
 
 const access = localStorage.getItem('access') ? localStorage.getItem('access') : null;
 const loggedIn = localStorage.getItem('loggedIn') ? localStorage.getItem('loggedIn') : false;
@@ -8,6 +8,7 @@ const AuthSlice = createSlice({
     initialState: {
         isLoading: false,
         data: {'access': access, 'refresh': ''},
+        profile: {},
         loggedIn: loggedIn
     },
     reducers: {},
@@ -45,6 +46,20 @@ const AuthSlice = createSlice({
             state.isLoading = true;
         }).addCase(registerUser.fulfilled, (state, action) => {
             state.loggedIn = false;
+            state.isLoading = false;
+        })
+
+        builder.addCase(userProfile.pending, (state, action) => {
+            state.isLoading = true;
+        }).addCase(userProfile.fulfilled, (state, action) => {
+            state.profile = action.payload;
+            state.isLoading = false;
+        })
+
+        builder.addCase(updateProfile.pending, (state, action) => {
+            state.isLoading = true;
+        }).addCase(updateProfile.fulfilled, (state, action) => {
+            state.profile = action.payload;
             state.isLoading = false;
         })
     }

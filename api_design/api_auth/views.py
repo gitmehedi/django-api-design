@@ -19,8 +19,8 @@ class RegisterView(generics.CreateAPIView):
 class ChangePasswordView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def put(self, request, pk):
-        serializer = ChangePasswordSerializer(request.user, data=request.data, context={'auth': request})
+    def put(self, request):
+        serializer = ChangePasswordSerializer(request.user, data=request.data, context={'auth': request.user})
         if serializer.is_valid():
             serializer.update(request.user, serializer.validated_data)
             return Response(serializer.data)
@@ -30,7 +30,7 @@ class ChangePasswordView(APIView):
 class UpdateProfileView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def put(self, request, pk):
+    def put(self, request):
         serializer = ChangeProfileSerializer(request.user, data=request.data, context={'auth': request.user})
         if serializer.is_valid():
             serializer.update(request.user, serializer.validated_data)

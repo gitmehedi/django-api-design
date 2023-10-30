@@ -54,6 +54,7 @@ const Header = () => {
                         <ul className="">
                             <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <Link to='/profile' className="dropdown-item">Edit Profile</Link>
+                                <Link to='/change-password' className="dropdown-item">Change Password</Link>
                                 <Link to='/logout' className="dropdown-item" onClick={handleLogout}>Logout</Link>
                             </div>
                         </ul>

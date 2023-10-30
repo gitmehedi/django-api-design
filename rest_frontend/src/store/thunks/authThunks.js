@@ -22,7 +22,6 @@ const logoutUser = createAsyncThunk('auth/logout', async (credential, thunkAPI) 
     let method = 'post';
     let header = thunkAPI.getState().auth.data;
 
-
     const res = await sendAsync(url, method, header, header);
     return res.data;
 })
@@ -32,7 +31,6 @@ const registerUser = createAsyncThunk('auth/register', async (record, thunkAPI) 
     const url = getApiURL(baseUrl + RESOURCE);
 
     const response = await axios.post(url, record);
-
     try {
         return response.data;
     } catch (e) {
@@ -40,4 +38,35 @@ const registerUser = createAsyncThunk('auth/register', async (record, thunkAPI) 
     }
 })
 
-export {checkAuthUser, logoutUser, registerUser};
+const changePassword = createAsyncThunk('auth/changePassword', async (record, thunkAPI) => {
+    const RESOURCE = 'api/change_password';
+    const url = getApiURL(baseUrl + RESOURCE);
+    let method = 'put';
+    let header = thunkAPI.getState().auth.data;
+
+    const res = await sendAsync(url, method, header, record);
+    return res.data;
+
+})
+const updateProfile = createAsyncThunk('auth/updateProfile', async (record, thunkAPI) => {
+    const RESOURCE = 'api/update_profile';
+    const url = getApiURL(baseUrl + RESOURCE);
+    let method = 'put';
+    let header = thunkAPI.getState().auth.data;
+
+    const res = await sendAsync(url, method, header, record);
+    return res.data;
+
+})
+
+const userProfile = createAsyncThunk('auth/userProfile', async (record, thunkAPI) => {
+    const RESOURCE = 'api/profile';
+    const url = getApiURL(baseUrl + RESOURCE);
+    let method = 'get';
+    let header = thunkAPI.getState().auth.data;
+
+    const res = await sendAsync(url, method, header);
+    return res.data;
+})
+
+export {checkAuthUser, logoutUser, registerUser, changePassword, userProfile, updateProfile};
