@@ -4,16 +4,25 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.contrib.auth.models import User
-from .serializers import UserSerializer, RegisterSerializer, ChangePasswordSerializer, ChangeProfileSerializer
-from rest_framework import generics
+from .serializers import UserSerializer, RegisterSerializer, ChangePasswordSerializer, ChangeProfileSerializer, \
+    ProfileSerializer
 from rest_framework_simplejwt.token_blacklist.models import BlacklistedToken, OutstandingToken
 from django.http import Http404
+from django.core.mail import send_mail
+from django.conf import settings
 
 
-class RegisterView(generics.CreateAPIView):
-    queryset = User.objects.all()
+class RegisterView(APIView):
     permission_classes = (AllowAny,)
-    serializer_class = RegisterSerializer
+
+    def post(self, request):
+        user_serializer = RegisterSerializer(data=request.data)
+        profile_serializer = ProfileSerializer(data=request.data)
+        if user_serializer.is_valid() and profile_serializer.is_valid():
+            user_serializer.save()
+            profile_serializer.save()
+            return Response(request.data)
+        return Response(profile_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class ChangePasswordView(APIView):
@@ -23,6 +32,8 @@ class ChangePasswordView(APIView):
         serializer = ChangePasswordSerializer(request.user, data=request.data, context={'auth': request.user})
         if serializer.is_valid():
             serializer.update(request.user, serializer.validated_data)
+            # email_from = settings.EMAIL_HOST_USER
+            # send_mail('First Django Application', "No major message", email_from, (request.user.email,))
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

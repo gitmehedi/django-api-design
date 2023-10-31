@@ -2,12 +2,32 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
+from .models import Profile
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'email', 'first_name', 'last_name']
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ['bio', 'profile_image', 'mobile', 'address', 'gender', 'location', 'birth_date']
+
+    def create(self, validated_data):
+        user = User.objects.get(email=self.initial_data.get('email'))
+        user.bio = validated_data.get('bio') or ''
+        user.mobile = validated_data.get('mobile') or ''
+        user.address = validated_data.get('address') or ''
+        user.gender = validated_data.get('gender') or ''
+        user.location = validated_data.get('location') or ''
+        user.birth_date = validated_data.get('birth_date') or ''
+        user.profile_image = validated_data.get('profile_image') or ''
+
+        user.save()
+        return user
 
 
 class RegisterSerializer(serializers.ModelSerializer):
