@@ -64,7 +64,7 @@ class LogoutView(APIView):
 
 
 class LogoutAllView(APIView):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
         tokens = OutstandingToken.objects.filter(user_id=request.user.id)
@@ -75,7 +75,7 @@ class LogoutAllView(APIView):
 
 
 class UsersViews(APIView):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = [IsAuthenticated]
 
     def get_object(self, username):
         try:
@@ -86,4 +86,15 @@ class UsersViews(APIView):
     def get(self, request):
         data = self.get_object(request.user.username)
         serializer = UserSerializer(data)
+        return Response(serializer.data)
+
+from .models import Profile
+
+class ProfileImage(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def put(self, request):
+        serializer = ProfileSerializer(data=request.data)
+        if serializer.is_valid():
+            pass
         return Response(serializer.data)

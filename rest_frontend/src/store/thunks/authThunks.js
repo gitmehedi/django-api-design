@@ -56,7 +56,16 @@ const updateProfile = createAsyncThunk('auth/updateProfile', async (record, thun
 
     const res = await sendAsync(url, method, header, record);
     return res.data;
+})
+const updateProfileImage = createAsyncThunk('auth/updateProfileImage', async (record, thunkAPI) => {
+    const RESOURCE = 'api/profile_image';
+    const url = getApiURL(baseUrl + RESOURCE);
+    let method = 'put';
+    let header = thunkAPI.getState().auth.data;
+    let type = "multipart/form-data";
 
+    const res = await sendAsync(url, method, header, record, type);
+    return res.data;
 })
 
 const userProfile = createAsyncThunk('auth/userProfile', async (record, thunkAPI) => {
@@ -69,4 +78,4 @@ const userProfile = createAsyncThunk('auth/userProfile', async (record, thunkAPI
     return res.data;
 })
 
-export {checkAuthUser, logoutUser, registerUser, changePassword, userProfile, updateProfile};
+export {checkAuthUser, logoutUser, registerUser, changePassword, userProfile, updateProfile, updateProfileImage};

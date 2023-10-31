@@ -1,10 +1,19 @@
 import {useState} from "react";
+import {updateProfileImage} from "src/store";
+import {useThunk} from "src/hooks/useThunk";
+
 
 const ImageUpload = () => {
-    const [img, setImg] = useState('')
+    const [doUpdateProfileImage] = useThunk(updateProfileImage);
+    const [img, setImg] = useState('');
     const imgFilehandler = (e) => {
         let img = e.target.files[0];
         setImg(URL.createObjectURL(img));
+        if (img) {
+            let record = new FormData();
+            record.append('profile_image', img);
+            doUpdateProfileImage(record);
+        }
     }
 
     return (

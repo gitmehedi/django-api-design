@@ -46,11 +46,17 @@ const getQueryStr = (path, page, search) => {
     return path + page_url;
 }
 
-const sendAsync = async (url, method, header, data = {}) => {
+const sendAsync = async (url, method, header, data = {}, type = 'json') => {
     console.log('---after----', url, '---', method, '---', header, '---', data);
+    let content = ''
+    if (type === 'json') {
+        content = 'application/json';
+    } else {
+        content = type;
+    }
 
     let headers = {
-        'Content-Type': 'application/json',
+        'Content-Type': content,
         'Authorization': 'Bearer ' + header.access
     }
 

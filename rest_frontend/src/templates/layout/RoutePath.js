@@ -78,7 +78,7 @@ const RoutePath = () => {
                     <Route path='/change-password'>
                         <Route index element={<ProtectedPage><ChangePassword/></ProtectedPage>}/>
                     </Route>
-                    <Route path='/image-upload'>
+                    <Route path='/profile-image'>
                         <Route index element={<ImageUpload/>}/>
                     </Route>
                 </Route>
