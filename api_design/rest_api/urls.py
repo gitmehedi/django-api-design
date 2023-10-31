@@ -27,4 +27,7 @@ urlpatterns = [
     path('discounts/<int:pk>/', discount.DiscountViews.as_view()),
     path('carts/', cart_item.CartItemList.as_view()),
     path('carts/<int:pk>/', cart_item.CartItemViews.as_view()),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
