@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-import environ
+import environ, os
 from datetime import timedelta
 
 env = environ.Env()
@@ -83,7 +83,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'api_design.wsgi.application'
 
-# Database
+# Database Configuration
+# ===============================================
+
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
@@ -97,7 +99,10 @@ DATABASES = {
     }
 }
 
-# Password validation
+
+# Password validation Configuration
+# ===============================================
+
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -115,9 +120,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Internationalization
-# https://docs.djangoproject.com/en/3.1/topics/i18n/
+# Internationalization Configuration
+# ===============================================
 
+# https://docs.djangoproject.com/en/3.1/topics/i18n/
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -128,8 +134,8 @@ USE_L10N = True
 
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.1/howto/static-files/
+# Simple JSON Web Token (JWT) Configuration
+# ===============================================
 
 SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=15),
@@ -138,6 +144,9 @@ SIMPLE_JWT = {
 }
 
 STATIC_URL = '/static/'
+
+# Django Rest Framework (DRF) Configuration
+# ===============================================
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -149,13 +158,12 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 50,
 }
 
+# CORS Configuration
+# ===============================================
+
 CORS_ORIGIN_ALLOW_ALL = True
-
 CSRF_COOKIE_SAMESITE = 'Strict'
-SESSION_COOKIE_SAMESITE = 'Strict'
 CSRF_COOKIE_HTTPONLY = False  # False since we will grab it via universal-cookies
-SESSION_COOKIE_HTTPONLY = True
-
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
@@ -167,6 +175,8 @@ CORS_EXPOSE_HEADERS = [
     "Content-Type",
 ]
 
+# CACHES Configuration
+# ===============================================
 CACHES = {
     "default": {
         'BACKEND': 'django.core.cache.backends.redis.RedisCache',
@@ -176,18 +186,25 @@ CACHES = {
         # },
         "KEY_PREFIX": "example"
     }
-
 }
 
+# SESSION Configuration
+# ===============================================
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SAMESITE = 'Strict'
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
 
 # Email Configuration
 # ================================
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'git.mehedi@gmail.com'
 EMAIL_HOST_PASSWORD = 'angry4gitpython!'
+
+# Media Configuration
+# ==========================
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')

@@ -8,8 +8,10 @@ from .serializers import UserSerializer, RegisterSerializer, ChangePasswordSeria
     ProfileSerializer
 from rest_framework_simplejwt.token_blacklist.models import BlacklistedToken, OutstandingToken
 from django.http import Http404
+from rest_framework.parsers import FileUploadParser
 from django.core.mail import send_mail
 from django.conf import settings
+from .models import Profile
 
 
 class RegisterView(APIView):
@@ -88,13 +90,17 @@ class UsersViews(APIView):
         serializer = UserSerializer(data)
         return Response(serializer.data)
 
-from .models import Profile
+
+
+
 
 class ProfileImage(APIView):
     permission_classes = [IsAuthenticated]
+    # parser_class = (FileUploadParser,)
 
     def put(self, request):
-        serializer = ProfileSerializer(data=request.data)
+        serializer = ProfileSerializer(request.data, request.FILES)
         if serializer.is_valid():
-            pass
+            serializer.update(request.user,serializer.validated_data)
+            return Response(serializer.data)
         return Response(serializer.data)

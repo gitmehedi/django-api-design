@@ -29,6 +29,18 @@ class ProfileSerializer(serializers.ModelSerializer):
         user.save()
         return user
 
+    def update(self, instance, validated_data):
+        profile = instance.profile
+        profile.bio = validated_data.get('bio') or ''
+        profile.mobile = validated_data.get('mobile') or ''
+        profile.address = validated_data.get('address') or ''
+        profile.gender = validated_data.get('gender') or ''
+        profile.location = validated_data.get('location') or ''
+        profile.birth_date = validated_data.get('birth_date') or ''
+        profile.profile_image = validated_data.get('profile_image') or ''
+        instance.save()
+        return instance
+
 
 class RegisterSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(required=True, validators=[UniqueValidator(queryset=User.objects.all())])
