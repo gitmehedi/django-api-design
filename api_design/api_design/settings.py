@@ -197,11 +197,11 @@ SESSION_CACHE_ALIAS = "default"
 # Email Configuration
 # ================================
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = env('EMAIL_HOST')
 EMAIL_USE_TLS = True
-EMAIL_PORT = 465
-EMAIL_HOST_USER = 'git.mehedi@gmail.com'
-EMAIL_HOST_PASSWORD = 'angry4gitpython!'
+EMAIL_PORT = env('EMAIL_PORT')
+EMAIL_HOST_USER = env('EMAIL_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_PASSWORD')
 
 # Media Configuration
 # ==========================
