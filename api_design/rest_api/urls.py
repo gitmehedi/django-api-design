@@ -1,6 +1,4 @@
 from django.urls import path
-from django.conf import settings
-from django.conf.urls.static import static
 from .views import product_category, product_inventory, cart_item, discount, order_details, order_items, \
     payment_details, products, shopping_session, user_addresses, user_payment
 
@@ -29,5 +27,4 @@ urlpatterns = [
     path('carts/<int:pk>/', cart_item.CartItemViews.as_view()),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
