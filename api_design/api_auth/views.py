@@ -5,7 +5,7 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.contrib.auth.models import User
 from .serializers import UserSerializer, RegisterSerializer, ChangePasswordSerializer, ChangeProfileSerializer, \
-    ProfileSerializer
+    ProfileSerializer, ProfileImageSerializer
 from rest_framework_simplejwt.token_blacklist.models import BlacklistedToken, OutstandingToken
 from django.http import Http404
 from rest_framework.parsers import FileUploadParser
@@ -87,20 +87,18 @@ class UsersViews(APIView):
 
     def get(self, request):
         data = self.get_object(request.user.username)
-        serializer = UserSerializer(data)
+        serializer = UserSerializer(data, context={"request": request})
         return Response(serializer.data)
-
-
-
 
 
 class ProfileImage(APIView):
     permission_classes = [IsAuthenticated]
+
     # parser_class = (FileUploadParser,)
 
     def put(self, request):
-        serializer = ProfileSerializer(request.data, request.FILES)
+        serializer = ProfileImageSerializer(data=request.FILES, context={"request": request})
         if serializer.is_valid():
-            serializer.update(request.user,serializer.validated_data)
+            serializer.update(request.user.profile, serializer.validated_data)
             return Response(serializer.data)
         return Response(serializer.data)

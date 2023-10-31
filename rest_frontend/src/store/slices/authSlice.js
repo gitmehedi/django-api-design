@@ -8,8 +8,11 @@ import {
     updateProfileImage
 } from "src/store/thunks/authThunks";
 
+
+const default_image = 'http://localhost:8000/media/profile/ds_classification.png';
 const access = localStorage.getItem('access') ? localStorage.getItem('access') : null;
 const loggedIn = localStorage.getItem('loggedIn') ? localStorage.getItem('loggedIn') : false;
+const profile = localStorage.getItem('profile_url') ? localStorage.getItem('profile_url') : default_image;
 const AuthSlice = createSlice({
     name: 'auth',
     initialState: {
@@ -17,7 +20,7 @@ const AuthSlice = createSlice({
         data: {'access': access, 'refresh': ''},
         profile: {},
         loggedIn: loggedIn,
-        profile_image: '',
+        profile_url: profile
     },
     reducers: {},
     extraReducers(builder) {
@@ -45,9 +48,9 @@ const AuthSlice = createSlice({
             localStorage.removeItem('access');
             localStorage.removeItem('refresh');
             localStorage.removeItem('loggedIn');
+            localStorage.removeItem('profile_url');
             state.loggedIn = false;
             state.isLoading = false;
-            console.log(state.data);
         })
 
         builder.addCase(registerUser.pending, (state, action) => {
@@ -60,7 +63,11 @@ const AuthSlice = createSlice({
         builder.addCase(userProfile.pending, (state, action) => {
             state.isLoading = true;
         }).addCase(userProfile.fulfilled, (state, action) => {
-            state.profile = action.payload;
+            let profile = action.payload;
+            state.profile = profile;
+            console.log(profile);
+            state.profile_image = profile.profile_url;
+            localStorage.setItem('profile_image', profile.profile_url);
             state.isLoading = false;
         })
 
@@ -74,7 +81,7 @@ const AuthSlice = createSlice({
         builder.addCase(updateProfileImage.pending, (state, action) => {
             state.isLoading = true;
         }).addCase(updateProfileImage.fulfilled, (state, action) => {
-            state.profile_image = action.payload;
+            state.profile_image = action.payload.profile_url;
             state.isLoading = false;
         })
     }

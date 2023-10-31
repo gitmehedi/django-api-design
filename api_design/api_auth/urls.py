@@ -2,6 +2,8 @@ from django.urls import path
 from rest_framework_simplejwt import views as jwt_views
 from .views import LogoutView, RegisterView, ChangePasswordView, UpdateProfileView, LogoutAllView, UsersViews, \
     ProfileImage
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
@@ -14,3 +16,6 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='token_logout'),
     path('logout_all/', LogoutAllView.as_view(), name='auth_logout_all'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

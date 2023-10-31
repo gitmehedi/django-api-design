@@ -2,19 +2,49 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
+from django.conf import settings
 from .models import Profile
+import os
 
 
 class UserSerializer(serializers.ModelSerializer):
+    profile_url = serializers.SerializerMethodField('get_image_url')
+
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'first_name', 'last_name']
+        fields = ['username', 'email', 'first_name', 'last_name', 'profile_url']
+
+    def get_image_url(self, obj):
+        request = self.context.get("request")
+        return request.build_absolute_uri(request.user.profile.profile_image.url)
+
+
+class ProfileImageSerializer(serializers.ModelSerializer):
+    profile_url = serializers.SerializerMethodField('get_image_url')
+
+    class Meta:
+        model = Profile
+        fields = ['profile_image', 'profile_url']
+
+    def update(self, ins, data):
+        previous_image = ins.profile_image.name
+        ins.profile_image = data['profile_image']
+        ins.save()
+
+        path = os.path.join(settings.MEDIA_ROOT, previous_image)
+        if os.path.isfile(path):
+            os.remove(path)
+        return ins
+
+    def get_image_url(self, obj):
+        request = self.context.get("request")
+        return request.build_absolute_uri(request.user.profile.profile_image.url)
 
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ['bio', 'profile_image', 'mobile', 'address', 'gender', 'location', 'birth_date']
+        fields = ['bio', 'mobile', 'address', 'gender', 'location', 'birth_date']
 
     def create(self, validated_data):
         user = User.objects.get(email=self.initial_data.get('email'))
@@ -24,7 +54,6 @@ class ProfileSerializer(serializers.ModelSerializer):
         user.gender = validated_data.get('gender') or ''
         user.location = validated_data.get('location') or ''
         user.birth_date = validated_data.get('birth_date') or ''
-        user.profile_image = validated_data.get('profile_image') or ''
 
         user.save()
         return user

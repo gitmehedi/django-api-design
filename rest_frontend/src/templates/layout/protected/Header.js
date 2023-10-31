@@ -1,19 +1,20 @@
 import {Link, useNavigate} from "react-router-dom";
-import {logoutUser} from "src/store";
+import {logoutUser,userProfile} from "src/store";
 import {useThunk} from "src/hooks/useThunk";
 import {useSelector} from "react-redux";
-import {UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap';
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Col from 'react-bootstrap/Col';
-import Image from 'react-bootstrap/Image';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-// import 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js';
+import {useEffect} from "react";
 
 const Header = () => {
     const navigate = useNavigate();
     const [doLogoutUser] = useThunk(logoutUser);
-    const {loggedIn} = useSelector(state => state.auth);
+    const [doUserProfile] = useThunk(userProfile);
+    const {loggedIn,profile_image} = useSelector(state => state.auth);
+
+    useEffect(() => {
+        doUserProfile();
+    }, []);
+
     const handleLogout = (evt) => {
         evt.preventDefault();
         doLogoutUser();
@@ -48,7 +49,7 @@ const Header = () => {
                            id="navbarDropdownMenuLink"
                            role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img
-                                src="https://avatars.githubusercontent.com/u/3753206?v=4"
+                                src={profile_image}
                                 width="40" height="40" className="rounded-circle"/>
                         </a>
                         <ul className="">
