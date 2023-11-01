@@ -137,9 +137,12 @@ USE_TZ = True
 # ===============================================
 
 SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=10),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=15),
     'ROTATE_REFRESH_TOKENS': True,
-    'BLACKLIST_AFTER_ROTATION': True
+    'BLACKLIST_AFTER_ROTATION': True,
+    "SIGNING_KEY": SECRET_KEY,
+    "USER_ID_FIELD": "id",
 }
 
 STATIC_URL = '/static/'

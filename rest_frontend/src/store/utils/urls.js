@@ -47,7 +47,6 @@ const getQueryStr = (path, page, search) => {
 }
 
 const sendAsync = async (url, method, header, data = {}, type = 'json') => {
-    console.log('---after----', url, '---', method, '---', header, '---', data);
     let content = ''
     if (type === 'json') {
         content = 'application/json';

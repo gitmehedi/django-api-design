@@ -12,7 +12,10 @@ const IndexCategory = () => {
     const [doFetchAllCategory, isLoading, isErrors] = useThunk(fetchAllCategory);
     const {data, count, page, search} = useSelector(state => state.categories);
 
+    console.log('-----call-----');
+
     useEffect(() => {
+        console.log('-----call-----');
         let params = {page: null, search: null}
         doFetchAllCategory(params);
     }, [doFetchAllCategory]);
@@ -23,7 +26,7 @@ const IndexCategory = () => {
     }
 
     const searchChange = (value) => {
-        if (value !== search) {
+        if (value !== search || !value) {
             let params = {page: null, search: value}
             dispatch(setSearch(value));
             doFetchAllCategory(params);

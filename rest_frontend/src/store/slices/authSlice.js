@@ -65,7 +65,6 @@ const AuthSlice = createSlice({
         }).addCase(userProfile.fulfilled, (state, action) => {
             let profile = action.payload;
             state.profile = profile;
-            console.log(profile);
             state.profile_image = profile.profile_url;
             localStorage.setItem('profile_image', profile.profile_url);
             state.isLoading = false;

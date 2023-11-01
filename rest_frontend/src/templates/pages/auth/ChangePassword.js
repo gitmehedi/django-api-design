@@ -15,7 +15,7 @@ const ChangePassword = () => {
 
     useEffect(() => {
         if (Object.keys(errors).length === 0 && submitting) {
-            console.log(doChangePassword(fields))
+            doChangePassword(fields);
         }
     }, [errors])
 
