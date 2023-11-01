@@ -27,13 +27,8 @@ class ProfileImageSerializer(serializers.ModelSerializer):
         fields = ['profile_image', 'profile_url']
 
     def update(self, ins, data):
-        previous_image = ins.profile_image.name
         ins.profile_image = data['profile_image']
         ins.save()
-
-        path = os.path.join(settings.MEDIA_ROOT, previous_image)
-        if os.path.isfile(path):
-            os.remove(path)
         return ins
 
     def get_image_url(self, obj):

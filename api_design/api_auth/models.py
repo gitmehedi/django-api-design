@@ -15,6 +15,7 @@ GENDER = (
 
 
 class Profile(models.Model):
+
     def upload_image(instance, filename):
         uid = uuid4()
         extension = filename.split(".")[-1]
@@ -31,6 +32,20 @@ class Profile(models.Model):
     gender = models.TextField(choices=GENDER, blank=True)
     location = models.CharField(max_length=30, blank=True)
     birth_date = models.DateField(blank=True, null=True)
+
+    class Meta:
+        db_table = 'auth_user_profile'
+        ordering = ['-id']
+        verbose_name_plural = 'Profile'
+
+    def save(self, *args, **kwargs):
+        if self.pk:
+            obj = Profile.objects.get(pk=self.pk)
+            previous_image = obj.profile_image.name
+            path = os.path.join(settings.MEDIA_ROOT, previous_image)
+            if os.path.isfile(path):
+                os.remove(path)
+        super().save(*args, **kwargs)
 
 
 @receiver(post_save, sender=User)

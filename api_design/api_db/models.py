@@ -12,6 +12,7 @@ class AbstractModel(models.Model):
 
     class Meta:
         abstract = True
+        ordering = ['-id']
 
 
 class ProductCategory(AbstractModel):
@@ -20,9 +21,9 @@ class ProductCategory(AbstractModel):
     status = models.BooleanField(default=True)
     description = models.TextField(max_length=200)
 
-    class Meta:
+    class Meta(AbstractModel.Meta):
         db_table = 'product_category'
-        ordering = ('-id',)
+        verbose_name_plural = 'Category'
 
     def __str__(self):
         return self.name
@@ -33,9 +34,9 @@ class ProductInventory(AbstractModel):
     quantity = models.FloatField()
     status = models.BooleanField(default=True)
 
-    class Meta:
+    class Meta(AbstractModel.Meta):
         db_table = 'product_inventory'
-        ordering = ('-id',)
+        verbose_name_plural = 'Inventory'
 
     def __str__(self):
         return self.name
@@ -46,9 +47,9 @@ class PaymentDetails(AbstractModel):
     provider = models.CharField(max_length=100)
     status = models.BooleanField(default=True)
 
-    class Meta:
+    class Meta(AbstractModel.Meta):
         db_table = 'payment_details'
-        ordering = ('-id',)
+        verbose_name_plural = 'Payments'
 
 
 class OrderDetails(AbstractModel):
@@ -58,9 +59,9 @@ class OrderDetails(AbstractModel):
     payment = models.ForeignKey(PaymentDetails, blank=True, null=True, on_delete=models.SET_NULL,
                                 related_name='%(class)s_order')
 
-    class Meta:
+    class Meta(AbstractModel.Meta):
         db_table = 'order_details'
-        ordering = ('-id',)
+        verbose_name_plural = 'Orders'
 
 
 class Discount(AbstractModel):
@@ -69,9 +70,9 @@ class Discount(AbstractModel):
     discount_percent = models.FloatField(verbose_name='Discount Percent (%)')
     status = models.BooleanField(default=True)
 
-    class Meta:
+    class Meta(AbstractModel.Meta):
         db_table = 'discount'
-        ordering = ('-id',)
+        verbose_name_plural = 'Discounts'
 
     def __str__(self):
         return self.name
@@ -81,9 +82,9 @@ class ShoppingSession(AbstractModel):
     total = models.FloatField()
     user = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL, related_name='%(class)s_session')
 
-    class Meta:
+    class Meta(AbstractModel.Meta):
         db_table = 'shopping_session'
-        ordering = ('-id',)
+        verbose_name_plural = 'Sessions'
 
 
 class UserAddresses(AbstractModel):
@@ -96,9 +97,9 @@ class UserAddresses(AbstractModel):
     mobile = models.CharField(max_length=15)
     telephone = models.CharField(max_length=20)
 
-    class Meta:
+    class Meta(AbstractModel.Meta):
         db_table = 'user_addresses'
-        ordering = ('-id',)
+        verbose_name_plural = 'User Address'
 
     def __str__(self):
         return self.city
@@ -111,9 +112,9 @@ class UserPayment(AbstractModel):
     account_no = models.CharField(max_length=20)
     expires_at = models.DateTimeField(blank=True, null=True)
 
-    class Meta:
+    class Meta(AbstractModel.Meta):
         db_table = 'user_payment'
-        ordering = ('-id',)
+        verbose_name_plural = 'User Payments'
 
     def __str__(self):
         return self.account_no
@@ -131,9 +132,9 @@ class Products(AbstractModel):
     discount = models.ForeignKey(Discount, blank=True, null=True, on_delete=models.SET_NULL,
                                  related_name='%(class)s_discount')
 
-    class Meta:
+    class Meta(AbstractModel.Meta):
         db_table = 'products'
-        ordering = ('-id',)
+        verbose_name_plural = 'Products'
 
     def __str__(self):
         return self.name
@@ -146,9 +147,9 @@ class OrderItems(AbstractModel):
     product = models.ForeignKey(Products, blank=True, null=True, on_delete=models.SET_NULL,
                                 related_name='%(class)s_product')
 
-    class Meta:
+    class Meta(AbstractModel.Meta):
         db_table = 'order_items'
-        ordering = ('-id',)
+        verbose_name_plural = 'Orders'
 
 
 class CartItem(AbstractModel):
@@ -158,6 +159,6 @@ class CartItem(AbstractModel):
     session = models.ForeignKey(ShoppingSession, blank=True, null=True, on_delete=models.SET_NULL,
                                 related_name='%(class)s_session')
 
-    class Meta:
+    class Meta(AbstractModel.Meta):
         db_table = 'cart_item'
-        ordering = ('-id',)
+        verbose_name_plural = 'Carts'

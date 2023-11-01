@@ -18,6 +18,10 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+admin.site.site_header = "LeanMonk Dashboard"
+admin.site.site_title = "LeanMonk Portal"
+admin.site.index_title = "Welcome to LeanMonk Portal"
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
