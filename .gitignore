@@ -1,4 +1,6 @@
 *.pyc
 *.env
 vapi
+vflask
 api_design/static/
+.idea

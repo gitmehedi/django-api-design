@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  rest_frontend:
+    container_name: rest_frontend
+    image: rest_frontend
+    build:
+      context: .
+    ports:
+      - "4000:3000"
+

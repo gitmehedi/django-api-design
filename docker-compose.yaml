@@ -1,0 +1,51 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:14
+    container_name: rest_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data:rw
+    env_file:
+      - api_design/.env
+    ports:
+      - '5432:5432'
+    networks:
+      - api_network
+    restart: always
+
+  frontend:
+    container_name: rest_frontend
+    image: gitmehedi/rest_frontend
+    build:
+      context: rest_frontend/
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+      - backend
+    env_file:
+      - api_design/.env
+    networks:
+      - api_network
+    restart: always
+
+  backend:
+    container_name: rest_backend
+    image: gitmehedi/rest_backend
+    build:
+      context: api_design/
+    ports:
+      - '8000:8000'
+    depends_on:
+      - db
+    env_file:
+      - api_design/.env
+    networks:
+      - api_network
+    restart: always
+
+networks:
+  api_network:
+    driver: bridge
+volumes:
+  postgres_data:

@@ -94,8 +94,8 @@ DATABASES = {
         'NAME': env('POSTGRES_DB'),
         'USER': env('POSTGRES_USER'),
         'PASSWORD': env('POSTGRES_PASSWORD'),
-        'HOST': env('PG_HOST'),
-        'PORT': env('PG_PORT'),
+        'HOST': env('POSTGRES_HOST'),
+        'PORT': env('POSTGRES_PORT'),
     }
 }
 
@@ -179,16 +179,16 @@ CORS_EXPOSE_HEADERS = [
 
 # CACHES Configuration
 # ===============================================
-CACHES = {
-    "default": {
-        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': 'redis://localhost:6379',
-        # "OPTIONS": {
-        #     "CLIENT_CLASS": "django_redis.client.DefaultClient",
-        # },
-        "KEY_PREFIX": "example"
-    }
-}
+# CACHES = {
+#     "default": {
+#         'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+#         'LOCATION': 'redis://localhost:6379',
+#         # "OPTIONS": {
+#         #     "CLIENT_CLASS": "django_redis.client.DefaultClient",
+#         # },
+#         "KEY_PREFIX": "example"
+#     }
+# }
 
 # SESSION Configuration
 # ===============================================

@@ -18,14 +18,13 @@ const fetchAllDiscount = createAsyncThunk('discounts/fetchAllDiscount', async (p
 });
 
 const postDiscount = createAsyncThunk('discounts/postDiscount', async (data, thunkAPI) => {
-    let {record} = data;
+    const {record} = data;
+    const url = getApiURL(RESOURCE);
+    let method = 'post';
+    let header = thunkAPI.getState().auth.data;
 
-    const response = await axios.post(url, record);
-    try {
-        return response.data;
-    } catch (e) {
-        return e.message;
-    }
+    const res = await sendAsync(url, method, header, record);
+    return res.data;
 });
 
 const fetchDiscount = createAsyncThunk('discounts/fetchDiscount', async (id, thunkAPI) => {
