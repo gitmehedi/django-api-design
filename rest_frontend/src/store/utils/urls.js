@@ -1,7 +1,8 @@
 import axios from "axios";
+import {BASE} from './env';
 
-const BASE_URL = 'http://localhost:8000/';
-const REST_URL = 'http://localhost:8000/rest/';
+const BASE_URL = BASE;
+const REST_URL = BASE + 'rest/';
 
 
 const getApiURL = (resource, id = null) => {

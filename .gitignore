@@ -4,3 +4,4 @@ vapi
 vflask
 api_design/static/
 .idea
+*env.js

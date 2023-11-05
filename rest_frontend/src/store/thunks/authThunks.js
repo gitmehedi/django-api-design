@@ -1,8 +1,9 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 import {getApiURL, sendAsync} from "src/store/utils/urls";
+import {BASE} from "../utils/env";
 
-const baseUrl = 'http://localhost:8000/';
+const baseUrl = BASE;
 
 
 const checkAuthUser = createAsyncThunk('auth/token', async (credential, thunkAPI) => {
