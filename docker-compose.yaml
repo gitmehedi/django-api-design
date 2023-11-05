@@ -65,5 +65,4 @@ networks:
   api_network:
     driver: bridge
 volumes:
-  volume_name:
-    name: pg_store
+  pg_store:
