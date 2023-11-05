@@ -168,7 +168,8 @@ CSRF_COOKIE_HTTPONLY = False  # False since we will grab it via universal-cookie
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
-    'http://127.0.0.1:3000'
+    'http://127.0.0.1:3000',
+    'http://app.leanmonk.com',
 ]
 
 CORS_EXPOSE_HEADERS = [
