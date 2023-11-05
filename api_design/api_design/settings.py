@@ -29,7 +29,7 @@ SECRET_KEY = '129x=f5&-4v_)d1)zo**2e8$i2ojg_!u7j%ri(uvt67ipl9z3o'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'app.leanmonk.com']
 
 # Application definition
 
