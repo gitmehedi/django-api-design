@@ -25,7 +25,7 @@ const Header = () => {
     return (
         <>
             <header className="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow" data-bs-theme="dark">
-                <Link to='/dashboard'
+                <Link to='/'
                       className="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white">LeanMonk</Link>
 
                 <ul className="navbar-nav flex-row d-md-none">
