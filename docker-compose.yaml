@@ -15,12 +15,11 @@ services:
     restart: always
 
   frontend:
-    container_name: rest_frontend
-    image: gitmehedi/rest_frontend
+    image: rest_frontend
     build:
       context: rest_frontend/
     ports:
-      - '3000:3000'
+      - '3000-3005:3000'
     depends_on:
       - db
       - backend
@@ -32,7 +31,7 @@ services:
 
   backend:
     container_name: rest_backend
-    image: gitmehedi/rest_backend
+    image: rest_backend
     build:
       context: api_design/
     ports:
