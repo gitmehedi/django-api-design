@@ -1,4 +1,3 @@
-#stage 1
 FROM node:20-alpine
 
 RUN mkdir -p /app/src/
@@ -10,4 +9,3 @@ COPY . .
 EXPOSE 3000
 
 CMD ["npm","start"]
-

@@ -1,8 +1,5 @@
 import axios from "axios";
-import {BASE} from './env';
-
-const BASE_URL = BASE;
-const REST_URL = BASE + 'rest/';
+import {restURL} from './env';
 
 
 const getApiURL = (resource, id = null) => {
@@ -20,18 +17,18 @@ const getRecId = () => {
     }
     return '';
 }
-
-const getAuthRequestHeader = (data) => {
-    let {access, refresh} = data;
-
-    let headers = {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + access
-    }
-
-    return headers;
-}
-
+//
+// const getAuthRequestHeader = (data) => {
+//     let {access, refresh} = data;
+//
+//     let headers = {
+//         'Content-Type': 'application/json',
+//         'Authorization': 'Bearer ' + access
+//     }
+//
+//     return headers;
+// }
+//
 
 const getQueryStr = (path, page, search) => {
     let page_url;
@@ -61,7 +58,7 @@ const sendAsync = async (url, method, header, data = {}, type = 'json') => {
     }
 
     const response = await axios({
-        baseURL: REST_URL,
+        baseURL: restURL,
         url: url,
         method: method,
         data: data,
@@ -85,4 +82,4 @@ const sendAsync = async (url, method, header, data = {}, type = 'json') => {
 }
 
 
-export {REST_URL, BASE_URL, getApiURL, getRecId, getAuthRequestHeader, sendAsync, getQueryStr};
+export {getApiURL, getRecId, sendAsync, getQueryStr};
