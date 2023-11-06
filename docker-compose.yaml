@@ -19,7 +19,7 @@ services:
     build:
       context: rest_frontend/
     ports:
-      - '3000-3005:3000'
+      - '3000-3002:3000'
     depends_on:
       - db
       - backend
@@ -30,12 +30,11 @@ services:
     restart: always
 
   backend:
-    container_name: rest_backend
     image: rest_backend
     build:
       context: api_design/
     ports:
-      - '8000:8000'
+      - '8000-8002:8000'
     depends_on:
       - db
     env_file:
