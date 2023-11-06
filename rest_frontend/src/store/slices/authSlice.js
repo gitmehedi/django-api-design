@@ -1,4 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
+import {hostURL} from '../utils/env';
 import {
     checkAuthUser,
     logoutUser,
@@ -9,7 +10,7 @@ import {
 } from "src/store/thunks/authThunks";
 
 
-const default_image = 'http://localhost:8000/media/profile/ds_classification.png';
+const default_image = hostURL + '/media/profile/ds_classification.png';
 const access = localStorage.getItem('access') ? localStorage.getItem('access') : null;
 const loggedIn = localStorage.getItem('loggedIn') ? localStorage.getItem('loggedIn') : false;
 const profile = localStorage.getItem('profile_url') ? localStorage.getItem('profile_url') : default_image;
