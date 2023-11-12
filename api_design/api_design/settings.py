@@ -24,12 +24,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '129x=f5&-4v_)d1)zo**2e8$i2ojg_!u7j%ri(uvt67ipl9z3o'
+SECRET_KEY = env('DJ_SECRET')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DJ_DEBUG')
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'app.leanmonk.com']
+ALLOWED_HOSTS = env('DJ_HOSTS').split(", ")
 
 # Application definition
 

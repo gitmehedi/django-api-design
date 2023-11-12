@@ -1,0 +1,115 @@
+
+# PORTFOLIO WEBSITE
+# =============================
+
+upstream website {
+        server 185.183.182.103:2000;
+}
+
+server {
+        listen 80;
+        listen [::]:80;
+        server_name leanmonk.com;
+        client_max_body_size 100M;
+
+        location / {
+                proxy_set_header Host $host;
+                proxy_set_header x-Real-IP $remote_addr;
+                proxy_set_header X-Forwared-For $proxy_add_x_forwarded_for;
+                proxy_pass http://website;
+        }
+}
+
+
+# REACT APPLICATION WITH DJANGO
+# =============================
+
+upstream rest_frontend {
+	server 185.183.182.103:3000 weight=1;
+	server 185.183.182.103:3001 weight=2;
+	server 185.183.182.103:3002 weight=3;
+}
+
+server {
+	listen 80;
+	listen [::]:80;
+        server_name app.leanmonk.com;
+	client_max_body_size 100M;
+
+	location / {
+		proxy_set_header Host $host;
+                proxy_set_header x-Real-IP $remote_addr;
+                proxy_set_header X-Forwared-For $proxy_add_x_forwarded_for;
+		proxy_pass http://rest_frontend;
+	}
+}
+
+
+# REACT APPLICATION WITH DJANGO
+# =============================
+
+upstream rest_backend {
+        server 185.183.182.103:8000 weight=2 max_fails=10 fail_timeout=90s;
+        server 185.183.182.103:8001 weight=3 max_fails=4 fail_timeout=60s;
+        server 185.183.182.103:8002 weight=5 max_fails=2 fail_timeout=30s;
+}
+
+server {
+	listen 80;
+	listen [::]:80;
+	server_name rest.leanmonk.com;
+	client_max_body_size 100M;
+
+	location / {
+		proxy_set_header Host $host;
+		proxy_set_header x-Real-IP $remote_addr;
+		proxy_set_header X-Forwared-For $proxy_add_x_forwarded_for;
+		proxy_pass http://rest_backend;
+	}
+}
+
+
+# JENKINS DEPLOYMENT SERVER
+# =============================
+
+upstream jenkins_deploy {
+	server 185.183.182.103:8080;
+}
+
+server {
+        listen 80;
+        listen [::]:80;
+        server_name deploy.leanmonk.com;
+        client_max_body_size 100M;
+
+        location / {
+                proxy_set_header Host $host;
+                proxy_set_header x-Real-IP $remote_addr;
+                proxy_set_header X-Forwared-For $proxy_add_x_forwarded_for;
+                proxy_pass http://jenkins_deploy;
+        }
+
+}
+
+
+# ERP APPICATION
+# =============================
+
+upstream erp {
+	server 185.183.182.103:9000 weight=2;
+}
+
+server {
+        listen 80;
+        listen [::]:80;
+        server_name erp.leanmonk.com;
+        client_max_body_size 100M;
+
+        location / {
+                proxy_set_header Host $host;
+                proxy_set_header x-Real-IP $remote_addr;
+                proxy_set_header X-Forwared-For $proxy_add_x_forwarded_for;
+                proxy_pass http://erp;
+        }
+
+}
