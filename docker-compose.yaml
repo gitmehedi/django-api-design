@@ -1,4 +1,6 @@
 version: '3.8'
+name: api_design
+
 services:
   db:
     image: postgres:14
